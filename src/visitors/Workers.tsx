@@ -3,9 +3,12 @@ import {
   List,
   Datagrid,
   TextField,
-  Pagination,
+  // Pagination,
   useDataProvider,
+  Button,
 } from "react-admin";
+import { Box, Pagination, Typography } from "@mui/material";
+import GridModal from "./modal";
 
 interface Worker {
   id: number;
@@ -15,59 +18,54 @@ interface Worker {
 }
 interface WorkersComponentProps {
   perPage: number;
+  workers: any[];
 }
-const PostPagination = () => <Pagination rowsPerPageOptions={[10, 25]} />;
-const WorkersComponent: React.FC<WorkersComponentProps> = ({ perPage }) => {
-  const [page, setPage] = useState(1);
-  const [total, setTotal] = useState(0);
-  const [workers, setWorkers] = useState<Worker[]>([]);
-  const dataProvider = useDataProvider();
-
-  const fetchWorkers = async () => {
-    const resource = "users";
-    const params = {
-      pagination: { page, perPage },
-      sort: { field: "name", order: "ASC" },
-      filter: {},
-    };
-
-    try {
-      const response = await dataProvider.getList(resource, params);
-      const { data, total } = response;
-      setWorkers(data.slice(0, 25));
-      //   setTotal(total);
-    } catch (error) {
-      console.error(error);
-    }
+// const PostPagination = () => <Pagination rowsPerPageOptions={[10, 25]} />;
+const WorkersComponent: React.FC<WorkersComponentProps> = ({
+  perPage,
+  workers,
+}) => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+  const handlePageChange = (event: any, newPage: number) => {
+    setCurrentPage(newPage);
   };
 
-  useEffect(() => {
-    fetchWorkers();
-  }, [page, perPage, dataProvider]);
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = workers.slice(indexOfFirstItem, indexOfLastItem);
 
-  const handlePageChange = (
-    _event: React.ChangeEvent<unknown>,
-    newPage: number
-  ) => {
-    setPage(newPage);
-  };
-
-  const handlePerPageChange = (
-    event: React.ChangeEvent<{ value: unknown }>
-  ) => {
-    const newPerPage = parseInt(event.target.value as string, 10);
-    setPage(1);
-    // setPerPage(newPerPage);
-  };
-
+  const totalPages = Math.ceil(workers.length / itemsPerPage);
+  const pageNumbers = Array.from(
+    { length: totalPages },
+    (_, index) => index + 1
+  );
   return (
     <>
       <List pagination={false}>
-        <Datagrid data={workers}>
+        <Datagrid data={currentItems}>
           <TextField source="name" sortable={true} label="Name" />
           <TextField source="position" sortable={true} label="Position" />
           {/* other fields */}
         </Datagrid>
+        <Box display="flex" justifyContent="center" marginTop={2}>
+          <Pagination
+            count={totalPages}
+            page={currentPage}
+            onChange={handlePageChange}
+            color="primary"
+            variant="outlined"
+          />
+        </Box>
+        <Typography
+          variant="caption"
+          color="textSecondary"
+          align="center"
+          marginTop={2}
+        >
+          Page {currentPage} of {totalPages}
+        </Typography>
+        {/* <Pagination count={10} onChange={(e) => console.log(e.target)} /> */}
       </List>
     </>
   );

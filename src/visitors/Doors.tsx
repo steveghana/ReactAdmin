@@ -4,7 +4,7 @@ import PostPagination from "./customPagination";
 
 const Doors: React.FC<{ data: any }> = (props) => {
   return (
-    <List>
+    <List pagination={false}>
       <Datagrid data={props.data}>
         <TextField source="name" sortable={true} label="Location Name" />
         <TextField source="addressCity" sortable={true} label="City" />

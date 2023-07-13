@@ -26,32 +26,40 @@ const LocationList: React.FC<LocationListProps> = (props) => {
   const [locations, setLocations] = React.useState<Location[]>([]);
   const [doors, setDoors] = React.useState<any[]>([]);
   const [workers, setWorkers] = React.useState<any[]>([]);
-  const [page, setPage] = React.useState(1);
-  const [total, setTotal] = React.useState(0);
+
   const dataProvider = useDataProvider();
 
   React.useEffect(() => {
     const fetchAllData = async () => {
-      const [locationsData, doorsData] = await Promise.all([
+      const [locationsData, doorsData, workersData] = await Promise.all([
         fetchLocations("locations"),
         fetchDoors("gates-users"),
-        // fetchWorkers("users"),
+        fetchWorkers("users"),
       ]);
       setLocations(locationsData);
       setDoors(doorsData.slice(0, 25));
-      // setWorkers(workersData);
+      setWorkers(workersData);
     };
 
     fetchAllData();
   }, []);
+  const fetchWorkers = async (resource: string) => {
+    const params = {
+      pagination: { page: 0, perPage: 0 },
+      sort: { field: "name", order: "ASC" },
+      filter: {},
+    };
 
+    return dataProvider
+      .getList(resource, params)
+      .then((response) => response.data);
+  };
   const fetchLocations = (resource: string) => {
     const params = {
       pagination: { page: 0, perPage: 0 },
       sort: { field: "location", order: "ASC" },
       filter: {},
     };
-
     return dataProvider
       .getList(resource, params)
       .then((response: any) => response.data);
@@ -66,7 +74,10 @@ const LocationList: React.FC<LocationListProps> = (props) => {
 
     return dataProvider
       .getList(resource, params)
-      .then((response: any) => response.data);
+      .then((response: any) => response.data)
+      .catch((err) => {
+        console.error(err);
+      });
     // Fetch doors data here
     // Return a promise that resolves to the doors data
   };
@@ -76,12 +87,11 @@ const LocationList: React.FC<LocationListProps> = (props) => {
       style={{
         display: "flex",
         gap: "1rem",
-        overflow: "hidden",
         // marginTop: "2rem",
-        height: "90%",
+        // height: "90%",
       }}
     >
-      <Container maxWidth="md" sx={{ mt: "2rem" }}>
+      <Container maxWidth="md" /* sx={{ mt: "2rem" }} */>
         <div style={{ display: "flex", gap: "2rem", alignItems: "center" }}>
           <Paper
             elevation={3}
@@ -132,67 +142,10 @@ const LocationList: React.FC<LocationListProps> = (props) => {
         <div style={{ marginTop: "2rem" }}>
           {selectedCard === "locations" && <LocationsComponent {...props} />}
           {selectedCard === "doors" && <DoorsComponent data={doors} />}
-          {selectedCard === "workers" && <WorkersComponent perPage={0} />}
+          {selectedCard === "workers" && (
+            <WorkersComponent perPage={0} workers={workers} />
+          )}
         </div>
-      </Container>
-      <Container
-        maxWidth="sm"
-        sx={{
-          height: "100%",
-          display: "flex",
-          gap: "1.5rem",
-          flexDirection: "column",
-          justifyContent: "space-between",
-        }}
-      >
-        <Paper
-          elevation={3}
-          sx={{
-            width: "100%",
-            // alignItems: "center",
-            gap: ".3rem",
-            padding: ".3rem",
-            height: "60%",
-            display: "flex",
-            flexDirection: "column",
-            // justifyContent: "center",
-          }}
-          onClick={handleWorkersClick}
-        >
-          <h2>Event</h2>
-          <Alert severity="error">This is an error alert — check it out!</Alert>
-          <Alert severity="warning">
-            This is a warning alert — check it out!
-          </Alert>
-          <Alert severity="info">This is an info alert — check it out!</Alert>
-          <Alert severity="success">
-            This is a success alert — check it out!
-          </Alert>
-          <Alert severity="success">
-            This is a success alert — check it out!
-          </Alert>
-          <Alert severity="success">
-            This is a success alert — check it out!
-          </Alert>
-        </Paper>
-
-        <Paper
-          elevation={3}
-          sx={{
-            width: "100%",
-            height: "40%",
-            alignItems: "center",
-
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-          }}
-          onClick={handleWorkersClick}
-        >
-          <h2>Weekly Traffic</h2>
-          <p style={{ color: "blue" }}> {workers.length}</p>
-          <WorkerChart />
-        </Paper>
       </Container>
     </Card>
   );
