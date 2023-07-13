@@ -16,7 +16,7 @@ const useSearchFilter = <T extends Item>(initialData: T[]) => {
         .includes(searchTerm.toLowerCase())
     );
     setData(filteredData);
-  }, [initialData, searchTerm]);
+  }, [searchTerm]);
 
   const handleSearch = (searchValue: string) => {
     setSearchTerm(searchValue);

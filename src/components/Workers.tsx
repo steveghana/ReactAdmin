@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { List, Datagrid, TextField, EditButton } from "react-admin";
-import { Box, InputBase, Pagination, Typography } from "@mui/material";
+import { Box, Pagination, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { TextField as Field } from "@mui/material";
+import useSearchFilter from "../customHook";
 
 interface WorkersComponentProps {
   workers: any[];
@@ -14,31 +16,39 @@ interface Location {
 }
 
 const WorkersComponent: React.FC<WorkersComponentProps> = ({ workers }) => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const navigate = useNavigate();
+  const [currentPage, setCurrentPage] = React.useState(1);
   const itemsPerPage = 10;
   const handlePageChange = (event: any, newPage: number) => {
     setCurrentPage(newPage);
   };
-
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = workers.slice(indexOfFirstItem, indexOfLastItem);
-  let location = window.origin;
-  console.log(location);
+  const totalPages = Math.ceil(workers?.length / itemsPerPage);
+  const [data, searchTerm, handleSearch] = useSearchFilter(currentItems);
+
+  console.log(currentItems, searchTerm, data);
   // const formattedTime = timestamp
   //   ? new Date(timestamp).toLocaleTimeString()
   //   : "";
-  const totalPages = Math.ceil(workers.length / itemsPerPage);
   /*   const pageNumbers = Array.from(
     { length: totalPages },
     (_, index) => index + 1
   ); */
   return (
     <>
-      <InputBase />
+      <Field
+        variant="outlined"
+        name="password"
+        autoComplete="off"
+        type="text"
+        placeholder="Enter name"
+        label="Name"
+        value={searchTerm}
+        onChange={(e) => handleSearch(e.target.value)}
+      />
       <List pagination={false}>
-        <Datagrid data={currentItems} rowClick="edit">
+        <Datagrid data={data} rowClick="edit">
           <TextField source="name" sortable={true} label="Worker" />
           <TextField source="email" sortable={true} label="Email" />
           <TextField source="phoneNumber" sortable={true} label="Phone" />
@@ -46,9 +56,9 @@ const WorkersComponent: React.FC<WorkersComponentProps> = ({ workers }) => {
           <TextField source="updatedAt" sortable={true} label="Last unlock" />
         </Datagrid>
         <EditButton
-          onClick={() => {
-            navigate(`${location}/#/workers`);
-          }}
+        // onClick={() => {
+        //   navigate(`${location}/#/workers`);
+        // }}
         />
         <Box display="flex" justifyContent="center" marginTop={2}>
           <Pagination
