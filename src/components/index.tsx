@@ -87,11 +87,11 @@ const LocationList: React.FC<LocationListProps> = (props) => {
       style={{
         display: "flex",
         gap: "1rem",
-        // marginTop: "2rem",
-        // height: "90%",
+        marginTop: "2rem",
+        height: "90%",
       }}
     >
-      <Container maxWidth="md" /* sx={{ mt: "2rem" }} */>
+      <Container maxWidth="md" sx={{ mt: "2rem" }}>
         <div style={{ display: "flex", gap: "2rem", alignItems: "center" }}>
           <Paper
             elevation={3}
@@ -142,9 +142,7 @@ const LocationList: React.FC<LocationListProps> = (props) => {
         <div style={{ marginTop: "2rem" }}>
           {selectedCard === "locations" && <LocationsComponent {...props} />}
           {selectedCard === "doors" && <DoorsComponent data={doors} />}
-          {selectedCard === "workers" && (
-            <WorkersComponent perPage={0} workers={workers} />
-          )}
+          {selectedCard === "workers" && <WorkersComponent workers={workers} />}
         </div>
       </Container>
     </Card>
