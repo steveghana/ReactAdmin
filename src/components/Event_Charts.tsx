@@ -1,8 +1,33 @@
 import React from "react";
 import { Alert, Box, Button, Card, Container, Paper } from "@mui/material";
 import WorkerChart from "./Charts";
+import { useDataProvider } from "react-admin";
 
 const Events = () => {
+  const dataProvider = useDataProvider();
+  const [logs, setLogs] = React.useState<any[]>([]);
+  const fetchDoors = (resource: string) => {
+    const params = {
+      pagination: { page: 0, perPage: 0 },
+      sort: { field: "location", order: "ASC" },
+      filter: {},
+    };
+
+    return dataProvider
+      .getList(resource, params)
+      .then((response: any) => {
+        setLogs(response.data);
+        console.log(response, "logs");
+      })
+      .catch((err: any) => {
+        console.error(err);
+      });
+    // Fetch doors data here
+    // Return a promise that resolves to the doors data
+  };
+  React.useEffect(() => {
+    fetchDoors("log-event-operations");
+  }, []);
   return (
     <Container maxWidth="sm">
       <div

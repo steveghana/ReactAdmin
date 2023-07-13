@@ -38,6 +38,8 @@ const LocationList: React.FC<LocationListProps> = (props) => {
         fetchDoors("gates-users"),
         fetchWorkers("users"),
       ]);
+      console.log(locationsData);
+
       setLocations(locationsData);
       setDoors(doorsData);
       setWorkers(workersData);
@@ -132,6 +134,7 @@ const LocationList: React.FC<LocationListProps> = (props) => {
           <p style={{ color: "blue" }}> {workers.length}</p>
         </Paper>
       </div>
+      {/* <Events /> */}
       <div style={{ marginTop: "2rem" }}>
         {selectedCard === "locations" && <LocationsComponent {...props} />}
         {selectedCard === "doors" && <DoorsComponent data={doors} />}

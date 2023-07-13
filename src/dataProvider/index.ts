@@ -8,13 +8,11 @@ const customDataProvider: DataProvider = {
     const url = `${apiUrl}/${resource}`;
 
     try {
-      console.log("start");
       const response = await axios.get(url);
       //   const response = await axios.get(url);
       const data = response.data;
-      console.log("fend");
 
-      // Handle the response structure
+      // Handling the response structure
       if (Array.isArray(data)) {
         return {
           data,
@@ -35,30 +33,25 @@ const customDataProvider: DataProvider = {
   },
 
   deleteMany: async () => {
-    // Implement deleteMany logic
     return {};
   },
   getMany: async () => {
-    // Implement getMany logic
     return { data: [] };
   },
   getManyReference: async () => {
-    // Implement getManyReference logic
     return { data: [], total: 0 };
   },
-
   updateMany: async () => {
-    // Implement updateMany logic
     return {};
   },
   // @ts-ignore
-  create: () => Promise.resolve({ data: { id: 0 } }),
+  create: () => Promise.resolve({}),
   // @ts-ignore
-  delete: () => Promise.resolve({ data: {} }),
+  delete: () => Promise.resolve({}),
 
   // @ts-ignore
   getOne: async (resource, params) => {
-    const url = `${apiUrl}/${resource}/${params.id}`;
+    const url = `${apiUrl}/${resource}/${params}`;
 
     try {
       const response = await axios.get(url);
