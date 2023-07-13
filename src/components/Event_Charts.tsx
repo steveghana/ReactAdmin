@@ -25,13 +25,10 @@ const Events = () => {
       .getList(resource, params)
       .then((response: any) => {
         setLogs(response.data.slice(0, 12));
-        console.log(response, "logs");
       })
       .catch((err: any) => {
         console.error(err);
       });
-    // Fetch doors data here
-    // Return a promise that resolves to the doors data
   };
   React.useEffect(() => {
     fetchDoors("log-event-operations");

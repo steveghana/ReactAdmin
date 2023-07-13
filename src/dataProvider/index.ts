@@ -9,7 +9,6 @@ const customDataProvider: DataProvider = {
 
     try {
       const response = await axios.get(url);
-      //   const response = await axios.get(url);
       const data = response.data;
 
       // Handling the response structure
