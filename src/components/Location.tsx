@@ -8,7 +8,8 @@ import {
   Pagination,
   TextField,
 } from "react-admin";
-
+import { TextField as Field } from "@mui/material";
+import useSearchFilter from "../customHook";
 interface Location {
   id: number;
   location: string;
@@ -21,16 +22,29 @@ interface LocationListProps extends ListProps {
 }
 
 const LocationList: React.FC<LocationListProps> = (props) => {
+  const [data, searchTerm, handleSearch] = useSearchFilter(props.data);
   return (
-    <List pagination={false}>
-      <Datagrid data={props.data} rowClick="edit">
-        <TextField source="name" sortable={true} label="Location Name" />
-        <TextField source="addressCity" sortable={true} label="City" />
-        <TextField source="addressStreet" sortable={true} label="Street" />
-        <TextField source="address" sortable={true} label="Full Address" />
-      </Datagrid>
-      <EditButton />
-    </List>
+    <>
+      <Field
+        variant="outlined"
+        name="password"
+        autoComplete="off"
+        type="text"
+        placeholder="Enter name"
+        label="Name"
+        value={searchTerm}
+        onChange={(e) => handleSearch(e.target.value)}
+      />
+      <List pagination={false}>
+        <Datagrid data={data} rowClick="edit">
+          <TextField source="name" sortable={true} label="Location Name" />
+          <TextField source="addressCity" sortable={true} label="City" />
+          <TextField source="addressStreet" sortable={true} label="Street" />
+          <TextField source="address" sortable={true} label="Full Address" />
+        </Datagrid>
+        <EditButton />
+      </List>
+    </>
   );
 };
 

@@ -1,12 +1,19 @@
 import { useState, useEffect } from "react";
 
-const useSearchFilter = (initialData: any[]) => {
-  const [data, setData] = useState(initialData);
-  const [searchTerm, setSearchTerm] = useState("");
+interface Item {
+  [key: string]: any;
+}
+
+const useSearchFilter = <T extends Item>(initialData: T[]) => {
+  const [data, setData] = useState<T[]>(initialData);
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
   useEffect(() => {
-    const filteredData = initialData.filter((item) =>
-      item.name.toLowerCase().includes(searchTerm.toLowerCase())
+    const filteredData = initialData?.filter((item) =>
+      Object.values(item)
+        .join(" ")
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase())
     );
     setData(filteredData);
   }, [initialData, searchTerm]);
@@ -15,7 +22,7 @@ const useSearchFilter = (initialData: any[]) => {
     setSearchTerm(searchValue);
   };
 
-  return [data, handleSearch];
+  return [data, searchTerm, handleSearch] as const;
 };
 
 export default useSearchFilter;

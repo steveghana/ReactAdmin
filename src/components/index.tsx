@@ -1,11 +1,13 @@
 import * as React from "react";
 import { ListProps, useDataProvider } from "react-admin";
-import { Alert, Card, Container, Paper } from "@mui/material";
+import { Alert, Card, Container, Paper, TextField } from "@mui/material";
 import WorkersComponent from "./Workers";
 import LocationsComponent from "./Location";
 import DoorsComponent from "./Doors";
 import WorkerChart from "./Charts";
 import Layout from "../Layout";
+import useSearchFilter from "../customHook";
+
 import Events from "./Event_Charts";
 interface Location {
   id: number;
@@ -24,13 +26,11 @@ const LocationList: React.FC<LocationListProps> = (props) => {
   const handleLocationsClick = () => setSelectedCard("locations");
   const handleDoorsClick = () => setSelectedCard("doors");
   const handleWorkersClick = () => setSelectedCard("workers");
-
   const [locations, setLocations] = React.useState<Location[]>([]);
   const [doors, setDoors] = React.useState<any[]>([]);
   const [workers, setWorkers] = React.useState<any[]>([]);
-
   const dataProvider = useDataProvider();
-
+  // console.log(data);
   React.useEffect(() => {
     const fetchAllData = async () => {
       const [locationsData, doorsData, workersData] = await Promise.all([
@@ -68,7 +68,7 @@ const LocationList: React.FC<LocationListProps> = (props) => {
       .getList(resource, params)
       .then((response: any) => response.data);
   };
-
+  // console.log(data);
   const fetchDoors = (resource: string) => {
     const params = {
       pagination: { page: 0, perPage: 0 },
@@ -134,9 +134,11 @@ const LocationList: React.FC<LocationListProps> = (props) => {
           <p style={{ color: "blue" }}> {workers.length}</p>
         </Paper>
       </div>
-      {/* <Events /> */}
+
       <div style={{ marginTop: "2rem" }}>
-        {selectedCard === "locations" && <LocationsComponent {...props} />}
+        {selectedCard === "locations" && (
+          <LocationsComponent {...props} data={locations} />
+        )}
         {selectedCard === "doors" && <DoorsComponent data={doors} />}
         {selectedCard === "workers" && <WorkersComponent workers={workers} />}
       </div>

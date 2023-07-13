@@ -1,13 +1,21 @@
 import React, { useState } from "react";
-import { List, Datagrid, TextField } from "react-admin";
+import { List, Datagrid, TextField, EditButton } from "react-admin";
 import { Box, InputBase, Pagination, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 interface WorkersComponentProps {
   workers: any[];
 }
+interface Location {
+  id: number;
+  location: string;
+  city: string;
+  address: string;
+}
 
 const WorkersComponent: React.FC<WorkersComponentProps> = ({ workers }) => {
   const [currentPage, setCurrentPage] = useState(1);
+  const navigate = useNavigate();
   const itemsPerPage = 10;
   const handlePageChange = (event: any, newPage: number) => {
     setCurrentPage(newPage);
@@ -16,7 +24,8 @@ const WorkersComponent: React.FC<WorkersComponentProps> = ({ workers }) => {
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = workers.slice(indexOfFirstItem, indexOfLastItem);
-
+  let location = window.origin;
+  console.log(location);
   // const formattedTime = timestamp
   //   ? new Date(timestamp).toLocaleTimeString()
   //   : "";
@@ -29,13 +38,18 @@ const WorkersComponent: React.FC<WorkersComponentProps> = ({ workers }) => {
     <>
       <InputBase />
       <List pagination={false}>
-        <Datagrid data={currentItems}>
+        <Datagrid data={currentItems} rowClick="edit">
           <TextField source="name" sortable={true} label="Worker" />
           <TextField source="email" sortable={true} label="Email" />
           <TextField source="phoneNumber" sortable={true} label="Phone" />
           {/* <TimestampField source="updatedAt" /> */}
           <TextField source="updatedAt" sortable={true} label="Last unlock" />
         </Datagrid>
+        <EditButton
+          onClick={() => {
+            navigate(`${location}/#/workers`);
+          }}
+        />
         <Box display="flex" justifyContent="center" marginTop={2}>
           <Pagination
             count={totalPages}
