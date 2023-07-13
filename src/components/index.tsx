@@ -1,8 +1,14 @@
 import * as React from "react";
 import { ListProps, useDataProvider } from "react-admin";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import { Paper } from "@mui/material";
+import WorkersComponent from "./Workers";
 import LocationsComponent from "./Location";
+import DoorsComponent from "./Doors";
 import Layout from "../Layout";
+import WorkerDetails from "./WorkerDetails";
+import { GlobalContext } from "../customHook/context";
 interface Location {
   id: number;
   location: string;
@@ -10,35 +16,12 @@ interface Location {
   address: string;
 }
 
-interface LocationListProps extends ListProps {
-  data: Location[];
-}
-
-const LocationList: React.FC<LocationListProps> = (props) => {
-  const [locations, setLocations] = React.useState<Location[]>([]);
-  // const [workerClicked, setWorkersClicked] = React.useState(false);
-  const dataProvider = useDataProvider();
-  // console.log(data);
-  React.useEffect(() => {
-    fetchLocations("locations");
-  }, []);
-
-  const fetchLocations = async (resource: string) => {
-    const params = {
-      pagination: { page: 0, perPage: 0 },
-      sort: { field: "location", order: "ASC" },
-      filter: {},
-    };
-    try {
-      let response = await dataProvider.getList(resource, params);
-      setLocations(response.data);
-      // .then((response: any) => response.data)
-      // .catch((err) => {
-      // });
-    } catch (error) {
-      console.error(error);
-    }
-  };
+const LocationList: React.FC = (props) => {
+  const [selectedCard, setSelectedCard] = React.useState("locations");
+  const { doors, locations, workers } = React.useContext(GlobalContext);
+  const handleLocationsClick = () => setSelectedCard("locations");
+  const handleDoorsClick = () => setSelectedCard("doors");
+  const handleWorkersClick = () => setSelectedCard("workers");
 
   return (
     <Layout>
@@ -52,7 +35,7 @@ const LocationList: React.FC<LocationListProps> = (props) => {
             alignItems: "center",
             justifyContent: "center",
           }}
-          // onClick={handleLocationsClick}
+          onClick={handleLocationsClick}
         >
           <h2>Locations</h2>
           <p style={{ color: "blue" }}> {locations.length}</p>
@@ -67,10 +50,10 @@ const LocationList: React.FC<LocationListProps> = (props) => {
             flexDirection: "column",
             justifyContent: "center",
           }}
-          // onClick={handleDoorsClick}
+          onClick={handleDoorsClick}
         >
           <h2>Doors</h2>
-          {/* <p style={{ color: "blue" }}> {doors.length}</p> */}
+          <p style={{ color: "blue" }}> {doors.length}</p>
         </Paper>
         <Paper
           elevation={3}
@@ -82,16 +65,14 @@ const LocationList: React.FC<LocationListProps> = (props) => {
             flexDirection: "column",
             justifyContent: "center",
           }}
-          // onClick={handleWorkersClick}
+          onClick={handleWorkersClick}
         >
           <h2>Workers</h2>
-          {/* <p style={{ color: "blue" }}> {workers.length}</p> */}
+          <p style={{ color: "blue" }}> {workers.length}</p>
         </Paper>
       </div>
 
-      <div style={{ marginTop: "2rem" }}>
-        <LocationsComponent {...props} data={locations} />
-      </div>
+      <LocationsComponent {...props} data={locations} />
     </Layout>
   );
 

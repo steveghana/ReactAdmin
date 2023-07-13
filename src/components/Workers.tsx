@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { List, Datagrid, TextField, EditButton } from "react-admin";
 import { Box, Pagination, Typography } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
 import { TextField as Field } from "@mui/material";
 import useSearchFilter from "../customHook";
 import customDataProvider from "../dataProvider";
 import Layout from "../Layout";
+import { GlobalContext } from "../customHook/context";
 
 interface WorkersComponentProps {
   workers: any[];
@@ -17,7 +17,7 @@ const WorkersComponent: React.FC<WorkersComponentProps> = ({
   setWorkersClicked,
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [workers, setWorkers] = React.useState<any[]>([]);
+  const { doors, locations, workers } = React.useContext(GlobalContext);
   const itemsPerPage = 10;
   const handlePageChange = (event: any, newPage: number) => {
     setCurrentPage(newPage);
@@ -28,24 +28,15 @@ const WorkersComponent: React.FC<WorkersComponentProps> = ({
   const currentItems = workers.slice(indexOfFirstItem, indexOfLastItem);
   const totalPages = Math.ceil(workers.length / itemsPerPage);
   const [data, searchTerm, handleSearch] = useSearchFilter(currentItems);
-  const fetchWorkers = async (resource: string) => {
-    const params = {
-      pagination: { page: 0, perPage: 0 },
-      sort: { field: "name", order: "ASC" },
-      filter: {},
-    };
 
-    try {
-      let response = await customDataProvider.getList(resource, params);
-      // console.log(response.data);
-      setWorkers(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  React.useEffect(() => {
-    fetchWorkers("users");
-  }, []);
+  // React.useEffect(() => {
+  //   const fetchData = async () => {
+  //     const workersData = await fetchWorkers("users");
+  //     setWorkers(workersData);
+  //   };
+
+  //   fetchData();
+  // }, []);
   console.log(workers, "dataset");
   return (
     <Layout>

@@ -9,8 +9,8 @@ interface Location {
   address: string;
 }
 
-interface LocationListProps extends ListProps {
-  data: Location[];
+interface LocationListProps {
+  data: any[];
 }
 
 const LocationList: React.FC<LocationListProps> = (props) => {

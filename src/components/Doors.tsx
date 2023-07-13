@@ -5,35 +5,18 @@ import { TextField as Field } from "@mui/material";
 import useSearchFilter from "../customHook";
 import customDataProvider from "../dataProvider";
 import Layout from "../Layout";
+import { GlobalContext } from "../customHook/context";
 
 const Doors: React.FC<{ data: Record<string, string>[] }> = (props) => {
   const [currentPage, setCurrentPage] = React.useState(1);
   const itemsPerPage = 10;
-  const [doors, setDoors] = React.useState<any[]>([]);
-
+  const { doors } = React.useContext(GlobalContext);
   const handlePageChange = (event: any, newPage: number) => {
     setCurrentPage(newPage);
   };
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
-  const fetchDoors = async (resource: string) => {
-    const params = {
-      pagination: { page: 0, perPage: 0 },
-      sort: { field: "location", order: "ASC" },
-      filter: {},
-    };
-    try {
-      let response = await customDataProvider.getList(resource, params);
-      setDoors(response.data);
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  React.useEffect(() => {
-    fetchDoors("gates-users");
-  }, []);
   const currentItems = doors.slice(indexOfFirstItem, indexOfLastItem);
   const totalPages = Math.ceil(doors.length / itemsPerPage);
   const [data, searchTerm, handleSearch] = useSearchFilter(currentItems);
