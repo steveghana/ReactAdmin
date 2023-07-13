@@ -5,6 +5,7 @@ import WorkersComponent from "./Workers";
 import LocationsComponent from "./Location";
 import DoorsComponent from "./Doors";
 import WorkerChart from "./Charts";
+import Layout from "../Layout";
 interface Location {
   id: number;
   location: string;
@@ -83,69 +84,60 @@ const LocationList: React.FC<LocationListProps> = (props) => {
   };
 
   return (
-    <Card
-      style={{
-        display: "flex",
-        gap: "1rem",
-        marginTop: "2rem",
-        height: "90%",
-      }}
-    >
-      <Container maxWidth="md" sx={{ mt: "2rem" }}>
-        <div style={{ display: "flex", gap: "2rem", alignItems: "center" }}>
-          <Paper
-            elevation={3}
-            sx={{
-              width: "100%",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-            onClick={handleLocationsClick}
-          >
-            <h2>Locations</h2>
-            <p style={{ color: "blue" }}> {locations.length}</p>
-          </Paper>
-          <Paper
-            elevation={3}
-            sx={{
-              width: "100%",
-              display: "flex",
-              alignItems: "center",
+    <Layout>
+      <div style={{ display: "flex", gap: "2rem", alignItems: "center" }}>
+        <Paper
+          elevation={3}
+          sx={{
+            width: "100%",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+          onClick={handleLocationsClick}
+        >
+          <h2>Locations</h2>
+          <p style={{ color: "blue" }}> {locations.length}</p>
+        </Paper>
+        <Paper
+          elevation={3}
+          sx={{
+            width: "100%",
+            display: "flex",
+            alignItems: "center",
 
-              flexDirection: "column",
-              justifyContent: "center",
-            }}
-            onClick={handleDoorsClick}
-          >
-            <h2>Doors</h2>
-            <p style={{ color: "blue" }}> {doors.length}</p>
-          </Paper>
-          <Paper
-            elevation={3}
-            sx={{
-              width: "100%",
-              alignItems: "center",
+            flexDirection: "column",
+            justifyContent: "center",
+          }}
+          onClick={handleDoorsClick}
+        >
+          <h2>Doors</h2>
+          <p style={{ color: "blue" }}> {doors.length}</p>
+        </Paper>
+        <Paper
+          elevation={3}
+          sx={{
+            width: "100%",
+            alignItems: "center",
 
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-            }}
-            onClick={handleWorkersClick}
-          >
-            <h2>Workers</h2>
-            <p style={{ color: "blue" }}> {workers.length}</p>
-          </Paper>
-        </div>
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+          }}
+          onClick={handleWorkersClick}
+        >
+          <h2>Workers</h2>
+          <p style={{ color: "blue" }}> {workers.length}</p>
+        </Paper>
+      </div>
 
-        <div style={{ marginTop: "2rem" }}>
-          {selectedCard === "locations" && <LocationsComponent {...props} />}
-          {selectedCard === "doors" && <DoorsComponent data={doors} />}
-          {selectedCard === "workers" && <WorkersComponent workers={workers} />}
-        </div>
-      </Container>
-    </Card>
+      <div style={{ marginTop: "2rem" }}>
+        {selectedCard === "locations" && <LocationsComponent {...props} />}
+        {selectedCard === "doors" && <DoorsComponent data={doors} />}
+        {selectedCard === "workers" && <WorkersComponent workers={workers} />}
+      </div>
+    </Layout>
   );
 };
 

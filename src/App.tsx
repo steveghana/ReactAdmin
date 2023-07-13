@@ -2,9 +2,9 @@
 import { render } from "react-dom";
 import { Route } from "react-router-dom";
 import { Admin, CustomRoutes, Resource } from "react-admin";
-import Locations from "./visitors";
+import Locations from "./components";
 import dataprovider from "./dataProvider";
-import CommentEdit from "./visitors/CommentEdit";
+import CommentEdit from "./components/CommentEdit";
 const App = () => (
   <Admin
     // title=""

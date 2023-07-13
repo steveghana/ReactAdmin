@@ -29,6 +29,7 @@ const LocationList: React.FC<LocationListProps> = (props) => {
         <TextField source="addressStreet" sortable={true} label="Street" />
         <TextField source="address" sortable={true} label="Full Address" />
       </Datagrid>
+      <EditButton />
     </List>
   );
 };
