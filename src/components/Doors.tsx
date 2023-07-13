@@ -28,7 +28,9 @@ const Doors: React.FC<{ data: Record<string, string>[] }> = (props) => {
         onChange={(e) => handleSearch(e.target.value)}
       />
       <List pagination={false}>
-        <Datagrid data={data}>
+        <Datagrid
+          data={data.length < currentItems.length ? data : currentItems}
+        >
           <TextField source="name" sortable={true} label="Door Name" />
           <TextField source="addressCity" sortable={true} label="Location" />
           <TextField source="addressStreet" sortable={true} label="Floor" />
