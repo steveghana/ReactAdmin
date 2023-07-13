@@ -1,13 +1,5 @@
 import * as React from "react";
-import {
-  Datagrid,
-  EditButton,
-  Link,
-  List,
-  ListProps,
-  Pagination,
-  TextField,
-} from "react-admin";
+import { Datagrid, EditButton, List, ListProps, TextField } from "react-admin";
 import { TextField as Field } from "@mui/material";
 import useSearchFilter from "../customHook";
 interface Location {

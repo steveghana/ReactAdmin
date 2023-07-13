@@ -14,7 +14,6 @@ import {
 } from "@mui/material";
 import customDataProvider from "../dataProvider";
 import { useParams } from "react-router-dom";
-import { Datagrid, List, TextField } from "react-admin";
 interface ItemProps {
   floor: string;
   name: string;
@@ -29,11 +28,11 @@ const ItemEdit = () => {
 
   const fetchItemById = async () => {
     let location = window.location.hash.split("/")[1];
-    const resource = location; // Change this to the appropriate resource
+    const resource = location;
     const params = {
-      pagination: { page: 1, perPage: 10 }, // Adjust pagination options as needed
-      sort: { field: "name", order: "ASC" }, // Adjust sorting options as needed
-      filter: { id }, // Filter by the ID parameter
+      pagination: { page: 1, perPage: 10 },
+      sort: { field: "name", order: "ASC" },
+      filter: { id },
     };
     console.log(id);
 
@@ -41,7 +40,7 @@ const ItemEdit = () => {
       //@ts-ignore
       const response = await customDataProvider.getOne(resource, id);
       console.log(response);
-      const itemData = response.data; // Assuming the API returns a single item
+      const itemData = response.data;
       setItem([itemData]);
     } catch (error) {
       console.error(error);
@@ -51,7 +50,7 @@ const ItemEdit = () => {
   useEffect(() => {
     fetchItemById();
     console.log(item, "from item");
-  }, []); // Run the fetchItemById function only once, on component mount
+  }, []);
 
   return (
     <Container>

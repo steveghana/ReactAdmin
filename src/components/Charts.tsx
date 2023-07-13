@@ -1,9 +1,8 @@
-import React, { PureComponent } from "react";
+import React from "react";
 import {
   BarChart,
   Bar,
   XAxis,
-  YAxis,
   CartesianGrid,
   Tooltip,
   Legend,
@@ -65,8 +64,8 @@ const WorkerChart = () => {
     "#6CEAE6",
     "#FF6663",
     "#FFB448",
-  ]; // Specify the color for all bars
-  const borderRadius = 8; // Specify the border radius for all bars
+  ];
+  const borderRadius = 8;
 
   return (
     <ResponsiveContainer width="100%" height="100%">
@@ -88,7 +87,7 @@ const WorkerChart = () => {
         <Legend />
         <CartesianGrid strokeDasharray="3 3" />
         <Bar dataKey="pv" background={{ fill: "#eee" }} radius={borderRadius}>
-          {data.map((entry, index) => (
+          {data.map((_, index) => (
             <Cell key={index} fill={barColors[index]} radius={borderRadius} />
           ))}
         </Bar>
