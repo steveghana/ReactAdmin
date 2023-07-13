@@ -22,8 +22,8 @@ const Doors: React.FC<{ data: Record<string, string>[] }> = (props) => {
         name="password"
         autoComplete="off"
         type="text"
-        placeholder="Enter name"
-        label="Name"
+        placeholder="Enter Door"
+        label="Door"
         value={searchTerm}
         onChange={(e) => handleSearch(e.target.value)}
       />

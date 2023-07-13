@@ -23,7 +23,7 @@ const LocationList: React.FC<LocationListProps> = (props) => {
         autoComplete="off"
         type="text"
         placeholder="Enter name"
-        label="Name"
+        label="Location"
         value={searchTerm}
         onChange={(e) => handleSearch(e.target.value)}
       />
