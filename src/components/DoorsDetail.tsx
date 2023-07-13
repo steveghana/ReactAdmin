@@ -30,7 +30,6 @@ const DoorsEdit = () => {
 
   React.useEffect(() => {
     fetchItemById();
-    console.log(item, "from item");
   }, []);
   return (
     <div>

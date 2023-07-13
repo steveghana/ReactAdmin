@@ -17,7 +17,7 @@ const WorkersComponent: React.FC<WorkersComponentProps> = ({
   setWorkersClicked,
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const { doors, locations, workers } = React.useContext(GlobalContext);
+  const { workers } = React.useContext(GlobalContext);
   const itemsPerPage = 10;
   const handlePageChange = (event: any, newPage: number) => {
     setCurrentPage(newPage);

@@ -10,11 +10,21 @@ export interface MyContextProps {
 interface LocationListProps extends ListProps {
   data: Location[];
 }
+interface ILogProps {
+  gateId: number;
+  isOpen: boolean;
+  isSuccess: boolean;
+  logDescription: string;
+  logNotes: string;
+  logTimestamp: Date;
+  userId: number;
+}
 export interface MyContextProps {
   fetchData?: () => Promise<void>;
   locations: any[];
   doors: any[];
   workers: any[];
+  logs: ILogProps[];
 }
 
 export const GlobalContext = createContext<MyContextProps>({
@@ -22,8 +32,23 @@ export const GlobalContext = createContext<MyContextProps>({
   locations: [],
   doors: [],
   workers: [],
+  logs: [],
 });
+const fetchEvents = async (resource: string) => {
+  const params = {
+    pagination: { page: 0, perPage: 0 },
+    sort: { field: "location", order: "ASC" },
+    filter: {},
+  };
 
+  try {
+    const response = await customDataProvider.getList(resource, params);
+    return response.data.slice(0, 12);
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+};
 const fetchLocations = async (resource: string) => {
   const params = {
     pagination: { page: 0, perPage: 0 },
@@ -74,17 +99,23 @@ export const GlobalContextProvider: React.FC<{ children: React.ReactNode }> = ({
   const [locations, setLocations] = useState<Location[]>([]);
   const [doors, setDoors] = useState<any[]>([]);
   const [workers, setWorkers] = useState<any[]>([]);
+  const [logs, setLogs] = React.useState<ILogProps[]>([]);
 
   useEffect(() => {
     const fetchAllData = async () => {
       try {
-        const [locationsData, doorsData, workersData] = await Promise.all([
-          fetchLocations("locations"),
-          fetchDoors("gates-users"),
-          fetchWorkers("users"),
-        ]);
+        const [locationsData, doorsData, workersData, logs] = await Promise.all(
+          [
+            fetchLocations("locations"),
+            fetchDoors("gates-users"),
+            fetchWorkers("users"),
+            fetchEvents("log-event-operations"),
+          ]
+        );
 
         setLocations(locationsData);
+        setLogs(logs);
+        console.log(logs, "from context");
         setDoors(doorsData);
         setWorkers(workersData);
       } catch (error) {
@@ -97,7 +128,7 @@ export const GlobalContextProvider: React.FC<{ children: React.ReactNode }> = ({
   }, []);
 
   return (
-    <GlobalContext.Provider value={{ locations, doors, workers }}>
+    <GlobalContext.Provider value={{ locations, doors, workers, logs }}>
       {children}
     </GlobalContext.Provider>
   );

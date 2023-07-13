@@ -39,7 +39,7 @@ const ItemEdit = () => {
     try {
       //@ts-ignore
       const response = await customDataProvider.getOne(resource, id);
-      console.log(response);
+      console.log(response, "new res");
       const itemData = response.data;
       setItem([itemData]);
     } catch (error) {
@@ -49,7 +49,6 @@ const ItemEdit = () => {
 
   useEffect(() => {
     fetchItemById();
-    console.log(item, "from item");
   }, []);
 
   return (

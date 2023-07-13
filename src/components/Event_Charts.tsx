@@ -2,37 +2,11 @@ import React from "react";
 import { Alert, Box, Button, Card, Container, Paper } from "@mui/material";
 import WorkerChart from "./Charts";
 import { useDataProvider } from "react-admin";
-interface ILogProps {
-  gateId: number;
-  isOpen: boolean;
-  isSuccess: boolean;
-  logDescription: string;
-  logNotes: string;
-  logTimestamp: Date;
-  userId: number;
-}
-const Events = () => {
-  const dataProvider = useDataProvider();
-  const [logs, setLogs] = React.useState<ILogProps[]>([]);
-  const fetchDoors = (resource: string) => {
-    const params = {
-      pagination: { page: 0, perPage: 0 },
-      sort: { field: "location", order: "ASC" },
-      filter: {},
-    };
+import { GlobalContext } from "../customHook/context";
 
-    return dataProvider
-      .getList(resource, params)
-      .then((response: any) => {
-        setLogs(response.data.slice(0, 12));
-      })
-      .catch((err: any) => {
-        console.error(err);
-      });
-  };
-  React.useEffect(() => {
-    fetchDoors("log-event-operations");
-  }, []);
+const Events = () => {
+  const { logs } = React.useContext(GlobalContext);
+  console.log(logs);
   return (
     <Container maxWidth="sm">
       <div
