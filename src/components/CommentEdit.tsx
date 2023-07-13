@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import customDataProvider from "../dataProvider";
 import { useParams } from "react-router-dom";
+import { List, TextField } from "react-admin";
 
 const ItemEdit = () => {
   const { id } = useParams();
@@ -62,30 +63,16 @@ const ItemEdit = () => {
       </Box>
       <Box sx={{ width: "100%" }}>
         {item ? (
-          <TableContainer>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>ID</TableCell>
-                  <TableCell>Name</TableCell>
-                  <TableCell>Description</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {/* <TableRow key={item.id}>
-                  <TableCell>{item.id}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.description}</TableCell>
-                </TableRow> */}
-              </TableBody>
-            </Table>
-          </TableContainer>
+          <List>{/* <TextField/> */}</List>
         ) : (
           <Typography>Loading...</Typography>
         )}
       </Box>
       <Typography variant="body2" color="textSecondary">
-        Text at the bottom
+        location
+      </Typography>
+      <Typography variant="body2" color="textSecondary">
+        street
       </Typography>
     </Container>
   );

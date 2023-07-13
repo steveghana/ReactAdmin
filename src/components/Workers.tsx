@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  List,
-  Datagrid,
-  TextField,
-  FieldProps,
-  useRecordContext,
-} from "react-admin";
+import { List, Datagrid, TextField } from "react-admin";
 import { Box, InputBase, Pagination, Typography } from "@mui/material";
 
 interface WorkersComponentProps {
@@ -22,13 +16,10 @@ const WorkersComponent: React.FC<WorkersComponentProps> = ({ workers }) => {
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = workers.slice(indexOfFirstItem, indexOfLastItem);
-  console.log(currentItems, "from work");
-  const record = useRecordContext();
 
-  const timestamp = record ? record.timestamp : null;
-  const formattedTime = timestamp
-    ? new Date(timestamp).toLocaleTimeString()
-    : "";
+  // const formattedTime = timestamp
+  //   ? new Date(timestamp).toLocaleTimeString()
+  //   : "";
   const totalPages = Math.ceil(workers.length / itemsPerPage);
   /*   const pageNumbers = Array.from(
     { length: totalPages },
@@ -43,12 +34,7 @@ const WorkersComponent: React.FC<WorkersComponentProps> = ({ workers }) => {
           <TextField source="email" sortable={true} label="Email" />
           <TextField source="phoneNumber" sortable={true} label="Phone" />
           {/* <TimestampField source="updatedAt" /> */}
-          <TextField
-            source="updatedAt"
-            sortable={true}
-            defaultValue={formattedTime}
-            label="Last unlock"
-          />
+          <TextField source="updatedAt" sortable={true} label="Last unlock" />
         </Datagrid>
         <Box display="flex" justifyContent="center" marginTop={2}>
           <Pagination
