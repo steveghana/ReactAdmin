@@ -2,10 +2,18 @@ import React from "react";
 import { Alert, Box, Button, Card, Container, Paper } from "@mui/material";
 import WorkerChart from "./Charts";
 import { useDataProvider } from "react-admin";
-
+interface ILogProps {
+  gateId: number;
+  isOpen: boolean;
+  isSuccess: boolean;
+  logDescription: string;
+  logNotes: string;
+  logTimestamp: Date;
+  userId: number;
+}
 const Events = () => {
   const dataProvider = useDataProvider();
-  const [logs, setLogs] = React.useState<any[]>([]);
+  const [logs, setLogs] = React.useState<ILogProps[]>([]);
   const fetchDoors = (resource: string) => {
     const params = {
       pagination: { page: 0, perPage: 0 },
@@ -16,7 +24,7 @@ const Events = () => {
     return dataProvider
       .getList(resource, params)
       .then((response: any) => {
-        setLogs(response.data);
+        setLogs(response.data.slice(0, 12));
         console.log(response, "logs");
       })
       .catch((err: any) => {
@@ -48,23 +56,30 @@ const Events = () => {
       <Paper
         elevation={3}
         sx={{
-          height: "40%",
+          height: "auto",
           padding: "1rem",
           marginBottom: "1rem",
           display: "flex",
           flexDirection: "column",
-          gap: "1.3rem",
+          gap: ".6rem",
         }}
       >
-        <Alert severity="success">This is an error alert — check it out!</Alert>
-        <Alert severity="error">This is a warning alert — check it out!</Alert>
-        <Alert severity="success">This is an info alert — check it out!</Alert>
-        <Alert severity="success">
-          This is a success alert — check it out!
-        </Alert>
-        <Alert severity="success">
-          This is a success alert — check it out!
-        </Alert>
+        {logs.map((log) => {
+          if (log.logDescription === "") {
+            return;
+          } else {
+            return (
+              <>
+                <Alert
+                  key={log.userId}
+                  severity={log.isSuccess ? "success" : "error"}
+                >
+                  {log.logDescription}
+                </Alert>
+              </>
+            );
+          }
+        })}
       </Paper>
       <Box sx={{ height: "40%" }}>
         <WorkerChart />

@@ -17,6 +17,10 @@ import { useParams } from "react-router-dom";
 import { Datagrid, List, TextField } from "react-admin";
 interface ItemProps {
   floor: string;
+  name: string;
+  updatedAt: string;
+  addressCity: string;
+  addressStreet: string;
 }
 const ItemEdit = () => {
   const { id } = useParams();
@@ -38,7 +42,7 @@ const ItemEdit = () => {
       const response = await customDataProvider.getOne(resource, id);
       console.log(response);
       const itemData = response.data; // Assuming the API returns a single item
-      setItem(itemData.floors);
+      setItem([itemData]);
     } catch (error) {
       console.error(error);
     }
@@ -51,7 +55,7 @@ const ItemEdit = () => {
 
   return (
     <Container>
-      <Box>
+      <Box style={{ marginTop: "2rem" }}>
         <Box
           sx={{
             width: "100%",
@@ -61,29 +65,55 @@ const ItemEdit = () => {
             alignItems: "center",
           }}
         >
-          <Typography variant="h5">{"Loading..."}</Typography>
+          <Typography variant="h5">{item[0]?.name}</Typography>
           <Button variant="outlined" sx={{ border: "1px solid blue" }}>
             Edit Details
           </Button>
         </Box>
-        <Box sx={{ width: "100%" }}></Box>
-        <Typography variant="body2" color="textSecondary">
-          location
-        </Typography>
-        <Typography variant="body2" color="textSecondary">
-          street
-        </Typography>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "1.3rem",
+            margin: "1rem 0",
+          }}
+        >
+          <Typography variant="body2" color="textSecondary">
+            City:{item[0]?.addressCity}
+          </Typography>
+          <Typography variant="body2" color="textSecondary">
+            street:{item[0]?.addressStreet}
+          </Typography>
+        </div>
       </Box>
       <Box>
-        <Datagrid
-          data={["1", "4", "5"]}
-          // isLoading={isLoading}
-          total={item && item.length}
-          // rowClick="edit"
-        >
-          {/* <TextField source="id" sortable={false} />
-          <TextField source="title" sortable={false} /> */}
-        </Datagrid>
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+            <TableHead>
+              <TableRow>
+                <TableCell>Door Name</TableCell>
+                <TableCell align="right">Last Unlock</TableCell>
+                <TableCell align="right">Status</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {item.map((row, i) => (
+                <TableRow
+                  key={i}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell align="right">{row?.name}</TableCell>
+                  <TableCell component="th" scope="row">
+                    {row.floor?.length ? row.floor[0] : 0}
+                  </TableCell>
+                  <TableCell align="right">
+                    {new Date(row.updatedAt).toLocaleTimeString()}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </Box>
     </Container>
   );
