@@ -25,6 +25,7 @@ const LocationList: React.FC<LocationListProps> = (props) => {
   const [locations, setLocations] = React.useState<Location[]>([]);
   const [doors, setDoors] = React.useState<any[]>([]);
   const [workers, setWorkers] = React.useState<any[]>([]);
+  const [workerClicked, setWorkersClicked] = React.useState(false);
   const dataProvider = useDataProvider();
   // console.log(data);
   React.useEffect(() => {

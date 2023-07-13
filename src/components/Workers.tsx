@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { List, Datagrid, TextField, EditButton } from "react-admin";
 import { Box, Pagination, Typography } from "@mui/material";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { TextField as Field } from "@mui/material";
 import useSearchFilter from "../customHook";
 
@@ -17,7 +17,7 @@ interface Location {
 
 const WorkersComponent: React.FC<WorkersComponentProps> = ({ workers }) => {
   const [currentPage, setCurrentPage] = useState(1);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const itemsPerPage = 10;
   const handlePageChange = (event: any, newPage: number) => {
     setCurrentPage(newPage);
@@ -59,9 +59,9 @@ const WorkersComponent: React.FC<WorkersComponentProps> = ({ workers }) => {
           <TextField source="updatedAt" sortable={true} label="Last unlock" />
         </Datagrid>
         <EditButton
-        // onClick={() => {
-        //   navigate(`${location}/#/workers`);
-        // }}
+          onClick={() => {
+            navigate(`${location}/#/workers`);
+          }}
         />
         <Box display="flex" justifyContent="center" marginTop={2}>
           <Pagination

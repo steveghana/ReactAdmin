@@ -61,14 +61,14 @@ const Events = () => {
           gap: ".6rem",
         }}
       >
-        {logs.map((log) => {
+        {logs.map((log, i) => {
           if (log.logDescription === "") {
             return;
           } else {
             return (
               <>
                 <Alert
-                  key={log.userId}
+                  key={log.userId + i}
                   severity={log.isSuccess ? "success" : "error"}
                 >
                   {log.logDescription}

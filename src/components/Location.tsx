@@ -15,6 +15,7 @@ interface LocationListProps extends ListProps {
 
 const LocationList: React.FC<LocationListProps> = (props) => {
   const [data, searchTerm, handleSearch] = useSearchFilter(props.data);
+  console.log(data);
   return (
     <>
       <Field
@@ -28,7 +29,7 @@ const LocationList: React.FC<LocationListProps> = (props) => {
         onChange={(e) => handleSearch(e.target.value)}
       />
       <List pagination={false}>
-        <Datagrid data={data} rowClick="edit">
+        <Datagrid data={!data.length ? props.data : data} rowClick="edit">
           <TextField source="name" sortable={true} label="Location Name" />
           <TextField source="addressCity" sortable={true} label="City" />
           <TextField source="addressStreet" sortable={true} label="Street" />
