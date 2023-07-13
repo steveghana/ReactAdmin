@@ -60,7 +60,10 @@ const LocationList: React.FC<LocationListProps> = (props) => {
     };
     return dataProvider
       .getList(resource, params)
-      .then((response: any) => response.data);
+      .then((response: any) => response.data)
+      .catch((err) => {
+        console.error(err);
+      });
   };
   const fetchDoors = (resource: string) => {
     const params = {
