@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { List, Datagrid, TextField } from "react-admin";
-import { Box, Pagination, Typography } from "@mui/material";
+import { Box, InputBase, Pagination, Typography } from "@mui/material";
 
 interface WorkersComponentProps {
   workers: any[];
@@ -24,6 +24,7 @@ const WorkersComponent: React.FC<WorkersComponentProps> = ({ workers }) => {
   ); */
   return (
     <>
+      <InputBase />
       <List pagination={false}>
         <Datagrid data={currentItems}>
           <TextField source="name" sortable={true} label="Name" />

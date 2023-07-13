@@ -6,6 +6,7 @@ import LocationsComponent from "./Location";
 import DoorsComponent from "./Doors";
 import WorkerChart from "./Charts";
 import Layout from "../Layout";
+import Events from "./Event_Charts";
 interface Location {
   id: number;
   location: string;
@@ -38,7 +39,7 @@ const LocationList: React.FC<LocationListProps> = (props) => {
         fetchWorkers("users"),
       ]);
       setLocations(locationsData);
-      setDoors(doorsData.slice(0, 25));
+      setDoors(doorsData);
       setWorkers(workersData);
     };
 
@@ -131,7 +132,7 @@ const LocationList: React.FC<LocationListProps> = (props) => {
           <p style={{ color: "blue" }}> {workers.length}</p>
         </Paper>
       </div>
-
+      <Events />
       <div style={{ marginTop: "2rem" }}>
         {selectedCard === "locations" && <LocationsComponent {...props} />}
         {selectedCard === "doors" && <DoorsComponent data={doors} />}

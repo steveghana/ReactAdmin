@@ -1,6 +1,6 @@
 import { DataProvider } from "react-admin";
 import axios from "axios";
-import RestProvider from "ra-data-simple-rest";
+// import RestProvider from "ra-data-simple-rest";
 const apiUrl = "https://access-key-dev.herokuapp.com"; // Replace with your API URL
 
 const customDataProvider: DataProvider = {
@@ -63,9 +63,6 @@ const customDataProvider: DataProvider = {
     try {
       const response = await axios.get(url);
       const data = response.data;
-
-      // Handle the response structure
-
       return {
         data,
       };

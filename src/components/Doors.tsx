@@ -12,15 +12,15 @@ const Doors: React.FC<{ data: any }> = (props) => {
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = props.data.slice(indexOfFirstItem, indexOfLastItem);
-
+  console.log(currentItems, "from doors");
   const totalPages = Math.ceil(props.data.length / itemsPerPage);
   return (
     <List pagination={false}>
       <Datagrid data={currentItems}>
-        <TextField source="name" sortable={true} label="Location Name" />
-        <TextField source="addressCity" sortable={true} label="City" />
-        <TextField source="addressStreet" sortable={true} label="Street" />
-        <TextField source="address" sortable={true} label="Full Address" />
+        <TextField source="name" sortable={true} label="Door Name" />
+        <TextField source="addressCity" sortable={true} label="Location" />
+        <TextField source="addressStreet" sortable={true} label="Floor" />
+        <TextField source="address" sortable={true} label="Status" />
       </Datagrid>
       <Box display="flex" justifyContent="center" marginTop={2}>
         <Pagination
