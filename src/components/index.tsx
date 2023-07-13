@@ -132,7 +132,6 @@ const LocationList: React.FC<LocationListProps> = (props) => {
           <p style={{ color: "blue" }}> {workers.length}</p>
         </Paper>
       </div>
-      <Events />
       <div style={{ marginTop: "2rem" }}>
         {selectedCard === "locations" && <LocationsComponent {...props} />}
         {selectedCard === "doors" && <DoorsComponent data={doors} />}

@@ -1,5 +1,7 @@
 import { Card, Container } from "@mui/material";
 import React from "react";
+import WorkerChart from "../components/Charts";
+import Events from "../components/Event_Charts";
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
@@ -14,6 +16,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       <Container maxWidth="md" sx={{ mt: "2rem" }}>
         {children}
       </Container>
+      <Events />
     </Card>
   );
 };

@@ -2,7 +2,7 @@ import { Box, Pagination, Typography } from "@mui/material";
 import React from "react";
 import { Datagrid, List, ListProps, TextField } from "react-admin";
 
-const Doors: React.FC<{ data: any }> = (props) => {
+const Doors: React.FC<{ data: Record<string, string>[] }> = (props) => {
   const [currentPage, setCurrentPage] = React.useState(1);
   const itemsPerPage = 10;
   const handlePageChange = (event: any, newPage: number) => {
@@ -12,7 +12,6 @@ const Doors: React.FC<{ data: any }> = (props) => {
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = props.data.slice(indexOfFirstItem, indexOfLastItem);
-  console.log(currentItems, "from doors");
   const totalPages = Math.ceil(props.data.length / itemsPerPage);
   return (
     <List pagination={false}>

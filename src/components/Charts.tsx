@@ -89,14 +89,7 @@ const WorkerChart = () => {
         <CartesianGrid strokeDasharray="3 3" />
         <Bar dataKey="pv" background={{ fill: "#eee" }} radius={borderRadius}>
           {data.map((entry, index) => (
-            <Cell
-              key={index}
-              // dataKey="pv"
-
-              fill={barColors[index]}
-              // background={{ fill: "#eee" }}
-              radius={borderRadius}
-            />
+            <Cell key={index} fill={barColors[index]} radius={borderRadius} />
           ))}
         </Bar>
       </BarChart>
