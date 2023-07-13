@@ -6,6 +6,8 @@ export interface MyContextProps {
   locations: any[];
   doors: any[];
   workers: any[];
+  disableChart: boolean;
+  setDisableChart: React.Dispatch<React.SetStateAction<boolean>>;
 }
 interface LocationListProps extends ListProps {
   data: Location[];
@@ -33,6 +35,8 @@ export const GlobalContext = createContext<MyContextProps>({
   doors: [],
   workers: [],
   logs: [],
+  disableChart: false,
+  setDisableChart: () => false,
 });
 const fetchEvents = async (resource: string) => {
   const params = {
@@ -43,7 +47,7 @@ const fetchEvents = async (resource: string) => {
 
   try {
     const response = await customDataProvider.getList(resource, params);
-    return response.data.slice(0, 12);
+    return response.data;
   } catch (error) {
     console.error(error);
     return [];
@@ -100,7 +104,7 @@ export const GlobalContextProvider: React.FC<{ children: React.ReactNode }> = ({
   const [doors, setDoors] = useState<any[]>([]);
   const [workers, setWorkers] = useState<any[]>([]);
   const [logs, setLogs] = React.useState<ILogProps[]>([]);
-
+  const [disableChart, setDisableChart] = useState(false);
   useEffect(() => {
     const fetchAllData = async () => {
       try {
@@ -128,7 +132,9 @@ export const GlobalContextProvider: React.FC<{ children: React.ReactNode }> = ({
   }, []);
 
   return (
-    <GlobalContext.Provider value={{ locations, doors, workers, logs }}>
+    <GlobalContext.Provider
+      value={{ locations, doors, workers, logs, setDisableChart, disableChart }}
+    >
       {children}
     </GlobalContext.Provider>
   );

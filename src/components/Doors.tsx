@@ -35,6 +35,7 @@ const Doors: React.FC<{ data: Record<string, string>[] }> = (props) => {
       <List pagination={false}>
         <Datagrid
           data={data.length < currentItems.length ? data : currentItems}
+          rowClick="edit"
         >
           <TextField source="name" sortable={true} label="Door Name" />
           <TextField source="addressCity" sortable={true} label="Location" />

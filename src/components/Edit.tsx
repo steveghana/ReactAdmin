@@ -1,26 +1,14 @@
 import React from "react";
 import { Container, Box, Typography, Button, Pagination } from "@mui/material";
-import { List, Datagrid, TextField, EditButton } from "react-admin";
-import useSearchFilter from "../customHook";
 
 type IEdit = {
   intro: Record<string, string>;
   name: string;
   data: { [key: string]: any }[];
+  withTable?: boolean;
 };
 
 const Edit: React.FC<IEdit> = (props) => {
-  const [currentPage, setCurrentPage] = React.useState(1);
-  const [workers, setWorkers] = React.useState<any[]>([]);
-  const itemsPerPage = 10;
-  const handlePageChange = (event: any, newPage: number) => {
-    setCurrentPage(newPage);
-  };
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = props.data.slice(indexOfFirstItem, indexOfLastItem);
-  const totalPages = Math.ceil(props.data.length / itemsPerPage);
-  const [data, searchTerm, handleSearch] = useSearchFilter(currentItems);
   return (
     <Container>
       <Box style={{ marginTop: "2rem" }}>
@@ -53,35 +41,6 @@ const Edit: React.FC<IEdit> = (props) => {
           ))}
         </div>
       </Box>
-      <List pagination={false}>
-        <Datagrid
-          data={data.length < currentItems.length ? data : currentItems}
-          rowClick="edit"
-        >
-          <TextField source="name" sortable={true} label="Worker" />
-          <TextField source="email" sortable={true} label="Email" />
-          <TextField source="phoneNumber" sortable={true} label="Phone" />
-          <TextField source="updatedAt" sortable={true} label="Last unlock" />
-        </Datagrid>
-
-        <Box display="flex" justifyContent="center" marginTop={2}>
-          <Pagination
-            count={totalPages}
-            page={currentPage}
-            onChange={handlePageChange}
-            color="primary"
-            variant="outlined"
-          />
-        </Box>
-        <Typography
-          variant="caption"
-          color="textSecondary"
-          align="center"
-          marginTop={2}
-        >
-          Page {currentPage} of {totalPages}
-        </Typography>
-      </List>
     </Container>
   );
 };

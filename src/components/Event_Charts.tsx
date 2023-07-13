@@ -1,12 +1,14 @@
 import React from "react";
 import { Alert, Box, Button, Card, Container, Paper } from "@mui/material";
 import WorkerChart from "./Charts";
-import { useDataProvider } from "react-admin";
 import { GlobalContext } from "../customHook/context";
+import { useParams } from "react-router-dom";
 
 const Events = () => {
+  const params = useParams();
   const { logs } = React.useContext(GlobalContext);
-  console.log(logs);
+  let slidedLogs = !params.id ? logs.slice(0, 12) : logs.slice(0, 18);
+  console.log(slidedLogs);
   return (
     <Container maxWidth="sm">
       <div
@@ -35,7 +37,7 @@ const Events = () => {
           gap: ".6rem",
         }}
       >
-        {logs.map((log, i) => {
+        {slidedLogs.map((log, i) => {
           if (log.logDescription === "") {
             return;
           } else {
@@ -52,9 +54,11 @@ const Events = () => {
           }
         })}
       </Paper>
-      <Box sx={{ height: "40%" }}>
-        <WorkerChart />
-      </Box>
+      {!params.id && (
+        <Box sx={{ height: "40%" }}>
+          <WorkerChart />
+        </Box>
+      )}
     </Container>
   );
 };

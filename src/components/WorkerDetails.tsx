@@ -51,7 +51,7 @@ const WorkerDetails = () => {
   useEffect(() => {
     fetchItemById();
   }, []);
-  console.log(item);
+  console.log;
   return (
     <>
       <Edit data={item} intro={{}} name={item[0]?.name} />

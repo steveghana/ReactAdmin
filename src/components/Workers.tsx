@@ -3,7 +3,6 @@ import { List, Datagrid, TextField, EditButton } from "react-admin";
 import { Box, Pagination, Typography } from "@mui/material";
 import { TextField as Field } from "@mui/material";
 import useSearchFilter from "../customHook";
-import customDataProvider from "../dataProvider";
 import Layout from "../Layout";
 import { GlobalContext } from "../customHook/context";
 
@@ -12,10 +11,7 @@ interface WorkersComponentProps {
   setWorkersClicked: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const WorkersComponent: React.FC<WorkersComponentProps> = ({
-  // workers,
-  setWorkersClicked,
-}) => {
+const WorkersComponent: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const { workers } = React.useContext(GlobalContext);
   const itemsPerPage = 10;
@@ -60,9 +56,6 @@ const WorkersComponent: React.FC<WorkersComponentProps> = ({
           <TextField source="email" sortable={true} label="Email" />
           <TextField source="phoneNumber" sortable={true} label="Phone" />
           <TextField source="updatedAt" sortable={true} label="Last unlock" />
-          {/* <Link to={"/worker"}> */}
-          <EditButton onClick={() => setWorkersClicked(true)} />
-          {/* </Link> */}
         </Datagrid>
 
         <Box display="flex" justifyContent="center" marginTop={2}>

@@ -1,11 +1,12 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import Edit from "./Edit";
-
+import customDataProvider from "../dataProvider";
+import WorkersComponent from "./Workers";
 const DoorsEdit = () => {
   const { id } = useParams();
 
-  const [item, setItem] = React.useState<any[]>([]);
+  const [item, setItem] = React.useState<any>({});
 
   const fetchItemById = async () => {
     let location = window.location.hash.split("/")[1];
@@ -33,7 +34,8 @@ const DoorsEdit = () => {
   }, []);
   return (
     <div>
-      <Edit data={item} intro={{}} name={item[0]?.name} />
+      <Edit data={item} withTable={true} intro={{}} name={item?.name} />
+      <WorkersComponent />
     </div>
   );
 };
