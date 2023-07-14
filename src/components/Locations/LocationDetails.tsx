@@ -1,21 +1,12 @@
 import React, { useEffect } from "react";
-import {
-  Container,
-  Box,
-  Typography,
-  Button,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper,
-} from "@mui/material";
+import { Container, Box, Typography, Button } from "@mui/material";
 import customDataProvider from "../../dataProvider";
 import { useParams } from "react-router-dom";
 import LocationList from "./Location";
 import { GlobalContext } from "../../customHook/context";
+import { useNavigate } from "react-router-dom";
+import { ChevronLeft } from "@mui/icons-material";
+
 interface ItemProps {
   floor: string;
   name: string;
@@ -47,7 +38,10 @@ const ItemEdit = () => {
       console.error(error);
     }
   };
-
+  let history = useNavigate();
+  const navigateBack = () => {
+    history("/");
+  };
   useEffect(() => {
     fetchItemById();
   }, []);
@@ -64,7 +58,15 @@ const ItemEdit = () => {
             alignItems: "center",
           }}
         >
-          <Typography variant="h5">{item[0]?.name}</Typography>
+          <div
+            onClick={navigateBack}
+            style={{ display: "flex", alignItems: "center", gap: ".7rem" }}
+          >
+            <ChevronLeft color="primary" />
+            <Typography color={"primary"} variant="h5">
+              {item[0]?.name}
+            </Typography>
+          </div>
           <Button variant="outlined" sx={{ border: "1px solid blue" }}>
             Edit Details
           </Button>
