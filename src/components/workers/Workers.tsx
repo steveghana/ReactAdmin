@@ -3,7 +3,7 @@ import { List, Datagrid, TextField, EditButton } from "react-admin";
 import { Box, Pagination, Typography } from "@mui/material";
 import { TextField as Field } from "@mui/material";
 import useSearchFilter from "../../customHook";
-import Layout from "../../Layout";
+import Layout from "../../layout";
 import { GlobalContext } from "../../customHook/context";
 const WorkersComponent: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);

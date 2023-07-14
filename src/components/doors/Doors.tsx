@@ -3,7 +3,7 @@ import React from "react";
 import { Datagrid, List, TextField } from "react-admin";
 import { TextField as Field } from "@mui/material";
 import useSearchFilter from "../../customHook";
-import Layout from "../../Layout";
+import Layout from "../../layout";
 import { GlobalContext } from "../../customHook/context";
 
 const Doors: React.FC /* <{ data: Record<string, string>[] }> */ = () => {

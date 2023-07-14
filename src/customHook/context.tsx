@@ -1,6 +1,4 @@
 import React, { createContext, useEffect, useState } from "react";
-import customDataProvider from "../dataProvider"; // Import your custom data provider
-import { ListProps } from "@mui/material";
 export interface MyContextProps {
   fetchData?: () => Promise<void>; // Define the fetchData function
   locations: any[];
@@ -9,9 +7,9 @@ export interface MyContextProps {
   disableChart: boolean;
   setDisableChart: React.Dispatch<React.SetStateAction<boolean>>;
 }
-interface LocationListProps extends ListProps {
-  data: Location[];
-}
+// interface LocationListProps extends ListProps {
+//   data: Location[];
+// }
 interface ILogProps {
   gateId: number;
   isOpen: boolean;

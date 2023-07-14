@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import Edit from "../Edit";
+import Edit from "../edit.tsx";
 import customDataProvider from "../../dataProvider";
 import Doors from "./Doors";
 const DoorsEdit = () => {

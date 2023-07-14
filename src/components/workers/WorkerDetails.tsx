@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
-import customDataProvider from "../../dataProvider";
 import { useParams } from "react-router-dom";
-import Edit from "../Edit";
+import Edit from "../edit.tsx";
 import WorkersComponent from "./Workers";
 interface ItemProps {
   floor: string;

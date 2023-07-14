@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Paper, Typography } from "@mui/material";
-import LocationsComponent from "./Locations/Location";
-import Layout from "../Layout";
+import LocationsComponent from "./locations/Location";
+import Layout from "../layout";
 import { GlobalContext } from "../customHook/context";
 interface Location {
   id: number;
