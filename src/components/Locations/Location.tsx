@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Datagrid, EditButton, List, ListProps, TextField } from "react-admin";
-import { TextField as Field } from "@mui/material";
-import useSearchFilter from "../customHook";
+import { Box, TextField as Field, Pagination, Typography } from "@mui/material";
+import useSearchFilter from "../../customHook";
 interface Location {
   id: number;
   location: string;
@@ -14,8 +14,16 @@ interface LocationListProps {
 }
 
 const LocationList: React.FC<LocationListProps> = (props) => {
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const itemsPerPage = 10;
+  const handlePageChange = (event: any, newPage: number) => {
+    setCurrentPage(newPage);
+  };
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = props.data.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(props.data.length / itemsPerPage);
   const [data, searchTerm, handleSearch] = useSearchFilter(props.data);
-  console.log(data);
   return (
     <>
       <Field
@@ -25,6 +33,7 @@ const LocationList: React.FC<LocationListProps> = (props) => {
         type="text"
         placeholder="Enter name"
         label="Location"
+        sx={{ marginTop: "3rem" }}
         value={searchTerm}
         onChange={(e) => handleSearch(e.target.value)}
       />
@@ -36,6 +45,23 @@ const LocationList: React.FC<LocationListProps> = (props) => {
           <TextField source="address" sortable={true} label="Full Address" />
         </Datagrid>
         <EditButton />
+        <Box display="flex" justifyContent="center" marginTop={2}>
+          <Pagination
+            count={totalPages}
+            page={currentPage}
+            onChange={handlePageChange}
+            color="primary"
+            variant="outlined"
+          />
+        </Box>
+        <Typography
+          variant="caption"
+          color="textSecondary"
+          align="center"
+          marginTop={2}
+        >
+          Page {currentPage} of {totalPages}
+        </Typography>
       </List>
     </>
   );

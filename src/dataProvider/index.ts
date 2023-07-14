@@ -31,20 +31,23 @@ const customDataProvider: DataProvider = {
     }
   },
 
-  deleteMany: async () => {
-    return {};
-  },
-  getMany: async () => {
-    return { data: [] };
-  },
-  getManyReference: async () => {
-    return { data: [], total: 0 };
-  },
-  updateMany: async () => {
-    return {};
-  },
   // @ts-ignore
-  create: () => Promise.resolve({}),
+  create: async (resource, params) => {
+    const url = `${apiUrl}/${resource}`;
+    const { data } = params;
+
+    // try {
+    console.log(data);
+    return axios
+      .post(url, data)
+      .then((res) => {
+        console.log(res.data);
+        return res;
+      })
+      .catch((err) => {
+        throw new Error("Failed to create resource");
+      });
+  },
   // @ts-ignore
   delete: () => Promise.resolve({}),
 

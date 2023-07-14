@@ -1,20 +1,8 @@
 import React, { useEffect } from "react";
-import {
-  Container,
-  Box,
-  Typography,
-  Button,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper,
-} from "@mui/material";
-import customDataProvider from "../dataProvider";
+import customDataProvider from "../../dataProvider";
 import { useParams } from "react-router-dom";
-import Edit from "./Edit";
+import Edit from "../Edit";
+import WorkersComponent from "./Workers";
 interface ItemProps {
   floor: string;
   name: string;
@@ -25,7 +13,7 @@ interface ItemProps {
 const WorkerDetails = () => {
   const { id } = useParams();
 
-  const [item, setItem] = React.useState<ItemProps[]>([]);
+  const [item, setItem] = React.useState<any>();
 
   const fetchItemById = async () => {
     let location = window.location.hash.split("/")[1];
@@ -40,21 +28,24 @@ const WorkerDetails = () => {
     try {
       //@ts-ignore
       const response = await customDataProvider.getOne(resource, id);
-      console.log(response);
       const itemData = response.data;
-      setItem([itemData]);
+      setItem(itemData);
     } catch (error) {
       console.error(error);
     }
   };
-
   useEffect(() => {
     fetchItemById();
   }, []);
-  console.log;
+  let EditData = {
+    latestunlockAt: new Date(item?.updatedAt)?.toLocaleTimeString(),
+    email: item?.email,
+    ["phone number"]: item?.phoneNumber,
+  };
   return (
     <>
-      <Edit data={item} intro={{}} name={item[0]?.name} />
+      <Edit data={item} intro={EditData} name={item?.name} />
+      <WorkersComponent />
     </>
   );
 };

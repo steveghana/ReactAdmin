@@ -1,8 +1,8 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import Edit from "./Edit";
-import customDataProvider from "../dataProvider";
-import WorkersComponent from "./Workers";
+import Edit from "../Edit";
+import customDataProvider from "../../dataProvider";
+import Doors from "./Doors";
 const DoorsEdit = () => {
   const { id } = useParams();
 
@@ -16,14 +16,12 @@ const DoorsEdit = () => {
       sort: { field: "name", order: "ASC" },
       filter: { id },
     };
-    console.log(id);
 
     try {
       //@ts-ignore
       const response = await customDataProvider.getOne(resource, id);
-      console.log(response);
       const itemData = response.data;
-      setItem([itemData]);
+      setItem(itemData);
     } catch (error) {
       console.error(error);
     }
@@ -34,8 +32,13 @@ const DoorsEdit = () => {
   }, []);
   return (
     <div>
-      <Edit data={item} withTable={true} intro={{}} name={item?.name} />
-      <WorkersComponent />
+      <Edit
+        data={item}
+        withTable={true}
+        intro={{ color: "#FFB448", location: "--", street: "--" }}
+        name={item?.name}
+      />
+      <Doors />
     </div>
   );
 };

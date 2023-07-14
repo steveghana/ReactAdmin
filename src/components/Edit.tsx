@@ -1,14 +1,19 @@
 import React from "react";
-import { Container, Box, Typography, Button, Pagination } from "@mui/material";
-
+import { Container, Box, Typography, Button } from "@mui/material";
+import { ChevronLeft } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 type IEdit = {
   intro: Record<string, string>;
-  name: string;
-  data: { [key: string]: any }[];
+  name?: string;
+  data?: { [key: string]: any }[];
   withTable?: boolean;
 };
 
 const Edit: React.FC<IEdit> = (props) => {
+  let history = useNavigate();
+  const navigateBack = () => {
+    history("/");
+  };
   return (
     <Container>
       <Box style={{ marginTop: "2rem" }}>
@@ -21,7 +26,15 @@ const Edit: React.FC<IEdit> = (props) => {
             alignItems: "center",
           }}
         >
-          <Typography variant="h5">{props.name}</Typography>
+          <div
+            onClick={navigateBack}
+            style={{ display: "flex", gap: ".7rem", alignItems: "center" }}
+          >
+            <ChevronLeft color="primary" />
+            <Typography color={"primary"} variant="h5">
+              {props?.name}
+            </Typography>
+          </div>
           <Button variant="outlined" sx={{ border: "1px solid blue" }}>
             Edit Details
           </Button>
@@ -34,10 +47,17 @@ const Edit: React.FC<IEdit> = (props) => {
             margin: "1rem 0",
           }}
         >
-          {Object.values(props.intro).map((item) => (
-            <Typography variant="body2" color="textSecondary">
-              {item}
+          {Object.values(props?.intro)?.map((item, i) => (
+            <Typography
+              key={`${item}${i}`}
+              variant="body2"
+              color="textSecondary"
+            >
+              {`${Object.keys(props?.intro)[i]} :${item}`}
             </Typography>
+            // {
+
+            // }
           ))}
         </div>
       </Box>

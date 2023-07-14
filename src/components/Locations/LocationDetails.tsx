@@ -12,8 +12,10 @@ import {
   TableRow,
   Paper,
 } from "@mui/material";
-import customDataProvider from "../dataProvider";
+import customDataProvider from "../../dataProvider";
 import { useParams } from "react-router-dom";
+import LocationList from "./Location";
+import { GlobalContext } from "../../customHook/context";
 interface ItemProps {
   floor: string;
   name: string;
@@ -25,6 +27,7 @@ const ItemEdit = () => {
   const { id } = useParams();
 
   const [item, setItem] = React.useState<ItemProps[]>([]);
+  const { locations } = React.useContext(GlobalContext);
 
   const fetchItemById = async () => {
     let location = window.location.hash.split("/")[1];
@@ -34,12 +37,10 @@ const ItemEdit = () => {
       sort: { field: "name", order: "ASC" },
       filter: { id },
     };
-    console.log(id);
 
     try {
       //@ts-ignore
       const response = await customDataProvider.getOne(resource, id);
-      console.log(response, "new res");
       const itemData = response.data;
       setItem([itemData]);
     } catch (error) {
@@ -84,35 +85,7 @@ const ItemEdit = () => {
           </Typography>
         </div>
       </Box>
-      <Box>
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-            <TableHead>
-              <TableRow>
-                <TableCell>Door Name</TableCell>
-                <TableCell align="right">Last Unlock</TableCell>
-                <TableCell align="right">Status</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {item.map((row, i) => (
-                <TableRow
-                  key={i}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell align="right">{row?.name}</TableCell>
-                  <TableCell component="th" scope="row">
-                    {row.floor?.length ? row.floor[0] : 0}
-                  </TableCell>
-                  <TableCell align="right">
-                    {new Date(row.updatedAt).toLocaleTimeString()}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Box>
+      <LocationList data={locations} />
     </Container>
   );
 };

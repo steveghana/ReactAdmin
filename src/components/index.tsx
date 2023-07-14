@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Paper } from "@mui/material";
-import LocationsComponent from "./Location";
+import { Paper, Typography } from "@mui/material";
+import LocationsComponent from "./Locations/Location";
 import Layout from "../Layout";
 import { GlobalContext } from "../customHook/context";
 interface Location {
@@ -25,8 +25,10 @@ const LocationList: React.FC = (props) => {
             justifyContent: "center",
           }}
         >
-          <h2>Locations</h2>
-          <p style={{ color: "blue" }}> {locations.length}</p>
+          <Typography variant="h4">Locations</Typography>
+          <Typography color={"primary"} variant="button">
+            {locations.length}
+          </Typography>
         </Paper>
         <Paper
           elevation={3}
@@ -34,30 +36,31 @@ const LocationList: React.FC = (props) => {
             width: "100%",
             display: "flex",
             alignItems: "center",
-
             flexDirection: "column",
             justifyContent: "center",
           }}
         >
-          <h2>Doors</h2>
-          <p style={{ color: "blue" }}> {doors.length}</p>
+          <Typography variant="h4">Doors</Typography>
+          <Typography color={"primary"} variant="button">
+            {doors.length}
+          </Typography>
         </Paper>
         <Paper
           elevation={3}
           sx={{
             width: "100%",
             alignItems: "center",
-
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
           }}
         >
-          <h2>Workers</h2>
-          <p style={{ color: "blue" }}> {workers.length}</p>
+          <Typography variant="h4">Workers</Typography>
+          <Typography color={"primary"} variant="button">
+            {workers.length}
+          </Typography>
         </Paper>
       </div>
-
       <LocationsComponent {...props} data={locations} />
     </Layout>
   );

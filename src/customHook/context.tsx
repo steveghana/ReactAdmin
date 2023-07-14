@@ -111,7 +111,7 @@ export const GlobalContextProvider: React.FC<{ children: React.ReactNode }> = ({
         const [locationsData, doorsData, workersData, logs] = await Promise.all(
           [
             fetchLocations("locations"),
-            fetchDoors("gates-users"),
+            fetchDoors("gates"),
             fetchWorkers("users"),
             fetchEvents("log-event-operations"),
           ]
@@ -119,12 +119,10 @@ export const GlobalContextProvider: React.FC<{ children: React.ReactNode }> = ({
 
         setLocations(locationsData);
         setLogs(logs);
-        console.log(logs, "from context");
         setDoors(doorsData);
         setWorkers(workersData);
       } catch (error) {
         console.error(error);
-        // Handle the error here
       }
     };
 
@@ -139,4 +137,3 @@ export const GlobalContextProvider: React.FC<{ children: React.ReactNode }> = ({
     </GlobalContext.Provider>
   );
 };
-// const Context = React.createContext(null)
