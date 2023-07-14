@@ -36,8 +36,6 @@ const customDataProvider: DataProvider = {
     const url = `${apiUrl}/${resource}`;
     const { data } = params;
 
-    // try {
-    console.log(data);
     return axios
       .post(url, data)
       .then((res) => {

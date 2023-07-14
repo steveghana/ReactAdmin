@@ -23,7 +23,6 @@ const WorkerDetails = () => {
       sort: { field: "name", order: "ASC" },
       filter: { id },
     };
-    console.log(id);
 
     try {
       //@ts-ignore
