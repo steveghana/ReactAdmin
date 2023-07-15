@@ -25,7 +25,6 @@ const App = () => {
             <Resource name="users" create={WorkerCreate} edit={WorkerDetails} list={WorkersComponent} />
             <Resource name="gates" create={DoorCreate} edit={DoorsDetails} list={Doors} />
         </Admin>
-        // </GlobalContextProvider>
     );
 };
 
