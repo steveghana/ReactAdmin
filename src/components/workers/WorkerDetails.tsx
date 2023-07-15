@@ -1,7 +1,6 @@
 import React from 'react';
 import Details from '../ReusableDetails';
 import { useParams } from 'react-router-dom';
-
 import WorkersComponent from './WorkersList';
 import { useGetOne } from 'react-admin';
 import { IDetailsProps } from '../../types';

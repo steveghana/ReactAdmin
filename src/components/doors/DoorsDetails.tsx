@@ -7,7 +7,6 @@ import { useGetOne } from 'react-admin';
 const DoorsEdit: React.FC<{}> = () => {
     const { id } = useParams();
     const { data } = useGetOne('gates', { id });
-    console.log(data);
     let detailsData = {
         Color: data.color || 'black',
         Floor: data.floor || 'Not Available',

@@ -19,7 +19,7 @@ const WorkersComponent: React.FC<IWorkers> = () => {
     const totalPages = Math.ceil((data?.length || 0) / itemsPerPage);
     const [item, searchTerm, handleSearch] = useSearchFilter(data?.length ? data : []);
     if (isLoading) {
-        return <div>Loading...</div>; // Display a loading indicator if data is being fetched
+        return <div>Loading...</div>;
     }
     return (
         <Layout>

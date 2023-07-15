@@ -1,8 +1,5 @@
 import { useState, useEffect } from 'react';
-
-interface Item {
-    [key: string]: any;
-}
+import { Item } from '../types';
 
 const useSearchFilter = <T extends Item>(initialData: T[]) => {
     const [data, setData] = useState<T[]>(initialData);

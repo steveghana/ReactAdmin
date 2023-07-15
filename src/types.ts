@@ -13,6 +13,9 @@ export type IEdit = {
     name?: string;
     withTable?: boolean;
 };
+export interface Item {
+    [key: string]: any;
+}
 export interface ItemProps {
     email: string;
     name: string;
