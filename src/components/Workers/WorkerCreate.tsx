@@ -12,16 +12,8 @@ import {
   Toolbar,
   SaveButton,
 } from "react-admin";
-type IToolbar = {
-  noPermission?: boolean;
-  setClicked: React.Dispatch<React.SetStateAction<boolean>>;
-};
-interface DoorFormData {
-  name: string;
-  addressCity: string;
-  floors: string;
-  address: string;
-}
+import { IToolbar } from "../../types";
+
 export const MyToolbar: React.FC<IToolbar> = (props) => (
   <Toolbar style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
     <SaveButton
@@ -44,6 +36,7 @@ export const MyToolbar: React.FC<IToolbar> = (props) => (
 );
 const CreateWorker = () => {
   const [clicked, setClicked] = React.useState(false);
+
   return (
     <div>
       <Create>
@@ -71,16 +64,9 @@ const CreateWorker = () => {
               </Button>
             </div>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DemoContainer
-                components={[
-                  "DatePicker",
-                  "MobileDatePicker",
-                  "DesktopDatePicker",
-                  "StaticDatePicker",
-                ]}
-              >
+              <DemoContainer components={["StaticDatePicker"]}>
                 <DemoItem label="Static variant">
-                  <StaticDatePicker defaultValue={dayjs("2022-04-17")} />
+                  <StaticDatePicker defaultValue={dayjs("2023-04-17")} />
                 </DemoItem>
               </DemoContainer>
             </LocalizationProvider>

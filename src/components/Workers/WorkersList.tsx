@@ -1,22 +1,31 @@
-import React, { useState } from "react";
-import { List, Datagrid, TextField, EditButton } from "react-admin";
+import React from "react";
+import { List, Datagrid, TextField, useGetList } from "react-admin";
 import { Box, Pagination, Typography } from "@mui/material";
 import { TextField as Field } from "@mui/material";
-import useSearchFilter from "../../customHook";
+import useSearchFilter from "../../CustomHook";
 import Layout from "../../Layout";
-import { GlobalContext } from "../../customHook/context";
-const WorkersComponent: React.FC = () => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const { workers } = React.useContext(GlobalContext);
+import { IWorkers } from "../../types";
+
+const WorkersComponent: React.FC<IWorkers> = () => {
+  const { data, isLoading } = useGetList("users");
+  const [currentPage, setCurrentPage] = React.useState(1);
   const itemsPerPage = 10;
-  const handlePageChange = (event: any, newPage: number) => {
+  const handlePageChange = (_: any, newPage: number) => {
     setCurrentPage(newPage);
   };
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = workers.slice(indexOfFirstItem, indexOfLastItem);
-  const totalPages = Math.ceil(workers.length / itemsPerPage);
-  const [data, searchTerm, handleSearch] = useSearchFilter(currentItems);
+  const currentItems = data?.length
+    ? data.slice(indexOfFirstItem, indexOfLastItem)
+    : [];
+  const totalPages = Math.ceil((data?.length || 0) / itemsPerPage);
+  const [item, searchTerm, handleSearch] = useSearchFilter(
+    data?.length ? data : []
+  );
+  console.log(data);
+  if (isLoading) {
+    return <div>Loading...</div>; // Display a loading indicator if data is being fetched
+  }
   return (
     <Layout>
       <Field
@@ -26,13 +35,13 @@ const WorkersComponent: React.FC = () => {
         type="text"
         placeholder="Enter name"
         label="Name"
+        sx={{ marginTop: "3rem" }}
         value={searchTerm}
         onChange={(e) => handleSearch(e.target.value)}
       />
-
       <List pagination={false}>
         <Datagrid
-          data={data.length < currentItems.length ? data : currentItems}
+          data={item.length < currentItems.length ? item : currentItems}
           rowClick="edit"
         >
           <TextField source="name" sortable={true} label="Worker" />
@@ -40,7 +49,6 @@ const WorkersComponent: React.FC = () => {
           <TextField source="phoneNumber" sortable={true} label="Phone" />
           <TextField source="updatedAt" sortable={true} label="Last unlock" />
         </Datagrid>
-
         <Box display="flex" justifyContent="center" marginTop={2}>
           <Pagination
             count={totalPages}

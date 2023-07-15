@@ -1,6 +1,6 @@
 import { Card, Container } from "@mui/material";
 import React from "react";
-import Events from "../components/Event_Charts/Event_Charts";
+import Events from "../Components/EventCharts/Event";
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (

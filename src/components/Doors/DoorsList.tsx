@@ -1,24 +1,32 @@
 import { Box, Pagination, Typography } from "@mui/material";
 import React from "react";
-import { Datagrid, List, TextField } from "react-admin";
+import { Datagrid, List, TextField, useGetList } from "react-admin";
 import { TextField as Field } from "@mui/material";
-import useSearchFilter from "../../customHook";
+import useSearchFilter from "../../CustomHook";
 import Layout from "../../Layout";
-import { GlobalContext } from "../../customHook/context";
+import { IDoors } from "../../types";
 
-const Doors: React.FC /* <{ data: Record<string, string>[] }> */ = () => {
+const Doors: React.FC<IDoors> = (props) => {
+  const { data, isLoading } = useGetList("gates");
+
   const [currentPage, setCurrentPage] = React.useState(1);
   const itemsPerPage = 10;
-  const { doors } = React.useContext(GlobalContext);
-  const handlePageChange = (event: any, newPage: number) => {
+  const handlePageChange = (_: any, newPage: number) => {
     setCurrentPage(newPage);
   };
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-
-  const currentItems = doors.slice(indexOfFirstItem, indexOfLastItem);
-  const totalPages = Math.ceil(doors.length / itemsPerPage);
-  const [data, searchTerm, handleSearch] = useSearchFilter(currentItems);
+  const currentItems = data?.length
+    ? data.slice(indexOfFirstItem, indexOfLastItem)
+    : [];
+  const totalPages = Math.ceil((data?.length || 0) / itemsPerPage);
+  const [item, searchTerm, handleSearch] = useSearchFilter(
+    data?.length ? data : []
+  );
+  console.log(data);
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
   return (
     <Layout>
       <Field
@@ -31,9 +39,9 @@ const Doors: React.FC /* <{ data: Record<string, string>[] }> */ = () => {
         value={searchTerm}
         onChange={(e) => handleSearch(e.target.value)}
       />
-      <List pagination={false}>
+      <List {...props} pagination={false}>
         <Datagrid
-          data={data.length < currentItems.length ? data : currentItems}
+          data={item.length < currentItems.length ? item : currentItems}
           rowClick="edit"
         >
           <TextField source="name" sortable={true} label="Door Name" />

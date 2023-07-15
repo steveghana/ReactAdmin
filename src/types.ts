@@ -1,79 +1,83 @@
-import { Identifier, RaRecord } from 'react-admin';
-
-export type ThemeName = 'light' | 'dark';
-
-export interface Category extends RaRecord {
-    name: string;
+export interface IDoors {
+  data: Record<string, any>[];
 }
-
-export interface Product extends RaRecord {
-    category_id: Identifier;
-    description: string;
-    height: number;
-    image: string;
-    price: number;
-    reference: string;
-    stock: number;
-    thumbnail: string;
-    width: number;
-}
-
-export interface Customer extends RaRecord {
-    first_name: string;
-    last_name: string;
-    address: string;
-    stateAbbr: string;
-    city: string;
-    zipcode: string;
-    avatar: string;
-    birthday: string;
-    first_seen: string;
-    last_seen: string;
-    has_ordered: boolean;
-    latest_purchase: string;
-    has_newsletter: boolean;
-    groups: string[];
-    nb_commands: number;
-    total_spent: number;
-    email: string;
-}
-
-export type OrderStatus = 'ordered' | 'delivered' | 'cancelled';
-
-export interface Order extends RaRecord {
-    status: OrderStatus;
-    basket: BasketItem[];
-    date: Date;
-    total: number;
-    total_ex_taxes: number;
-    delivery_fees: number;
-    tax_rate: number;
-    taxes: number;
-    customer_id: Identifier;
-    reference: string;
-}
-
-export type BasketItem = {
-    product_id: Identifier;
-    quantity: number;
+export type IToolbar = {
+  noPermission?: boolean;
+  setClicked: React.Dispatch<React.SetStateAction<boolean>>;
 };
-
-export interface Invoice extends RaRecord {
-    date: Date;
+export interface IWorkers {
+  workers: Record<string, any>[];
 }
-
-export type ReviewStatus = 'accepted' | 'pending' | 'rejected';
-
-export interface Review extends RaRecord {
-    date: Date;
-    status: ReviewStatus;
-    customer_id: Identifier;
-    product_id: Identifier;
-    comment: string;
+export type IEdit = {
+  intro: Record<string, string>;
+  name?: string;
+  withTable?: boolean;
+};
+export interface ItemProps {
+  email: string;
+  name: string;
+  updatedAt: string;
+  phoneNumber: string;
+  addressStreet: string;
 }
-
-declare global {
-    interface Window {
-        restServer: any;
-    }
+export interface IDetailsProps {
+  data: ItemProps;
 }
+export interface LocationListProps {
+  data: any[];
+  nointro?: boolean;
+}
+export const barColors = [
+  "#FFB448",
+  "#6CEAE6",
+  "#FF6663",
+  "#FFB448",
+  "#6CEAE6",
+  "#FF6663",
+  "#FFB448",
+];
+
+export const chartData = [
+  {
+    name: "Sun",
+    uv: 3490,
+    pv: 4300,
+    amt: 2100,
+  },
+  {
+    name: "Mon",
+    uv: 4000,
+    pv: 2400,
+    amt: 2400,
+  },
+  {
+    name: "Tues",
+    uv: 3000,
+    pv: 2398,
+    amt: 2210,
+  },
+  {
+    name: "Wed",
+    uv: 2000,
+    pv: 9800,
+    amt: 2290,
+  },
+  {
+    name: "Thurs",
+    uv: 2780,
+    pv: 3908,
+    amt: 2000,
+  },
+  {
+    name: "Fri",
+    uv: 2890,
+    pv: 4800,
+    amt: 2181,
+  },
+  {
+    name: "Sat",
+    uv: 2390,
+    pv: 3800,
+    amt: 2500,
+  },
+];

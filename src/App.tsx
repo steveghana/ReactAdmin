@@ -1,16 +1,17 @@
-import { Admin, CustomRoutes, Resource } from "react-admin";
-import Locations from "./components";
-import dataprovider from "./dataProvider";
-import LocationEdit from "./components/Locations/LocationDetails";
-import WorkersComponent from "./components/Workers/Workers";
+import { Admin, Resource } from "react-admin";
+import { RestProvider } from "./DataProvider";
+import LocationEdit from "./Components/Locations/LocationDetails";
+import WorkersComponent from "./Components/Workers/WorkersList";
 import { QueryClient } from "react-query";
-import Doors from "./components/Doors/Doors";
-import WorkerDetails from "./components/Workers/WorkerDetails";
-import { GlobalContextProvider } from "./customHook/context";
-import DoorsEdit from "./components/Doors/DoorsDetail";
-import UserCreate from "./components/Workers/CreateWorker";
-import DoorCreate from "./components/Doors/DoorCreate";
+import Doors from "./Components/Doors/DoorsList";
+import WorkerDetails from "./Components/Workers/WorkerDetails";
+
+import DoorsDetails from "./Components/Doors/DoorsDetails";
+import WorkerCreate from "./Components/Workers/WorkerCreate";
+import DoorCreate from "./Components/Doors/DoorCreate";
+import LocationList from "./Components/Locations/LocationList";
 const App = () => {
+  //For caching responses in memory
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
@@ -19,27 +20,26 @@ const App = () => {
     },
   });
   return (
-    <GlobalContextProvider>
-      <Admin
-        // title=""
-        dataProvider={dataprovider}
-        queryClient={queryClient}
-      >
-        <Resource name="locations" edit={LocationEdit} list={Locations} />
-        <Resource
-          name="users"
-          create={UserCreate}
-          edit={WorkerDetails}
-          list={WorkersComponent}
-        />
-        <Resource
-          name="gates"
-          create={DoorCreate}
-          edit={DoorsEdit}
-          list={Doors}
-        />
-      </Admin>
-    </GlobalContextProvider>
+    <Admin
+      title="Access Key"
+      dataProvider={RestProvider}
+      queryClient={queryClient}
+    >
+      <Resource name="locations" edit={LocationEdit} list={LocationList} />
+      <Resource
+        name="users"
+        create={WorkerCreate}
+        edit={WorkerDetails}
+        list={WorkersComponent}
+      />
+      <Resource
+        name="gates"
+        create={DoorCreate}
+        edit={DoorsDetails}
+        list={Doors}
+      />
+    </Admin>
+    // </GlobalContextProvider>
   );
 };
 
