@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, Datagrid, TextField, useGetList } from 'react-admin';
+import { List, Datagrid, TextField, useGetList, DateField } from 'react-admin';
 import { Box, Pagination, Typography } from '@mui/material';
 import { TextField as Field } from '@mui/material';
 import useSearchFilter from '../../CustomHook';
@@ -39,7 +39,7 @@ const WorkersComponent: React.FC<IWorkers> = () => {
                     <TextField source="name" sortable={true} label="Worker" />
                     <TextField source="email" sortable={true} label="Email" />
                     <TextField source="phoneNumber" sortable={true} label="Phone" />
-                    <TextField source="updatedAt" sortable={true} label="Last unlock" />
+                    <DateField source="updatedAt" sortable={true} label="Last unlock" />
                 </Datagrid>
                 <Box display="flex" justifyContent="center" marginTop={2}>
                     <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} color="primary" variant="outlined" />

@@ -19,7 +19,6 @@ const Doors: React.FC<IDoors> = props => {
     const currentItems = data?.length ? data.slice(indexOfFirstItem, indexOfLastItem) : [];
     const totalPages = Math.ceil((data?.length || 0) / itemsPerPage);
     const [item, searchTerm, handleSearch] = useSearchFilter(data?.length ? data : []);
-    console.log(data);
     if (isLoading) {
         return <div>Loading...</div>;
     }

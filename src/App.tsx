@@ -11,7 +11,7 @@ import WorkerCreate from './Components/Workers/WorkerCreate';
 import DoorCreate from './Components/Doors/DoorCreate';
 import LocationList from './Components/Locations/LocationList';
 const App = () => {
-    //For caching responses in memory
+    //This will cache responses in memory for smooth experience
     const queryClient = new QueryClient({
         defaultOptions: {
             queries: {

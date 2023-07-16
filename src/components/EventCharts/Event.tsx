@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Alert, Box, Button, Container, Paper } from '@mui/material';
+import { Alert, Box, Button, Container, Paper, Typography } from '@mui/material';
 import WorkerChart from './Charts';
 import { useParams } from 'react-router-dom';
 import { useDataProvider } from 'react-admin';
@@ -16,7 +16,6 @@ const Events = () => {
         const fetchLogs = async () => {
             try {
                 const response = await axios.get(`${Apiurl}/log-event-operations?filter[limit]=20`);
-                console.log(response);
                 setLogs(response.data);
                 setIsLoading(false);
             } catch (error) {
@@ -32,21 +31,6 @@ const Events = () => {
 
     return (
         <Container maxWidth="sm">
-            <div
-                style={{
-                    display: 'flex',
-                    gap: '1rem',
-                    justifyContent: 'flex-end',
-                    alignItems: 'flex-end',
-                }}
-            >
-                <Button variant="contained" color="primary">
-                    All
-                </Button>
-                <Button variant="outlined" disabled color="primary">
-                    Alerts
-                </Button>
-            </div>
             {isLoading ? (
                 <div>Loading...</div>
             ) : (
@@ -61,6 +45,24 @@ const Events = () => {
                         gap: '.6rem',
                     }}
                 >
+                    <div
+                        style={{
+                            display: 'flex',
+                            gap: '1rem',
+                            justifyContent: 'flex-end',
+                            alignItems: 'flex-end',
+                        }}
+                    >
+                        <Typography variant="button" sx={{ marginRight: 'auto' }}>
+                            Events
+                        </Typography>
+                        <Button variant="contained" style={{ borderRadius: '40px' }} color="primary">
+                            All
+                        </Button>
+                        <Button variant="outlined" style={{ borderRadius: '40px' }} disabled color="primary">
+                            Alerts
+                        </Button>
+                    </div>
                     {slidedLogs
                         .filter(log => log.logDescription !== '')
                         .map((log, i) => (
