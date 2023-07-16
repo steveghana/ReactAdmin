@@ -17,7 +17,6 @@
     "@types/recharts": "^1.8.10",
     "axios": "^1.4.0",
     "dayjs": "^1.11.9",
-    "inflection": "~1.12.0",
     "ra-data-simple-rest": "^4.12.1",
     "react": "^18.2.0",
     "react-admin": "^4.12.1",
@@ -38,7 +37,6 @@
     "eslint": "^8.44.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.1",
-    "rewire": "^5.0.0",
     "typescript": "^5.0.2",
     "vite": "^4.4.0"
   }

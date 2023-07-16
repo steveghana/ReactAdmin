@@ -10,7 +10,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                 flexWrap: 'wrap',
                 gap: '1rem',
                 marginTop: '2rem',
-                height: 'auto',
+                minHeight: '90%',
             }}
         >
             <Container maxWidth="md" sx={{ mt: '2rem' }}>
