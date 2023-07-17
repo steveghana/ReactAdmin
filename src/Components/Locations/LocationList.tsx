@@ -20,7 +20,7 @@ const LocationList: React.FC<LocationListProps> = ({ nointro }) => {
     if (isLoading) {
         return <div>Loading...</div>;
     }
-    console.log(data);
+    // console.log(data);
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentItems = data?.slice(indexOfFirstItem, indexOfLastItem) || [];

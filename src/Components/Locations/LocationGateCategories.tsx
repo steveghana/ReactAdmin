@@ -1,54 +1,26 @@
 import React from 'react';
-import { Show, SimpleShowLayout, TextField, ArrayField, Datagrid } from 'react-admin';
+import { Show, SimpleShowLayout, TextField, ArrayField, Datagrid, DateField } from 'react-admin';
 import { Accordion, AccordionSummary, AccordionDetails, Typography } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-const NestedList: React.FC = () => {
-    const postData = {
-        id: 1,
-        title: 'Post Title',
-        authors: [
-            {
-                id: '1',
-                firstName: 'Lisa',
-                lastName: 'Noha',
-                books: [
-                    { id: '2', title: 'Book 1 by Lisa' },
-                    { id: '3', title: 'Book 2 by Lisa' },
-                ],
-            },
-            {
-                id: '2',
-                firstName: 'John',
-                lastName: 'Doe',
-                books: [
-                    { id: '4', title: 'Book 1 by John' },
-                    { id: '5', title: 'Book 2 by John' },
-                ],
-            },
-        ],
-    };
-
+const NestedList: React.FC<{ data: any }> = props => {
     return (
         <Show>
             <SimpleShowLayout>
-                {/* <TextField source="title" record={postData} /> */}
-
-                <ArrayField source="authors" record={postData}>
+                <ArrayField source="authors" record={props?.data}>
                     <div>
-                        {postData.authors.map((author: any) => (
-                            <Accordion key={author.id}>
+                        {props.data?.Floors?.map((floor: any) => (
+                            <Accordion key={floor?.id}>
                                 <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                                    <Typography>{`${author.firstName} ${author.lastName}`}</Typography>
+                                    <Typography> {`${floor?.firstName}`}</Typography>
                                 </AccordionSummary>
                                 <AccordionDetails>
                                     <div>
-                                        <TextField source="firstName" record={author} />
-                                        <TextField source="lastName" record={author} />
-
-                                        <ArrayField source="books" record={author}>
+                                        <ArrayField source="books" record={floor}>
                                             <Datagrid>
-                                                <TextField source="title" />
+                                                <TextField label="Door Name" source="gateName" />
+                                                <DateField label="Last Unlock" source="gateUpdatedAt" />
+                                                <DateField label="Status" source="" />
                                             </Datagrid>
                                         </ArrayField>
                                     </div>
