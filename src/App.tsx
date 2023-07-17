@@ -24,9 +24,9 @@ const App = () => {
     });
     return (
         <Admin layout={MyLayout} title="Access Key" dataProvider={RestProvider} queryClient={queryClient}>
-            <Resource name="locations" /* edit={LocationEdit} */ list={LocationList} />
-            <Resource name="users" /* create={WorkerCreate} */ edit={WorkerDetails} list={WorkersComponent} />
-            <Resource name="gates" /* create={DoorCreate} */ edit={DoorsDetails} list={Doors} />
+            <Resource name="locations" edit={LocationEdit} list={LocationList} />
+            <Resource name="view-user-companies" /* create={WorkerCreate} */ edit={WorkerDetails} list={WorkersComponent} />
+            <Resource name="view-user-gates" /* create={DoorCreate} */ edit={DoorsDetails} list={Doors} />
         </Admin>
     );
 };

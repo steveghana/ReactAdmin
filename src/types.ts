@@ -1,5 +1,5 @@
 export interface IDoors {
-    data: Record<string, any>[];
+    idata: Record<string, any>[];
     noIntro?: boolean;
 }
 export type IToolbar = {
@@ -10,7 +10,7 @@ export type Anchor = 'left' | 'right';
 export type ICustomDeleteCreate = { withCreate?: boolean; handleSearch: (searchValue: string) => void; searchTerm: string; label: string };
 export interface IWorkers {
     workers: Record<string, any>[];
-    noIntro: boolean;
+    noIntro?: boolean;
 }
 export type IEdit = {
     intro: Record<string, string>;

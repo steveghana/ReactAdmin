@@ -7,16 +7,16 @@ import { IDetailsProps } from '../../types';
 
 const WorkerDetails: React.FC<IDetailsProps> = () => {
     const { id } = useParams();
-    const { data } = useGetOne('users', { id });
+    const { data } = useGetOne('view-user-companies', { id });
     let EditData = {
-        LatestunlockAt: new Date(data?.updatedAt)?.toLocaleTimeString(),
-        Email: data?.email,
-        ['Phone number']: data?.phoneNumber,
+        LatestunlockAt: new Date(data?.usrUpdatedAt)?.toLocaleTimeString(),
+        Email: data?.usrEmail,
+        ['Phone number']: data?.usrPhoneNumber,
     };
     return (
         <>
-            <Details intro={EditData} name={data?.name} />
-            <WorkersComponent workers={data as Record<string, string>[]} />
+            <Details intro={EditData} name={data?.usrName} />
+            <WorkersComponent noIntro workers={data as Record<string, string>[]} />
         </>
     );
 };

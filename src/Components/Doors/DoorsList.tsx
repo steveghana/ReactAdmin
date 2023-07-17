@@ -10,18 +10,21 @@ import { AddRounded, DeleteRounded } from '@mui/icons-material';
 import CustomCreateDelete from '../CustomCreateDelete';
 
 const Doors: React.FC<IDoors> = props => {
-    const { data, isLoading } = useGetList('gates');
+    const { data, isLoading } = useGetList('view-user-gates');
+    // const { data: location } = useGetList('locations');
 
     const [currentPage, setCurrentPage] = React.useState(1);
     const itemsPerPage = 10;
     const handlePageChange = (_: any, newPage: number) => {
         setCurrentPage(newPage);
     };
+    console.log(data, 'gates');
+    let actualData = props.idata?.length ? props?.idata : data;
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentItems = data?.length ? data.slice(indexOfFirstItem, indexOfLastItem) : [];
-    const totalPages = Math.ceil((data?.length || 0) / itemsPerPage);
-    const [item, searchTerm, handleSearch] = useSearchFilter(data?.length ? data : []);
+    const currentItems = actualData?.length ? actualData.slice(indexOfFirstItem, indexOfLastItem) : [];
+    const totalPages = Math.ceil((actualData?.length || 0) / itemsPerPage);
+    const [item, searchTerm, handleSearch] = useSearchFilter(actualData?.length ? actualData : []);
     if (isLoading) {
         return <div>Loading...</div>;
     }
@@ -33,10 +36,10 @@ const Doors: React.FC<IDoors> = props => {
                 <CustomCreateDelete handleSearch={handleSearch} label="Door" searchTerm={searchTerm} withCreate={true} />
 
                 <List exporter={false} {...props} pagination={false}>
-                    <Datagrid data={item.length < currentItems.length ? item : currentItems} rowClick="edit">
-                        <TextField source="name" sortable={true} label="Door Name" />
-                        <TextField source="locationId" sortable={true} label="Location" />
-                        <TextField source="floor" sortable={true} label="Floor" />
+                    <Datagrid data={item.length < currentItems?.length ? item : currentItems} rowClick="edit">
+                        <TextField source="gateName" sortable={true} label="Door Name" />
+                        <TextField source="gateLocationId" sortable={true} label="Location" />
+                        <TextField source="gateFloor" sortable={true} label="Floor" />
                         <TextField source="address" sortable={true} label="Status" />
                     </Datagrid>
                     <Box display="flex" justifyContent="center" marginTop={2}>
