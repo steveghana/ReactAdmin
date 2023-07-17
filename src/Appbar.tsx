@@ -1,5 +1,5 @@
 import { AppBar, Layout } from 'react-admin';
-import { Avatar, Box, SvgIcon, Typography, makeStyles } from '@mui/material';
+import { Avatar, Box, SvgIcon, Typography } from '@mui/material';
 import { Comment, LogoSvg } from './assets/logo';
 import { ExpandMore } from '@mui/icons-material';
 
