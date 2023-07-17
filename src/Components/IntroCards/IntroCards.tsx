@@ -19,7 +19,7 @@ const Text: React.FC<{ length: number; type: string; id: string }> = ({ length, 
                 padding: '1rem 0',
             }}
         >
-            <Typography letterSpacing={'0.072px'} fontWeight={'500'} variant="h5" color={typographyColor}>
+            <Typography letterSpacing={'0.072px'} fontWeight={'500'} variant="h6" color={typographyColor}>
                 {type}
             </Typography>
             <Typography letterSpacing={'0.072px'} fontWeight={'500'} color={typographyColor} variant="h4">

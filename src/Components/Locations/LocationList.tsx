@@ -5,7 +5,7 @@ import useSearchFilter from '../../CustomHook';
 import IntroCard from '../IntroCards/IntroCards';
 import Layout from '../../Layout';
 import { LocationListProps } from '../../types';
-import { AddRounded, DeleteRounded } from '@mui/icons-material';
+import { AddRounded, ChevronRight, DeleteRounded } from '@mui/icons-material';
 import CustomCreateDelete from '../CustomCreateDelete';
 
 const LocationList: React.FC<LocationListProps> = ({ nointro }) => {

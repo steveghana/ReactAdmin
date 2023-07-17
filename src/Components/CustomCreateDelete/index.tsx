@@ -1,8 +1,9 @@
 import { Box, IconButton, InputBase, Paper } from '@mui/material';
 import React from 'react';
-import { TextField as Field } from '@mui/material';
 import { AddRounded, DeleteRounded, FilterListRounded, Search } from '@mui/icons-material';
-import { ICustomDeleteCreate } from '../../types';
+import { Anchor, ICustomDeleteCreate } from '../../types';
+import SwipeableDrawer from '@mui/material/SwipeableDrawer';
+import Button from '@mui/material/Button';
 
 const CustomCreateDelete: React.FC<ICustomDeleteCreate> = props => {
     let styles = {
@@ -16,6 +17,23 @@ const CustomCreateDelete: React.FC<ICustomDeleteCreate> = props => {
 
         flexShrink: '0',
     };
+    const [state, setState] = React.useState({
+        top: false,
+        left: false,
+        bottom: false,
+        right: false,
+    });
+
+    const toggleDrawer = (anchor: Anchor, open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
+        if (event && event.type === 'keydown' && ((event as React.KeyboardEvent).key === 'Tab' || (event as React.KeyboardEvent).key === 'Shift')) {
+            return;
+        }
+        setState({ ...state, [anchor]: open });
+    };
+
+    const list = (anchor: Anchor) => (
+        <Box sx={{ width: 450 }} role="presentation" onClick={toggleDrawer(anchor, false)} onKeyDown={toggleDrawer(anchor, false)}></Box>
+    );
     return (
         <Box sx={{ display: 'flex', alignItems: 'center', gap: '.6rem' }}>
             <div>{props.label}</div>
@@ -35,21 +53,28 @@ const CustomCreateDelete: React.FC<ICustomDeleteCreate> = props => {
                     <Search />
                 </IconButton>
             </Paper>
-            {/* <Field
-                variant="outlined"
-                name="password"
-                autoComplete="off"
-                type="text"
-                placeholder="Enter name"
-                label={props.label}
-                
-            /> */}
+            <div></div>
             <div style={{ marginLeft: 'auto', display: 'flex', gap: '1rem', alignItems: 'center' }}>
-                {!props.withCreate && (
-                    <div style={styles}>
-                        <AddRounded color={'primary'} />
-                    </div>
-                )}
+                <div style={styles}>
+                    {(['right'] as const).map(anchor => (
+                        <React.Fragment key={anchor}>
+                            {!props.withCreate && (
+                                <Button onClick={toggleDrawer(anchor, true)}>
+                                    {' '}
+                                    <AddRounded color={'primary'} />
+                                </Button>
+                            )}
+                            <SwipeableDrawer
+                                anchor={anchor}
+                                open={state[anchor]}
+                                onClose={toggleDrawer(anchor, false)}
+                                onOpen={toggleDrawer(anchor, true)}
+                            >
+                                {list(anchor)}
+                            </SwipeableDrawer>
+                        </React.Fragment>
+                    ))}
+                </div>
                 <div style={styles}>
                     <DeleteRounded color={'primary'} />
                 </div>
