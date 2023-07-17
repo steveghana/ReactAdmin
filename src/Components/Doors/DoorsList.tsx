@@ -6,6 +6,7 @@ import useSearchFilter from '../../CustomHook';
 import Layout from '../../Layout';
 import { IDoors } from '../../types';
 import IntroCard from '../IntroCards/IntroCards';
+import { AddRounded, DeleteRounded } from '@mui/icons-material';
 
 const Doors: React.FC<IDoors> = props => {
     const { data, isLoading } = useGetList('gates');
@@ -27,18 +28,22 @@ const Doors: React.FC<IDoors> = props => {
         <Layout>
             {!props.noIntro && <IntroCard />}
 
-            <Paper sx={{ marginTop: '2rem', padding: '1rem 1rem 0 1rem' }}>
-                <Field
-                    variant="outlined"
-                    name="password"
-                    autoComplete="off"
-                    type="text"
-                    placeholder="Enter Door"
-                    label="Door"
-                    value={searchTerm}
-                    onChange={e => handleSearch(e.target.value)}
-                />
-                <List {...props} pagination={false}>
+            <Paper sx={{ marginTop: '2rem', padding: '0rem 1rem 0 1rem' }}>
+                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    <Field
+                        variant="outlined"
+                        name="password"
+                        autoComplete="off"
+                        type="text"
+                        placeholder="Enter Door"
+                        label="Door"
+                        value={searchTerm}
+                        onChange={e => handleSearch(e.target.value)}
+                    />
+                    <DeleteRounded sx={{ marginLeft: 'auto' }} color={'primary'} />
+                </Box>
+
+                <List exporter={false} {...props} pagination={false}>
                     <Datagrid data={item.length < currentItems.length ? item : currentItems} rowClick="edit">
                         <TextField source="name" sortable={true} label="Door Name" />
                         <TextField source="locationId" sortable={true} label="Location" />

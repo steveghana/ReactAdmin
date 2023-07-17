@@ -8,6 +8,7 @@ export type IToolbar = {
 };
 export interface IWorkers {
     workers: Record<string, any>[];
+    noIntro: boolean;
 }
 export type IEdit = {
     intro: Record<string, string>;
