@@ -2,25 +2,33 @@ import * as React from 'react';
 import { Paper, Typography } from '@mui/material';
 import { useGetList } from 'react-admin';
 
-const Text: React.FC<{ length: number; type: string }> = ({ length, type }) => {
+const Text: React.FC<{ length: number; type: string; id: string }> = ({ length, type, id }) => {
+    const origin = window.location.href;
+    const pageName = origin.includes(id);
+    const typographyColor = pageName ? '#01A2FD' : 'black'; // Define the color based on the pageName
+
     return (
         <Paper
-            elevation={3}
+            elevation={0}
             sx={{
                 width: '100%',
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
+                padding: '1rem 0',
             }}
         >
-            <Typography variant="h4">{type}</Typography>
-            <Typography color={'primary'} variant="h4">
+            <Typography variant="h5" color={typographyColor}>
+                {type}
+            </Typography>
+            <Typography color={typographyColor} variant="h4">
                 {length}
             </Typography>
         </Paper>
     );
 };
+
 const IntroCard: React.FC = () => {
     const { data: locations } = useGetList('locations');
     const { data: user } = useGetList('users');
@@ -28,9 +36,9 @@ const IntroCard: React.FC = () => {
 
     return (
         <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-            <Text length={locations?.length as number} type="Locations" />
-            <Text length={doors?.length as number} type="Doors" />
-            <Text length={user?.length as number} type="Workers" />
+            <Text length={locations?.length as number} type="Locations" id="locations" />
+            <Text length={doors?.length as number} type="Doors" id="gates" />
+            <Text length={user?.length as number} type="Workers" id="users" />
         </div>
     );
 };

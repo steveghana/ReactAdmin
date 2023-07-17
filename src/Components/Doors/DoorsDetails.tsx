@@ -15,7 +15,7 @@ const DoorsEdit: React.FC<{}> = () => {
     return (
         <>
             <Details withTable={true} intro={detailsData} name={data?.name} />
-            <DoorsList data={data as Record<string, string>[]} />
+            <DoorsList noIntro data={data as Record<string, string>[]} />
         </>
     );
 };

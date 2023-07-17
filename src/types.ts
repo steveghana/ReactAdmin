@@ -1,5 +1,6 @@
 export interface IDoors {
     data: Record<string, any>[];
+    noIntro?: boolean;
 }
 export type IToolbar = {
     noPermission?: boolean;

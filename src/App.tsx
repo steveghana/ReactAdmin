@@ -1,4 +1,4 @@
-import { Admin, Resource } from 'react-admin';
+import { Admin, Resource, Layout } from 'react-admin';
 import { RestProvider } from './DataProvider';
 import LocationEdit from './Components/Locations/LocationDetails';
 import WorkersComponent from './Components/Workers/WorkersList';
@@ -10,6 +10,9 @@ import DoorsDetails from './Components/Doors/DoorsDetails';
 import WorkerCreate from './Components/Workers/WorkerCreate';
 import DoorCreate from './Components/Doors/DoorCreate';
 import LocationList from './Components/Locations/LocationList';
+import MyLayout from './Appbar';
+
+// export const MyLayout = (props:any) => <Layout {...props} appBar={MyAppBar} />;
 const App = () => {
     //This will cache responses in memory for smooth experience
     const queryClient = new QueryClient({
@@ -20,10 +23,10 @@ const App = () => {
         },
     });
     return (
-        <Admin title="Access Key" dataProvider={RestProvider} queryClient={queryClient}>
-            <Resource name="locations" edit={LocationEdit} list={LocationList} />
-            <Resource name="users" create={WorkerCreate} edit={WorkerDetails} list={WorkersComponent} />
-            <Resource name="gates" create={DoorCreate} edit={DoorsDetails} list={Doors} />
+        <Admin layout={MyLayout} title="Access Key" dataProvider={RestProvider} queryClient={queryClient}>
+            <Resource name="locations" /* edit={LocationEdit} */ list={LocationList} />
+            <Resource name="users" /* create={WorkerCreate} */ edit={WorkerDetails} list={WorkersComponent} />
+            <Resource name="gates" /* create={DoorCreate} */ edit={DoorsDetails} list={Doors} />
         </Admin>
     );
 };
