@@ -5,7 +5,7 @@ import useSearchFilter from '../../CustomHook';
 import IntroCard from '../IntroCards/IntroCards';
 import Layout from '../../Layout';
 import { LocationListProps } from '../../types';
-import { AddBoxOutlined, AddRounded, DeleteRounded } from '@mui/icons-material';
+import { AddRounded, DeleteRounded } from '@mui/icons-material';
 
 const LocationList: React.FC<LocationListProps> = ({ nointro }) => {
     const { data, isLoading } = useGetList('locations');
