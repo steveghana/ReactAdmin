@@ -5,7 +5,7 @@ import { useGetList } from 'react-admin';
 const Text: React.FC<{ length: number; type: string; id: string }> = ({ length, type, id }) => {
     const origin = window.location.href;
     const pageName = origin.includes(id);
-    const typographyColor = pageName ? '#01A2FD' : 'black'; // Define the color based on the pageName
+    const typographyColor = pageName ? '#01A2FD' : '#708099'; // Define the color based on the pageName
 
     return (
         <Paper
@@ -19,10 +19,10 @@ const Text: React.FC<{ length: number; type: string; id: string }> = ({ length, 
                 padding: '1rem 0',
             }}
         >
-            <Typography variant="h5" color={typographyColor}>
+            <Typography letterSpacing={'0.072px'} fontWeight={'500'} variant="h5" color={typographyColor}>
                 {type}
             </Typography>
-            <Typography color={typographyColor} variant="h4">
+            <Typography letterSpacing={'0.072px'} fontWeight={'500'} color={typographyColor} variant="h4">
                 {length}
             </Typography>
         </Paper>

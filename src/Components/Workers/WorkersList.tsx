@@ -28,7 +28,7 @@ const WorkersComponent: React.FC<IWorkers> = ({ noIntro }) => {
         <Layout>
             {!noIntro && <IntroCard />}
             <Paper sx={{ marginTop: '2rem', padding: '0rem 1rem 0 1rem' }}>
-                <CustomCreateDelete handleSearch={handleSearch} label="Door" searchTerm={searchTerm} />
+                <CustomCreateDelete handleSearch={handleSearch} label="Name" searchTerm={searchTerm} />
 
                 <List exporter={false} pagination={false}>
                     <Datagrid data={item.length < currentItems.length ? item : currentItems} rowClick="edit">
