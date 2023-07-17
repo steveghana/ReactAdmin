@@ -11,6 +11,7 @@ import WorkerCreate from './Components/Workers/WorkerCreate';
 import DoorCreate from './Components/Doors/DoorCreate';
 import LocationList from './Components/Locations/LocationList';
 import MyLayout from './Appbar';
+import NestedList from './Components/Locations/LocationGateCategories';
 
 // export const MyLayout = (props:any) => <Layout {...props} appBar={MyAppBar} />;
 const App = () => {
