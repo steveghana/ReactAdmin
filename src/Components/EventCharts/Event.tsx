@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Alert, Box, Button, Container, Paper, Typography } from '@mui/material';
+import { Alert, Button, Grid, Paper, Typography } from '@mui/material';
 import WorkerChart from './Charts';
 import { useParams } from 'react-router-dom';
 import { useDataProvider } from 'react-admin';
@@ -30,14 +30,14 @@ const Events = () => {
     let slidedLogs = !params.id ? logs.slice(0, 12) : logs.slice(0, 18);
 
     return (
-        <Container maxWidth="xs">
+        <Grid item xs={12} sm={4} sx={{ height: '100%' }}>
             {isLoading ? (
-                <div>Loading...</div>
+                <div style={{ width: '100%', textAlign: 'center' }}>Loading...</div>
             ) : (
                 <Paper
-                    elevation={3}
+                    elevation={2}
                     sx={{
-                        height: 'auto',
+                        height: params.id ? 'auto' : '50%',
                         padding: '1rem',
                         marginBottom: '1rem',
                         display: 'flex',
@@ -53,7 +53,7 @@ const Events = () => {
                             alignItems: 'flex-end',
                         }}
                     >
-                        <Typography variant="button" sx={{ marginRight: 'auto' }}>
+                        <Typography color={'#708099'} variant="button" sx={{ marginRight: 'auto' }}>
                             Events
                         </Typography>
                         <Button variant="contained" style={{ borderRadius: '40px' }} color="primary">
@@ -74,11 +74,11 @@ const Events = () => {
             )}
 
             {!params.id && (
-                <Box sx={{ height: '40%' }}>
-                    <WorkerChart />
-                </Box>
+                // <Box sx={{ maxHeight: '50%' }}>
+                <WorkerChart />
+                // </Box>
             )}
-        </Container>
+        </Grid>
     );
 };
 

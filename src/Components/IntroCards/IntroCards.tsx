@@ -9,7 +9,7 @@ const Text: React.FC<{ length: number; type: string; id: string }> = ({ length, 
 
     return (
         <Paper
-            elevation={0}
+            elevation={1}
             sx={{
                 width: '100%',
                 display: 'flex',
@@ -38,7 +38,7 @@ const IntroCard: React.FC = () => {
         <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
             <Text length={locations?.length as number} type="Locations" id="locations" />
             <Text length={doors?.length as number} type="Doors" id="gates" />
-            <Text length={user?.length as number} type="Workers" id="users" />
+            <Text length={user?.length as number} type="Workers" id="view-user-companies" />
         </div>
     );
 };

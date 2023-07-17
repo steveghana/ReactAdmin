@@ -6,19 +6,21 @@ const WorkerChart = () => {
     const borderRadius = 8;
 
     return (
-        <Paper sx={{ height: '100%', padding: '1.3rem 1.3rem 2rem 1.3rem', display: 'flex', flexDirection: 'column', gap: '2rem' }} elevation={5}>
+        <Paper sx={{ height: 'auto', padding: ' 2rem', display: 'flex', flexDirection: 'column', gap: '2rem' }} elevation={2}>
             <div>
-                <Typography variant="h5" fontFamily={'sans-serif'} fontWeight={'700'}>
+                <Typography color={'#708099'} variant="h6" fontFamily={'sans-serif'} fontWeight={'700'}>
                     Weekly Traffic
                 </Typography>
                 <Box sx={{ display: 'flex', gap: '.4rem', alignItems: 'center' }}>
                     <Typography variant="h4" color={'#01A2FD'}>
                         130
                     </Typography>
-                    <Typography variant="body1">Entrances</Typography>
+                    <Typography color={'#708099'} variant="body2">
+                        Entrances
+                    </Typography>
                 </Box>
             </div>
-            <ResponsiveContainer width="100%" height="100%">
+            <ResponsiveContainer width="100%" height="100%" aspect={16 / 8}>
                 <BarChart
                     width={100}
                     height={300}

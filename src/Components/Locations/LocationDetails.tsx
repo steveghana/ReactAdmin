@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useGetOne } from 'react-admin';
-import LocationList from './LocationList';
 import Details from '../ReusableDetails';
 import axios from 'axios';
 import { Apiurl } from '../../DataProvider';

@@ -4,10 +4,19 @@ export interface IDoors {
 }
 export type IToolbar = {
     noPermission?: boolean;
+    save: () => void;
     setClicked: React.Dispatch<React.SetStateAction<boolean>>;
 };
 export type Anchor = 'left' | 'right';
-export type ICustomDeleteCreate = { withCreate?: boolean; handleSearch: (searchValue: string) => void; searchTerm: string; label: string };
+export type ICustomDeleteCreate = {
+    withCreate?: boolean;
+
+    setClicked?: React.Dispatch<React.SetStateAction<boolean>>;
+
+    handleSearch: (searchValue: string) => void;
+    searchTerm: string;
+    label: string;
+};
 export interface IWorkers {
     workers: Record<string, any>[];
     noIntro?: boolean;

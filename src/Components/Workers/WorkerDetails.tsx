@@ -1,38 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Details from '../ReusableDetails';
 import { useParams } from 'react-router-dom';
-import WorkersComponent from './WorkersList';
-import { useGetList, useGetOne } from 'react-admin';
+import { useGetOne } from 'react-admin';
 import { IDetailsProps } from '../../types';
 import { Apiurl } from '../../DataProvider';
 import axios from 'axios';
+import Doors from '../Doors/DoorsList';
 
 const WorkerDetails: React.FC<IDetailsProps> = () => {
     const { id } = useParams();
     const { data } = useGetOne('view-user-companies', { id });
-    // const { data:gates } = useGetList('view-user-gates', { id: 380 });
+    const [workersinDoors, setWorkerinDoors] = useState([]);
     let EditData = {
         LatestunlockAt: new Date(data?.usrUpdatedAt)?.toLocaleTimeString() || 'Not available',
         Email: data?.usrEmail || 'Not Available',
         ['Phone number']: data?.usrPhoneNumber || 'Not available',
     };
     React.useEffect(() => {
-        const limit = 20; // Set the desired limit
+        const limit = 25;
 
         const fetchFloors = async () => {
             const response = await axios.get(`${Apiurl}/view-user-gates?filter={"where":{"usrId": ${JSON.stringify(id)}}, "limit": ${limit}}`);
             console.log('workers with gates:', response?.data);
-
+            setWorkerinDoors(response.data);
             // Transform the API response into the desired data structure
         };
 
         fetchFloors();
     }, []);
-    console.log(data, 'from details');
     return (
         <>
             <Details intro={EditData} name={data?.usrName} />
-            {/* <WorkersComponent noIntro workers={data as Record<string, string>[]} /> */}
+            <Doors idata={workersinDoors} noIntro />
         </>
     );
 };

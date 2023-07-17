@@ -4,6 +4,8 @@ import { AddRounded, DeleteRounded, FilterListRounded, Search } from '@mui/icons
 import { Anchor, ICustomDeleteCreate } from '../../types';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import Button from '@mui/material/Button';
+import CreateWorker from '../Workers/WorkerCreate';
+import { useGetList } from 'react-admin';
 
 const CustomCreateDelete: React.FC<ICustomDeleteCreate> = props => {
     let styles = {
@@ -23,7 +25,7 @@ const CustomCreateDelete: React.FC<ICustomDeleteCreate> = props => {
         bottom: false,
         right: false,
     });
-
+    useGetList;
     const toggleDrawer = (anchor: Anchor, open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
         if (event && event.type === 'keydown' && ((event as React.KeyboardEvent).key === 'Tab' || (event as React.KeyboardEvent).key === 'Shift')) {
             return;
@@ -31,8 +33,10 @@ const CustomCreateDelete: React.FC<ICustomDeleteCreate> = props => {
         setState({ ...state, [anchor]: open });
     };
 
-    const list = (anchor: Anchor) => (
-        <Box sx={{ width: 450 }} role="presentation" onClick={toggleDrawer(anchor, false)} onKeyDown={toggleDrawer(anchor, false)}></Box>
+    const list = (_: Anchor) => (
+        <Box sx={{ width: 450, height: '100%' }} role="presentation">
+            <CreateWorker />
+        </Box>
     );
     return (
         <Box sx={{ display: 'flex', alignItems: 'center', gap: '.6rem' }}>
@@ -55,26 +59,26 @@ const CustomCreateDelete: React.FC<ICustomDeleteCreate> = props => {
             </Paper>
             <div></div>
             <div style={{ marginLeft: 'auto', display: 'flex', gap: '1rem', alignItems: 'center' }}>
-                <div style={styles}>
-                    {(['right'] as const).map(anchor => (
-                        <React.Fragment key={anchor}>
-                            {!props.withCreate && (
+                {!props.withCreate && (
+                    <div style={styles}>
+                        {(['right'] as const).map(anchor => (
+                            <React.Fragment key={anchor}>
                                 <Button onClick={toggleDrawer(anchor, true)}>
                                     {' '}
                                     <AddRounded color={'primary'} />
                                 </Button>
-                            )}
-                            <SwipeableDrawer
-                                anchor={anchor}
-                                open={state[anchor]}
-                                onClose={toggleDrawer(anchor, false)}
-                                onOpen={toggleDrawer(anchor, true)}
-                            >
-                                {list(anchor)}
-                            </SwipeableDrawer>
-                        </React.Fragment>
-                    ))}
-                </div>
+                                <SwipeableDrawer
+                                    anchor={anchor}
+                                    open={state[anchor]}
+                                    onClose={toggleDrawer(anchor, false)}
+                                    onOpen={toggleDrawer(anchor, true)}
+                                >
+                                    {list(anchor)}
+                                </SwipeableDrawer>
+                            </React.Fragment>
+                        ))}
+                    </div>
+                )}
                 <div style={styles}>
                     <DeleteRounded color={'primary'} />
                 </div>

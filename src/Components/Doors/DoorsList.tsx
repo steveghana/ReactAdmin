@@ -1,12 +1,10 @@
 import { Box, Pagination, Paper, Typography } from '@mui/material';
 import React from 'react';
 import { Datagrid, List, TextField, useGetList } from 'react-admin';
-import { TextField as Field } from '@mui/material';
 import useSearchFilter from '../../CustomHook';
 import Layout from '../../Layout';
 import { IDoors } from '../../types';
 import IntroCard from '../IntroCards/IntroCards';
-import { AddRounded, DeleteRounded } from '@mui/icons-material';
 import CustomCreateDelete from '../CustomCreateDelete';
 
 const Doors: React.FC<IDoors> = props => {
@@ -21,7 +19,6 @@ const Doors: React.FC<IDoors> = props => {
     if (isLoading) {
         return <div>Loading...</div>;
     }
-    console.log(data);
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentItems = (props.idata || data)?.slice(indexOfFirstItem, indexOfLastItem) || [];
@@ -30,7 +27,7 @@ const Doors: React.FC<IDoors> = props => {
             {!props.noIntro && <IntroCard />}
 
             <Paper sx={{ marginTop: '2rem', padding: '1rem 1rem 0 1rem' }}>
-                <CustomCreateDelete handleSearch={handleSearch} label="Door" searchTerm={searchTerm} withCreate={true} />
+                <CustomCreateDelete handleSearch={handleSearch} label="Door" searchTerm={searchTerm} />
 
                 <List exporter={false} /* {...props} */ pagination={false}>
                     <Datagrid data={item?.length < currentItems?.length ? item : currentItems} rowClick="edit">

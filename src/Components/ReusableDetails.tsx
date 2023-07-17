@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, Button } from '@mui/material';
+import { Box, Typography, Button, Paper } from '@mui/material';
 import { ChevronLeft } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { IEdit } from '../types';
@@ -10,7 +10,7 @@ const Edit: React.FC<IEdit> = props => {
         history('/');
     };
     return (
-        <Box style={{ marginTop: '2rem' }}>
+        <Paper elevation={2} sx={{ marginTop: '1rem', padding: '1rem' }}>
             <Box
                 sx={{
                     width: '100%',
@@ -52,7 +52,7 @@ const Edit: React.FC<IEdit> = props => {
                     </Typography>
                 ))}
             </div>
-        </Box>
+        </Paper>
     );
 };
 

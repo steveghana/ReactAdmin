@@ -19,9 +19,6 @@ const WorkersComponent: React.FC<IWorkers> = props => {
     if (isLoading) {
         return <div>Loading...</div>;
     }
-    console.log(data, 'from workers');
-
-    // console.log(data);
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentItems = (props.workers || data)?.slice(indexOfFirstItem, indexOfLastItem) || [];

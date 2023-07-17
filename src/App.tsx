@@ -1,4 +1,4 @@
-import { Admin, Resource, Layout } from 'react-admin';
+import { Admin, Resource } from 'react-admin';
 import { RestProvider } from './DataProvider';
 import LocationEdit from './Components/Locations/LocationDetails';
 import WorkersComponent from './Components/Workers/WorkersList';
@@ -19,10 +19,10 @@ const App = () => {
         },
     });
     return (
-        <Admin layout={MyLayout} title="Access Key" dataProvider={RestProvider} queryClient={queryClient}>
+        <Admin layout={MyLayout} dataProvider={RestProvider} queryClient={queryClient}>
             <Resource name="locations" edit={LocationEdit} list={LocationList} />
-            <Resource name="view-user-companies" /* create={WorkerCreate} */ edit={WorkerDetails} list={WorkersComponent} />
-            <Resource name="view-user-gates" /* create={DoorCreate} */ edit={DoorsDetails} list={Doors} />
+            <Resource options={{ label: 'Workers' }} name="view-user-companies" edit={WorkerDetails} list={WorkersComponent} />
+            <Resource name="view-user-gates" options={{ label: 'Doors' }} edit={DoorsDetails} list={Doors} />
         </Admin>
     );
 };

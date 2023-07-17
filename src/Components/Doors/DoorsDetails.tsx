@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Details from '../ReusableDetails';
-import DoorsList from './DoorsList';
-import { useGetList, useGetOne } from 'react-admin';
+import { useGetOne } from 'react-admin';
 import WorkersComponent from '../Workers/WorkersList';
 import axios from 'axios';
 import { Apiurl } from '../../DataProvider';
@@ -10,7 +9,6 @@ const DoorsEdit: React.FC<{}> = () => {
     const { id } = useParams();
     const { data: dataById } = useGetOne('view-user-gates', { id });
     const [dataByuser, setDataByuser] = useState([]);
-    // const { data: dataByuser } = useGetList('view-user-gates?filter[where][gateId]=29&filter[limit]=20');
     let detailsData = {
         Color: dataById?.gateColor || 'Not Available',
         Floor: dataById?.gateFloor || 'Not Available',
