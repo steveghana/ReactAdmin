@@ -27,7 +27,7 @@ const WorkersComponent: React.FC<IWorkers> = ({ noIntro }) => {
     return (
         <Layout>
             {!noIntro && <IntroCard />}
-            <Paper sx={{ marginTop: '2rem', padding: '0rem 1rem 0 1rem' }}>
+            <Paper sx={{ marginTop: '2rem', padding: '1rem 1rem 0 1rem' }}>
                 <CustomCreateDelete handleSearch={handleSearch} label="Name" searchTerm={searchTerm} />
 
                 <List exporter={false} pagination={false}>

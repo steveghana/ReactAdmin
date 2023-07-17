@@ -27,7 +27,7 @@ const LocationList: React.FC<LocationListProps> = ({ nointro }) => {
     return (
         <Layout>
             {!nointro && <IntroCard />}
-            <Paper sx={{ marginTop: '2rem', padding: '0rem 1rem 0 1rem' }}>
+            <Paper sx={{ marginTop: '2rem', padding: '1rem 1rem 0 1rem' }}>
                 <CustomCreateDelete handleSearch={handleSearch} label="Location" searchTerm={searchTerm} />
                 <List exporter={false} pagination={false}>
                     <Datagrid data={item?.length < currentItems?.length ? item : currentItems} rowClick="edit">

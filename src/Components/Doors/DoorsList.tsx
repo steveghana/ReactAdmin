@@ -29,7 +29,7 @@ const Doors: React.FC<IDoors> = props => {
         <Layout>
             {!props.noIntro && <IntroCard />}
 
-            <Paper sx={{ marginTop: '2rem', padding: '0rem 1rem 0 1rem' }}>
+            <Paper sx={{ marginTop: '2rem', padding: '1rem 1rem 0 1rem' }}>
                 <CustomCreateDelete handleSearch={handleSearch} label="Door" searchTerm={searchTerm} withCreate={true} />
 
                 <List exporter={false} {...props} pagination={false}>

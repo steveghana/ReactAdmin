@@ -1,7 +1,7 @@
-import { Box } from '@mui/material';
+import { Box, IconButton, InputBase, Paper } from '@mui/material';
 import React from 'react';
 import { TextField as Field } from '@mui/material';
-import { AddRounded, DeleteRounded } from '@mui/icons-material';
+import { AddRounded, DeleteRounded, FilterListRounded, Search } from '@mui/icons-material';
 import { ICustomDeleteCreate } from '../../types';
 
 const CustomCreateDelete: React.FC<ICustomDeleteCreate> = props => {
@@ -17,17 +17,33 @@ const CustomCreateDelete: React.FC<ICustomDeleteCreate> = props => {
         flexShrink: '0',
     };
     return (
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <Field
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: '.6rem' }}>
+            <div>{props.label}</div>
+            <FilterListRounded color="primary" />
+            <Paper component="form" sx={{ p: '2px', display: 'flex', alignItems: 'center', minWidth: 300 }}>
+                <InputBase
+                    name="password"
+                    autoComplete="off"
+                    value={props.searchTerm}
+                    onChange={e => props.handleSearch(e.target.value)}
+                    type="text"
+                    sx={{ ml: 1, flex: 1 }}
+                    placeholder={`Enter ${props.label}`}
+                    inputProps={{ 'aria-label': props.label }}
+                />
+                <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
+                    <Search />
+                </IconButton>
+            </Paper>
+            {/* <Field
                 variant="outlined"
                 name="password"
                 autoComplete="off"
                 type="text"
                 placeholder="Enter name"
                 label={props.label}
-                value={props.searchTerm}
-                onChange={e => props.handleSearch(e.target.value)}
-            />
+                
+            /> */}
             <div style={{ marginLeft: 'auto', display: 'flex', gap: '1rem', alignItems: 'center' }}>
                 {!props.withCreate && (
                     <div style={styles}>
