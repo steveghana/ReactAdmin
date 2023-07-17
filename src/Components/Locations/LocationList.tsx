@@ -1,11 +1,10 @@
 import * as React from 'react';
-import { Box, TextField as Field, Pagination, Paper, Typography } from '@mui/material';
+import { Box, Pagination, Paper, Typography } from '@mui/material';
 import { Datagrid, List, TextField, useGetList } from 'react-admin';
 import useSearchFilter from '../../CustomHook';
 import IntroCard from '../IntroCards/IntroCards';
 import Layout from '../../Layout';
 import { LocationListProps } from '../../types';
-import { AddRounded, ChevronRight, DeleteRounded } from '@mui/icons-material';
 import CustomCreateDelete from '../CustomCreateDelete';
 
 const LocationList: React.FC<LocationListProps> = ({ nointro }) => {

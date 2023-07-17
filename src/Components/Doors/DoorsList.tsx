@@ -11,23 +11,20 @@ import CustomCreateDelete from '../CustomCreateDelete';
 
 const Doors: React.FC<IDoors> = props => {
     const { data, isLoading } = useGetList('view-user-gates');
-    // const { data: location } = useGetList('locations');
-
     const [currentPage, setCurrentPage] = React.useState(1);
     const itemsPerPage = 10;
     const handlePageChange = (_: any, newPage: number) => {
         setCurrentPage(newPage);
     };
-    console.log(data, 'gates');
-    let actualData = props.idata?.length ? props?.idata : data;
-    const indexOfLastItem = currentPage * itemsPerPage;
-    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentItems = actualData?.length ? actualData.slice(indexOfFirstItem, indexOfLastItem) : [];
-    const totalPages = Math.ceil((actualData?.length || 0) / itemsPerPage);
-    const [item, searchTerm, handleSearch] = useSearchFilter(actualData?.length ? actualData : []);
+    const totalPages = Math.ceil(((props.idata || data)?.length || 0) / itemsPerPage);
+    const [item, searchTerm, handleSearch] = useSearchFilter(data as any);
     if (isLoading) {
         return <div>Loading...</div>;
     }
+    console.log(data);
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = (props.idata || data)?.slice(indexOfFirstItem, indexOfLastItem) || [];
     return (
         <Layout>
             {!props.noIntro && <IntroCard />}
@@ -35,8 +32,8 @@ const Doors: React.FC<IDoors> = props => {
             <Paper sx={{ marginTop: '2rem', padding: '1rem 1rem 0 1rem' }}>
                 <CustomCreateDelete handleSearch={handleSearch} label="Door" searchTerm={searchTerm} withCreate={true} />
 
-                <List exporter={false} {...props} pagination={false}>
-                    <Datagrid data={item.length < currentItems?.length ? item : currentItems} rowClick="edit">
+                <List exporter={false} /* {...props} */ pagination={false}>
+                    <Datagrid data={item?.length < currentItems?.length ? item : currentItems} rowClick="edit">
                         <TextField source="gateName" sortable={true} label="Door Name" />
                         <TextField source="gateLocationId" sortable={true} label="Location" />
                         <TextField source="gateFloor" sortable={true} label="Floor" />

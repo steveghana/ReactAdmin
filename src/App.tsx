@@ -7,13 +7,8 @@ import Doors from './Components/Doors/DoorsList';
 import WorkerDetails from './Components/Workers/WorkerDetails';
 
 import DoorsDetails from './Components/Doors/DoorsDetails';
-import WorkerCreate from './Components/Workers/WorkerCreate';
-import DoorCreate from './Components/Doors/DoorCreate';
 import LocationList from './Components/Locations/LocationList';
 import MyLayout from './Appbar';
-import NestedList from './Components/Locations/LocationGateCategories';
-
-// export const MyLayout = (props:any) => <Layout {...props} appBar={MyAppBar} />;
 const App = () => {
     //This will cache responses in memory for smooth experience
     const queryClient = new QueryClient({

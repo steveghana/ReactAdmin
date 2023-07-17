@@ -7,30 +7,32 @@ import { IWorkers } from '../../types';
 import IntroCard from '../IntroCards/IntroCards';
 import CustomCreateDelete from '../CustomCreateDelete';
 
-const WorkersComponent: React.FC<IWorkers> = ({ noIntro, workers }) => {
+const WorkersComponent: React.FC<IWorkers> = props => {
     const { data, isLoading } = useGetList('view-user-companies');
     const [currentPage, setCurrentPage] = React.useState(1);
     const itemsPerPage = 10;
     const handlePageChange = (_: any, newPage: number) => {
         setCurrentPage(newPage);
     };
-    let actualData = workers?.length ? workers : data;
-    const indexOfLastItem = currentPage * itemsPerPage;
-    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentItems = actualData?.length ? actualData.slice(indexOfFirstItem, indexOfLastItem) : [];
-    const totalPages = Math.ceil((actualData?.length || 0) / itemsPerPage);
-    const [item, searchTerm, handleSearch] = useSearchFilter(actualData?.length ? actualData : []);
+    const totalPages = Math.ceil(((props.workers || data)?.length || 0) / itemsPerPage);
+    const [item, searchTerm, handleSearch] = useSearchFilter(data as any);
     if (isLoading) {
         return <div>Loading...</div>;
     }
+    console.log(data, 'from workers');
+
+    // console.log(data);
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = (props.workers || data)?.slice(indexOfFirstItem, indexOfLastItem) || [];
     return (
         <Layout>
-            {!noIntro && <IntroCard />}
+            {!props.noIntro && <IntroCard />}
             <Paper sx={{ marginTop: '2rem', padding: '1rem 1rem 0 1rem' }}>
                 <CustomCreateDelete handleSearch={handleSearch} label="Name" searchTerm={searchTerm} />
 
                 <List exporter={false} pagination={false}>
-                    <Datagrid data={item.length < currentItems.length ? item : currentItems} rowClick="edit">
+                    <Datagrid data={item?.length < currentItems?.length ? item : currentItems} rowClick="edit">
                         <TextField source="usrName" sortable={true} label="Worker" />
                         <TextField source="usrEmail" sortable={true} label="Email" />
                         <TextField source="usrPhoneNumber" sortable={true} label="Phone" />
