@@ -1,12 +1,16 @@
 export interface IDoors {
     data: Record<string, any>[];
+    noIntro?: boolean;
 }
 export type IToolbar = {
     noPermission?: boolean;
     setClicked: React.Dispatch<React.SetStateAction<boolean>>;
 };
+export type Anchor = 'left' | 'right';
+export type ICustomDeleteCreate = { withCreate?: boolean; handleSearch: (searchValue: string) => void; searchTerm: string; label: string };
 export interface IWorkers {
     workers: Record<string, any>[];
+    noIntro: boolean;
 }
 export type IEdit = {
     intro: Record<string, string>;

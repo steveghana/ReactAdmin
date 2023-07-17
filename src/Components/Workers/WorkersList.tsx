@@ -1,12 +1,15 @@
 import React from 'react';
 import { List, Datagrid, TextField, useGetList, DateField } from 'react-admin';
-import { Box, Pagination, Typography } from '@mui/material';
+import { Box, Pagination, Paper, Typography } from '@mui/material';
 import { TextField as Field } from '@mui/material';
 import useSearchFilter from '../../CustomHook';
 import Layout from '../../Layout';
 import { IWorkers } from '../../types';
+import IntroCard from '../IntroCards/IntroCards';
+import { AddRounded, DeleteRounded } from '@mui/icons-material';
+import CustomCreateDelete from '../CustomCreateDelete';
 
-const WorkersComponent: React.FC<IWorkers> = () => {
+const WorkersComponent: React.FC<IWorkers> = ({ noIntro }) => {
     const { data, isLoading } = useGetList('users');
     const [currentPage, setCurrentPage] = React.useState(1);
     const itemsPerPage = 10;
@@ -23,31 +26,25 @@ const WorkersComponent: React.FC<IWorkers> = () => {
     }
     return (
         <Layout>
-            <Field
-                variant="outlined"
-                name="password"
-                autoComplete="off"
-                type="text"
-                placeholder="Enter name"
-                label="Name"
-                sx={{ marginTop: '3rem' }}
-                value={searchTerm}
-                onChange={e => handleSearch(e.target.value)}
-            />
-            <List pagination={false}>
-                <Datagrid data={item.length < currentItems.length ? item : currentItems} rowClick="edit">
-                    <TextField source="name" sortable={true} label="Worker" />
-                    <TextField source="email" sortable={true} label="Email" />
-                    <TextField source="phoneNumber" sortable={true} label="Phone" />
-                    <DateField source="updatedAt" sortable={true} label="Last unlock" />
-                </Datagrid>
-                <Box display="flex" justifyContent="center" marginTop={2}>
-                    <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} color="primary" variant="outlined" />
-                </Box>
-                <Typography variant="caption" color="textSecondary" align="center" marginTop={2}>
-                    Page {currentPage} of {totalPages}
-                </Typography>
-            </List>
+            {!noIntro && <IntroCard />}
+            <Paper sx={{ marginTop: '2rem', padding: '1rem 1rem 0 1rem' }}>
+                <CustomCreateDelete handleSearch={handleSearch} label="Name" searchTerm={searchTerm} />
+
+                <List exporter={false} pagination={false}>
+                    <Datagrid data={item.length < currentItems.length ? item : currentItems} rowClick="edit">
+                        <TextField source="name" sortable={true} label="Worker" />
+                        <TextField source="email" sortable={true} label="Email" />
+                        <TextField source="phoneNumber" sortable={true} label="Phone" />
+                        <DateField source="updatedAt" sortable={true} label="Last unlock" />
+                    </Datagrid>
+                    <Box display="flex" justifyContent="center" marginTop={2}>
+                        <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} color="primary" variant="outlined" />
+                    </Box>
+                    <Typography variant="caption" color="textSecondary" align="center" marginTop={2}>
+                        Page {currentPage} of {totalPages}
+                    </Typography>
+                </List>
+            </Paper>
         </Layout>
     );
 };

@@ -30,7 +30,7 @@ const Events = () => {
     let slidedLogs = !params.id ? logs.slice(0, 12) : logs.slice(0, 18);
 
     return (
-        <Container maxWidth="sm">
+        <Container maxWidth="xs">
             {isLoading ? (
                 <div>Loading...</div>
             ) : (
