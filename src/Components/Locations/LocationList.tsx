@@ -6,6 +6,7 @@ import IntroCard from '../IntroCards/IntroCards';
 import Layout from '../../Layout';
 import { LocationListProps } from '../../types';
 import { AddRounded, DeleteRounded } from '@mui/icons-material';
+import CustomCreateDelete from '../CustomCreateDelete';
 
 const LocationList: React.FC<LocationListProps> = ({ nointro }) => {
     const { data, isLoading } = useGetList('locations');
@@ -27,21 +28,7 @@ const LocationList: React.FC<LocationListProps> = ({ nointro }) => {
         <Layout>
             {!nointro && <IntroCard />}
             <Paper sx={{ marginTop: '2rem', padding: '0rem 1rem 0 1rem' }}>
-                <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                    <Field
-                        variant="outlined"
-                        name="password"
-                        autoComplete="off"
-                        type="text"
-                        placeholder="Enter name"
-                        label="Location"
-                        // sx={{ marginTop: '3rem' }}
-                        value={searchTerm}
-                        onChange={e => handleSearch(e.target.value)}
-                    />
-                    <AddRounded sx={{ marginLeft: 'auto' }} color={'primary'} />
-                    <DeleteRounded color={'primary'} />
-                </Box>
+                <CustomCreateDelete handleSearch={handleSearch} label="Door" searchTerm={searchTerm} />
                 <List exporter={false} pagination={false}>
                     <Datagrid data={item?.length < currentItems?.length ? item : currentItems} rowClick="edit">
                         <TextField source="name" sortable={true} label="Location Name" />

@@ -6,6 +6,7 @@ export type IToolbar = {
     noPermission?: boolean;
     setClicked: React.Dispatch<React.SetStateAction<boolean>>;
 };
+export type ICustomDeleteCreate = { withCreate?: boolean; handleSearch: (searchValue: string) => void; searchTerm: string; label: string };
 export interface IWorkers {
     workers: Record<string, any>[];
     noIntro: boolean;

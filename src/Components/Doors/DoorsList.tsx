@@ -7,6 +7,7 @@ import Layout from '../../Layout';
 import { IDoors } from '../../types';
 import IntroCard from '../IntroCards/IntroCards';
 import { AddRounded, DeleteRounded } from '@mui/icons-material';
+import CustomCreateDelete from '../CustomCreateDelete';
 
 const Doors: React.FC<IDoors> = props => {
     const { data, isLoading } = useGetList('gates');
@@ -29,19 +30,7 @@ const Doors: React.FC<IDoors> = props => {
             {!props.noIntro && <IntroCard />}
 
             <Paper sx={{ marginTop: '2rem', padding: '0rem 1rem 0 1rem' }}>
-                <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                    <Field
-                        variant="outlined"
-                        name="password"
-                        autoComplete="off"
-                        type="text"
-                        placeholder="Enter Door"
-                        label="Door"
-                        value={searchTerm}
-                        onChange={e => handleSearch(e.target.value)}
-                    />
-                    <DeleteRounded sx={{ marginLeft: 'auto' }} color={'primary'} />
-                </Box>
+                <CustomCreateDelete handleSearch={handleSearch} label="Door" searchTerm={searchTerm} withCreate={true} />
 
                 <List exporter={false} {...props} pagination={false}>
                     <Datagrid data={item.length < currentItems.length ? item : currentItems} rowClick="edit">

@@ -7,6 +7,7 @@ import Layout from '../../Layout';
 import { IWorkers } from '../../types';
 import IntroCard from '../IntroCards/IntroCards';
 import { AddRounded, DeleteRounded } from '@mui/icons-material';
+import CustomCreateDelete from '../CustomCreateDelete';
 
 const WorkersComponent: React.FC<IWorkers> = ({ noIntro }) => {
     const { data, isLoading } = useGetList('users');
@@ -27,20 +28,7 @@ const WorkersComponent: React.FC<IWorkers> = ({ noIntro }) => {
         <Layout>
             {!noIntro && <IntroCard />}
             <Paper sx={{ marginTop: '2rem', padding: '0rem 1rem 0 1rem' }}>
-                <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                    <Field
-                        variant="outlined"
-                        name="password"
-                        autoComplete="off"
-                        type="text"
-                        placeholder="Enter name"
-                        label="Name"
-                        value={searchTerm}
-                        onChange={e => handleSearch(e.target.value)}
-                    />
-                    <AddRounded sx={{ marginLeft: 'auto' }} color={'primary'} />
-                    <DeleteRounded color={'primary'} />
-                </Box>
+                <CustomCreateDelete handleSearch={handleSearch} label="Door" searchTerm={searchTerm} />
 
                 <List exporter={false} pagination={false}>
                     <Datagrid data={item.length < currentItems.length ? item : currentItems} rowClick="edit">
