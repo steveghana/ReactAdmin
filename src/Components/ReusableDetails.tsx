@@ -10,7 +10,7 @@ const Edit: React.FC<IEdit> = props => {
         history('/');
     };
     return (
-        <Paper elevation={2} sx={{ marginTop: '1rem', padding: '1rem' }}>
+        <Paper elevation={2} sx={{ margin: '0rem 0 1.5rem 0', padding: '1rem' }}>
             <Box
                 sx={{
                     width: '100%',
@@ -24,7 +24,7 @@ const Edit: React.FC<IEdit> = props => {
                     onClick={navigateBack}
                     style={{
                         display: 'flex',
-                        gap: '.7rem',
+                        gap: '.2rem',
                         alignItems: 'center',
                         cursor: 'pointer',
                     }}
@@ -47,8 +47,8 @@ const Edit: React.FC<IEdit> = props => {
                 }}
             >
                 {Object.values(props?.intro)?.map((item, i) => (
-                    <Typography key={`${item}${i}`} variant="body2" color="textSecondary">
-                        {`${Object.keys(props?.intro)[i]} :${item}`}
+                    <Typography fontWeight={'700'} key={`${item}${i}`} variant="body2" color="textSecondary">
+                        {`${Object.keys(props?.intro)[i]}: ${item}`}
                     </Typography>
                 ))}
             </div>

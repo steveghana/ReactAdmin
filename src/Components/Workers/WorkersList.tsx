@@ -22,9 +22,16 @@ const WorkersComponent: React.FC<IWorkers> = props => {
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentItems = (props.workers || data)?.slice(indexOfFirstItem, indexOfLastItem) || [];
-    return (
-        <Layout>
+    // return (
+    //     <Layout>
+    //         {!props.noIntro && <IntroCard />}
+
+    //     </Layout>
+    // );
+    const OptionalLayout = () => (
+        <>
             {!props.noIntro && <IntroCard />}
+
             <Paper sx={{ marginTop: '2rem', padding: '1rem 1rem 0 1rem' }}>
                 <CustomCreateDelete handleSearch={handleSearch} label="Name" searchTerm={searchTerm} />
 
@@ -43,8 +50,17 @@ const WorkersComponent: React.FC<IWorkers> = props => {
                     </Typography>
                 </List>
             </Paper>
-        </Layout>
+        </>
     );
+    if (!props.withLayout) {
+        return (
+            <Layout>
+                <OptionalLayout />
+            </Layout>
+        );
+    }
+
+    return <OptionalLayout />;
 };
 
 export default WorkersComponent;

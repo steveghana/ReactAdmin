@@ -5,6 +5,7 @@ import { useGetOne } from 'react-admin';
 import WorkersComponent from '../Workers/WorkersList';
 import axios from 'axios';
 import { Apiurl } from '../../DataProvider';
+import Layout from '../../Layout';
 const DoorsEdit: React.FC<{}> = () => {
     const { id } = useParams();
     const { data: dataById } = useGetOne('view-user-gates', { id });
@@ -30,11 +31,11 @@ const DoorsEdit: React.FC<{}> = () => {
         fetchLogs();
     }, []);
     return (
-        <>
+        <Layout>
             <Details withTable={true} intro={detailsData} name={dataById?.gateName} />
-            <WorkersComponent noIntro workers={dataByuser} />
+            <WorkersComponent withLayout noIntro workers={dataByuser} />
             {/* <DoorsList noIntro idata={data as Record<string, string>[]} /> */}
-        </>
+        </Layout>
     );
 };
 

@@ -5,6 +5,7 @@ import Details from '../ReusableDetails';
 import axios from 'axios';
 import { Apiurl } from '../../DataProvider';
 import NestedList from './LocationGateCategories';
+import Layout from '../../Layout';
 const ItemEdit = () => {
     const { id } = useParams();
     const { data } = useGetOne('locations', { id });
@@ -48,10 +49,10 @@ const ItemEdit = () => {
     }, []);
 
     return (
-        <>
+        <Layout>
             <Details intro={detailsData} name={data?.name} />
             <NestedList data={nestedList} doorLength={doorlength} />
-        </>
+        </Layout>
     );
 };
 

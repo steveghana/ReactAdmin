@@ -22,8 +22,8 @@ const Doors: React.FC<IDoors> = props => {
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentItems = (props.idata || data)?.slice(indexOfFirstItem, indexOfLastItem) || [];
-    return (
-        <Layout>
+    const OptionalLayout = () => (
+        <>
             {!props.noIntro && <IntroCard />}
 
             <Paper sx={{ marginTop: '2rem', padding: '1rem 1rem 0 1rem' }}>
@@ -44,8 +44,17 @@ const Doors: React.FC<IDoors> = props => {
                     </Typography>
                 </List>
             </Paper>
-        </Layout>
+        </>
     );
+    if (!props.withLayout) {
+        return (
+            <Layout>
+                <OptionalLayout />
+            </Layout>
+        );
+    }
+
+    return <OptionalLayout />;
 };
 
 export default Doors;

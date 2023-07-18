@@ -5,8 +5,8 @@ import { useGetList } from 'react-admin';
 const Text: React.FC<{ length: number; type: string; id: string }> = ({ length, type, id }) => {
     const origin = window.location.href;
     const pageName = origin.includes(id);
-    const typographyColor = pageName ? '#01A2FD' : '#708099'; // Define the color based on the pageName
-
+    const typographyColor = pageName ? '#01A2FD' : '#708099';
+    const bgColor = pageName ? 'white' : '#f7f7f7';
     return (
         <Paper
             elevation={1}
@@ -15,6 +15,7 @@ const Text: React.FC<{ length: number; type: string; id: string }> = ({ length, 
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
+                background: bgColor,
                 justifyContent: 'center',
                 padding: '1rem 0',
             }}

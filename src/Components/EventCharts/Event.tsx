@@ -27,7 +27,7 @@ const Events = () => {
         fetchLogs();
     }, [dataProvider, params.id]);
 
-    let slidedLogs = !params.id ? logs.slice(0, 12) : logs.slice(0, 18);
+    let slidedLogs = !params.id ? logs.slice(0, 12) : logs.slice(0, 22);
 
     return (
         <Grid item xs={12} sm={4} sx={{ height: '100%' }}>
@@ -37,7 +37,7 @@ const Events = () => {
                 <Paper
                     elevation={2}
                     sx={{
-                        height: params.id ? 'auto' : '50%',
+                        height: 'auto',
                         padding: '1rem',
                         marginBottom: '1rem',
                         display: 'flex',

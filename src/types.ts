@@ -1,6 +1,7 @@
 export interface IDoors {
     idata: Record<string, any>[];
     noIntro?: boolean;
+    withLayout?: boolean;
 }
 export type IToolbar = {
     noPermission?: boolean;
@@ -20,6 +21,7 @@ export type ICustomDeleteCreate = {
 export interface IWorkers {
     workers: Record<string, any>[];
     noIntro?: boolean;
+    withLayout?: boolean;
 }
 export type IEdit = {
     intro: Record<string, string>;
