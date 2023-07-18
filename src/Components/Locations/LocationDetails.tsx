@@ -37,7 +37,7 @@ const ItemEdit = () => {
 
             const postData = {
                 id: 1,
-                title: 'Post Title',
+                title: 'Floor',
                 Floors: transformedData,
             };
 
