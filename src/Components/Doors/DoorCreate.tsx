@@ -8,7 +8,7 @@ interface FormData {
     // Add more fields as needed
 }
 export const MyToolbar = () => (
-    <Toolbar style={{ bottom: '0' }}>
+    <Toolbar sx={{ bottom: '0', position: 'fixed', width: 440 }}>
         <SaveButton fullWidth variant="contained">
             Add new worker
         </SaveButton>
@@ -51,7 +51,7 @@ const DoorCreate = () => {
         );
     };
     return (
-        <div style={{ position: 'relative' }}>
+        <div style={{ position: 'relative', height: '100%' }}>
             <Create sx={{ height: '100%' }}>
                 <SimpleForm onSubmit={handleFormSubmit} onChange={handleFormChange} toolbar={<MyToolbar />}>
                     <TextInput fullWidth label="Door Name" source="name" />

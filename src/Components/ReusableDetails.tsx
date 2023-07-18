@@ -7,7 +7,7 @@ import { IEdit } from '../types';
 const Edit: React.FC<IEdit> = props => {
     let history = useNavigate();
     const navigateBack = () => {
-        history('/');
+        history(-1);
     };
     return (
         <Paper elevation={2} sx={{ margin: '0rem 0 1.5rem 0', padding: '1rem' }}>

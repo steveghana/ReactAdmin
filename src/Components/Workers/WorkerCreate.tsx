@@ -83,8 +83,8 @@ const CreateWorker = () => {
                     </SimpleForm>
                 ) : (
                     <SimpleForm toolbar={<MyToolbar save={() => handleFormSubmit()} noPermission={true} setClicked={setClicked} />}>
-                        <TextInput label="Door" source="name" />
-                        <TextInput label="Role" source="role" />
+                        <TextInput fullWidth label="Door" source="name" />
+                        <TextInput fullWidth label="Role" source="role" />
                         <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
                             <Button variant="contained" disabled size="small">
                                 Daily
