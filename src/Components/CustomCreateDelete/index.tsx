@@ -1,6 +1,6 @@
 import { Box, IconButton, InputBase, Paper } from '@mui/material';
 import React from 'react';
-import { AddRounded, DeleteRounded, FilterListRounded, Search } from '@mui/icons-material';
+import { AddRounded, FilterListRounded, Search } from '@mui/icons-material';
 import { Anchor, ICustomDeleteCreate } from '../../types';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import Button from '@mui/material/Button';
@@ -31,7 +31,6 @@ const CustomCreateDelete: React.FC<ICustomDeleteCreate> = props => {
         }
         setState({ ...state, [anchor]: open });
     };
-    console.log(props);
     const list = (_: Anchor, type: string) => (
         <Box sx={{ width: 450, height: '100%' }} role="presentation">
             {type === 'Door' ? <DoorCreate /> : <CreateWorker />}
@@ -56,7 +55,6 @@ const CustomCreateDelete: React.FC<ICustomDeleteCreate> = props => {
                     <Search />
                 </IconButton>
             </Paper>
-            <div></div>
             <div style={{ marginLeft: 'auto', display: 'flex', gap: '1rem', alignItems: 'center' }}>
                 {!props.withCreate && (
                     <div style={styles}>
@@ -78,9 +76,9 @@ const CustomCreateDelete: React.FC<ICustomDeleteCreate> = props => {
                         ))}
                     </div>
                 )}
-                <div style={styles}>
+                {/* <div style={styles}>
                     <DeleteRounded color={'primary'} />
-                </div>
+                </div> */}
             </div>
         </Box>
     );
