@@ -24,7 +24,6 @@ const LocationList: React.FC<LocationListProps> = ({ nointro }) => {
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentItems = data?.slice(indexOfFirstItem, indexOfLastItem) || [];
-    console.log('location:', data);
     return (
         <Layout>
             {!nointro && <IntroCard />}

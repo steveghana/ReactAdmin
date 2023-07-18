@@ -5,7 +5,7 @@ import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
-import { Create, SimpleForm, TextInput, Toolbar, SaveButton, useCreate, useNotify, useRedirect, useFormGroupContext } from 'react-admin';
+import { Create, SimpleForm, TextInput, Toolbar, SaveButton, useCreate, useNotify, useRedirect } from 'react-admin';
 import { IToolbar } from '../../types';
 interface FormData {
     name: string;

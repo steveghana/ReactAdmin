@@ -5,7 +5,6 @@ import { Anchor, ICustomDeleteCreate } from '../../types';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import Button from '@mui/material/Button';
 import CreateWorker from '../Workers/WorkerCreate';
-import { useGetList } from 'react-admin';
 import DoorCreate from '../Doors/DoorCreate';
 
 const CustomCreateDelete: React.FC<ICustomDeleteCreate> = props => {

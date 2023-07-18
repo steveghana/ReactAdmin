@@ -1,4 +1,3 @@
-import { Button } from '@mui/material';
 import React from 'react';
 import { Create, SimpleForm, TextInput, Toolbar, SaveButton, useCreate, useNotify, useRedirect } from 'react-admin';
 interface FormData {
