@@ -6,24 +6,9 @@ import Layout from '../../Layout';
 import { IWorkers } from '../../types';
 import IntroCard from '../IntroCards/IntroCards';
 import CustomCreateDelete from '../CustomCreateDelete';
-import axios from 'axios';
-import { Apiurl } from '../../DataProvider';
 
 const WorkersComponent: React.FC<IWorkers> = props => {
     const { data, isLoading } = useGetList('view-user-companies');
-
-    React.useEffect(() => {
-        (async () => {
-            try {
-                const response = await axios.get(`${Apiurl}/users?filter[limit]=20`);
-                console.log('from single user:', response);
-                // setDataByuser(response.data);
-            } catch (error) {
-                console.error(error);
-                // setIsLoading(false);
-            }
-        })();
-    }, []);
 
     const OptionalLayout = () => {
         const [currentPage, setCurrentPage] = React.useState(1);
