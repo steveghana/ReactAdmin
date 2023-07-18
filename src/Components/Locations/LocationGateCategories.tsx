@@ -2,7 +2,6 @@ import React from 'react';
 import { Show, SimpleShowLayout, TextField, ArrayField, Datagrid, DateField } from 'react-admin';
 import { Accordion, AccordionSummary, AccordionDetails, Typography, Paper } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import Layout from '../../Layout';
 
 const NestedList: React.FC<{ data: any; doorLength: number }> = props => {
     return (
