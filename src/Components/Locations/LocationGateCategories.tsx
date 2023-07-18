@@ -20,8 +20,8 @@ const NestedList: React.FC<{ data: any; doorLength: number }> = props => {
                                         <div>
                                             <ArrayField source="books" record={floor}>
                                                 <Datagrid>
-                                                    <TextField label="Door Name" source="gateName" />
-                                                    <DateField label="Last Unlock" source="gateUpdatedAt" />
+                                                    <TextField label="Door Name" source="name" />
+                                                    <DateField label="Last Unlock" source="updatedAt" />
                                                     <DateField label="Status" source="" />
                                                 </Datagrid>
                                             </ArrayField>

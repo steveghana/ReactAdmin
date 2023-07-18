@@ -36,7 +36,7 @@ const WorkersComponent: React.FC<IWorkers> = props => {
                 <CustomCreateDelete handleSearch={handleSearch} label="Name" searchTerm={searchTerm} />
 
                 <List exporter={false} pagination={false}>
-                    <Datagrid data={item?.length < currentItems?.length ? item : currentItems} rowClick="edit">
+                    <Datagrid data={item?.length < currentItems?.length ? item : currentItems} rowClick={!props.withLayout && 'edit'}>
                         <TextField source="usrName" sortable={true} label="Worker" />
                         <TextField source="usrEmail" sortable={true} label="Email" />
                         <TextField source="usrPhoneNumber" sortable={true} label="Phone" />

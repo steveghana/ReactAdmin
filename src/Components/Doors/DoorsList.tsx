@@ -30,7 +30,7 @@ const Doors: React.FC<IDoors> = props => {
                 <CustomCreateDelete handleSearch={handleSearch} label="Door" searchTerm={searchTerm} />
 
                 <List exporter={false} /* {...props} */ pagination={false}>
-                    <Datagrid data={item?.length < currentItems?.length ? item : currentItems} rowClick="edit">
+                    <Datagrid data={item?.length < currentItems?.length ? item : currentItems} rowClick={!props.withLayout && 'edit'}>
                         <TextField source="gateName" sortable={true} label="Door Name" />
                         <TextField source="gateLocationId" sortable={true} label="Location" />
                         <TextField source="gateFloor" sortable={true} label="Floor" />
