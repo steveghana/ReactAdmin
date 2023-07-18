@@ -6,6 +6,8 @@ import Layout from '../../Layout';
 import { IWorkers } from '../../types';
 import IntroCard from '../IntroCards/IntroCards';
 import CustomCreateDelete from '../CustomCreateDelete';
+import axios from 'axios';
+import { Apiurl } from '../../DataProvider';
 
 const WorkersComponent: React.FC<IWorkers> = props => {
     const { data, isLoading } = useGetList('view-user-companies');
@@ -14,6 +16,20 @@ const WorkersComponent: React.FC<IWorkers> = props => {
     const handlePageChange = (_: any, newPage: number) => {
         setCurrentPage(newPage);
     };
+    React.useEffect(() => {
+        //Fetch manually as its not a resource but a component of a resource
+        const fetchLogs = async () => {
+            try {
+                const response = await axios.get(`${Apiurl}/users?filter[limit]=20`);
+                console.log('from single user:', response);
+                // setDataByuser(response.data);
+            } catch (error) {
+                console.error(error);
+                // setIsLoading(false);
+            }
+        };
+        fetchLogs();
+    }, []);
     const totalPages = Math.ceil(((props.workers || data)?.length || 0) / itemsPerPage);
     const [item, searchTerm, handleSearch] = useSearchFilter(data as any);
     if (isLoading) {
@@ -22,12 +38,6 @@ const WorkersComponent: React.FC<IWorkers> = props => {
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentItems = (props.workers || data)?.slice(indexOfFirstItem, indexOfLastItem) || [];
-    // return (
-    //     <Layout>
-    //         {!props.noIntro && <IntroCard />}
-
-    //     </Layout>
-    // );
     const OptionalLayout = () => (
         <>
             {!props.noIntro && <IntroCard />}

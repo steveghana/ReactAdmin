@@ -5,7 +5,7 @@ import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
-import { Create, SimpleForm, TextInput, Toolbar, SaveButton, useCreate } from 'react-admin';
+import { Create, SimpleForm, TextInput, Toolbar, SaveButton, useCreate, useNotify, useRedirect, useFormGroupContext } from 'react-admin';
 import { IToolbar } from '../../types';
 interface FormData {
     name: string;
@@ -13,14 +13,15 @@ interface FormData {
     // Add more fields as needed
 }
 export const MyToolbar: React.FC<IToolbar> = props => (
-    <Toolbar style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '1rem', position: 'fixed', bottom: '0' }}>
+    <Toolbar style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '1rem', position: 'fixed', bottom: '3%' }}>
         <SaveButton
+            type="submit"
             label=" Add new worker"
-            onSubmit={props.save}
+            // onSubmit={props.save}
             onClick={() => props.setClicked(false)}
             style={{ width: '420px' }}
             variant="contained"
-        ></SaveButton>
+        />
         {!props.noPermission && (
             <Button onClick={() => props.setClicked(prev => !prev)} fullWidth variant="outlined">
                 Add new worker with permissions
@@ -31,8 +32,9 @@ export const MyToolbar: React.FC<IToolbar> = props => (
 const CreateWorker = () => {
     const [clicked, setClicked] = React.useState(false);
     const [formData, setFormData] = React.useState<FormData>({ name: '', email: '' });
-    const [create] = useCreate('resourceName'); // Replace 'resourceName' with your actual resource name
-
+    const [create] = useCreate('users'); // Replace 'resourceName' with your actual resource name
+    const notify = useNotify();
+    const redirect = useRedirect();
     const handleFormChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
         console.log(name, value);
@@ -43,13 +45,23 @@ const CreateWorker = () => {
     };
 
     const handleFormSubmit = () => {
+        // e.preventDefault();
+        console.log('submit entered');
         create(
-            'some',
+            'users',
             { data: formData },
             {
-                onSuccess: ({ data }) => {
+                onSuccess: res => {
+                    notify('ra.notification.created', {
+                        type: 'success',
+                        messageArgs: { smart_count: 1 },
+                    });
+                    redirect('/');
                     // Handle success response
-                    console.log('Success:', data);
+                    console.log('Success:', res);
+                },
+                onError: err => {
+                    console.error(err);
                 },
             }
         );
@@ -60,16 +72,17 @@ const CreateWorker = () => {
             <Create sx={{ height: '100%', position: 'relative' }}>
                 {!clicked ? (
                     <SimpleForm
+                        onSubmit={handleFormSubmit}
                         onChange={handleFormChange}
                         sx={{ height: '100% ' }}
-                        toolbar={<MyToolbar save={handleFormSubmit} setClicked={setClicked} />}
+                        toolbar={<MyToolbar save={() => handleFormSubmit()} setClicked={setClicked} />}
                     >
                         <TextInput source="name" fullWidth />
                         <TextInput fullWidth source="email" />
                         <TextInput fullWidth source="phoneNumber" />
                     </SimpleForm>
                 ) : (
-                    <SimpleForm toolbar={<MyToolbar save={handleFormSubmit} noPermission={true} setClicked={setClicked} />}>
+                    <SimpleForm toolbar={<MyToolbar save={() => handleFormSubmit()} noPermission={true} setClicked={setClicked} />}>
                         <TextInput label="Door" source="name" />
                         <TextInput label="Role" source="role" />
                         <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>

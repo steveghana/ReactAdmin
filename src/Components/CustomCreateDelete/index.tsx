@@ -6,6 +6,7 @@ import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import Button from '@mui/material/Button';
 import CreateWorker from '../Workers/WorkerCreate';
 import { useGetList } from 'react-admin';
+import DoorCreate from '../Doors/DoorCreate';
 
 const CustomCreateDelete: React.FC<ICustomDeleteCreate> = props => {
     let styles = {
@@ -25,17 +26,16 @@ const CustomCreateDelete: React.FC<ICustomDeleteCreate> = props => {
         bottom: false,
         right: false,
     });
-    useGetList;
     const toggleDrawer = (anchor: Anchor, open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
         if (event && event.type === 'keydown' && ((event as React.KeyboardEvent).key === 'Tab' || (event as React.KeyboardEvent).key === 'Shift')) {
             return;
         }
         setState({ ...state, [anchor]: open });
     };
-
-    const list = (_: Anchor) => (
+    console.log(props);
+    const list = (_: Anchor, type: string) => (
         <Box sx={{ width: 450, height: '100%' }} role="presentation">
-            <CreateWorker />
+            {type === 'Door' ? <DoorCreate /> : <CreateWorker />}
         </Box>
     );
     return (
@@ -73,7 +73,7 @@ const CustomCreateDelete: React.FC<ICustomDeleteCreate> = props => {
                                     onClose={toggleDrawer(anchor, false)}
                                     onOpen={toggleDrawer(anchor, true)}
                                 >
-                                    {list(anchor)}
+                                    {list(anchor, props.label)}
                                 </SwipeableDrawer>
                             </React.Fragment>
                         ))}
