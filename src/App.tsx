@@ -21,7 +21,7 @@ const App = () => {
     return (
         <Admin layout={Appbar} dataProvider={Dataprovider} queryClient={queryClient}>
             <Resource name="locations" edit={LocationEdit} list={LocationList} />
-            <Resource options={{ label: 'Workers' }} name="view-user-companies" edit={WorkerDetails} list={WorkersComponent} />
+            <Resource options={{ label: 'Workers' }} name="users" edit={WorkerDetails} list={WorkersComponent} />
             <Resource name="view-user-gates" options={{ label: 'Doors' }} edit={DoorsDetails} list={Doors} />
         </Admin>
     );

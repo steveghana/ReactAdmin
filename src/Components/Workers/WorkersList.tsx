@@ -9,7 +9,7 @@ import CustomCreateDelete from '../CustomCreateDelete';
 import CustomLoader from '../Loader';
 
 const WorkersComponent: React.FC<IWorkers> = props => {
-    const { data, isLoading } = useGetList('view-user-companies');
+    const { data, isLoading } = useGetList('users');
 
     const OptionalLayout = () => {
         const [currentPage, setCurrentPage] = React.useState(1);
@@ -35,10 +35,10 @@ const WorkersComponent: React.FC<IWorkers> = props => {
 
                     <List exporter={false} pagination={false}>
                         <Datagrid data={item?.length < currentItems?.length ? item : currentItems} rowClick={!props.withLayout && 'edit'}>
-                            <TextField source="usrName" sortable={true} label="Worker" />
-                            <TextField source="usrEmail" sortable={true} label="Email" />
-                            <TextField source="usrPhoneNumber" sortable={true} label="Phone" />
-                            <DateField source="usrUpdatedAt" sortable={true} label="Last unlock" />
+                            <TextField source="name" sortable={true} label="Worker" />
+                            <TextField source="email" sortable={true} label="Email" />
+                            <TextField source="phoneNumber" sortable={true} label="Phone" />
+                            <DateField source="updatedAt" sortable={true} label="Last unlock" />
                         </Datagrid>
 
                         <Box display="flex" justifyContent="center" marginTop={2}>
