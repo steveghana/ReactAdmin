@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Paper, Pagination, Typography } from '@mui/material';
-import {Datagrid, FunctionField, List, RaRecord, TextField, useGetList} from 'react-admin';
+import { Datagrid, FunctionField, List, RaRecord, TextField, useGetList } from 'react-admin';
 import useSearchFilter from '../../CustomHook';
 import IntroCard from '../IntroCards/IntroCards';
 import Layout from '../../Layout';
@@ -10,7 +10,7 @@ import CustomLoader from '../Loader';
 const LocationList: React.FC<LocationListProps> = ({ nointro }) => {
     // const { data, isLoading } = useGetList('locations');
     const { data, isLoading } = useGetList('view-company-locations');
-
+    console.log('this is location:', data);
     const [currentPage, setCurrentPage] = React.useState(1);
     const itemsPerPage = 10;
     const handlePageChange = (_: any, newPage: number) => {
@@ -38,17 +38,15 @@ const LocationList: React.FC<LocationListProps> = ({ nointro }) => {
                         <TextField source="locatAddressCountry" sortable label="Country" />
                         <FunctionField
                             label="Full Address"
-                            render={(record:RaRecord) => `${record.loctAddressStreet} ${record.loctAddressNumber}, ${record.loctAddressCity}`}
-                        />;
-                        {/*<TextField source="loctAddressZipCode" sortable label="Zip code" />*/}
+                            render={(record: RaRecord) => `${record.loctAddressStreet} ${record.loctAddressNumber}, ${record.loctAddressCity}`}
+                        />
+                        ;{/*<TextField source="loctAddressZipCode" sortable label="Zip code" />*/}
                         <TextField source="loctFloors" sortable label="Floors" />
                         {/*<FunctionField*/}
                         {/*    label="Floors"*/}
                         {/*    render={(record:RaRecord) => JSON.stringify(record.loctFloors).replace("[", "").replace("]", "").replace(/\\\//g, "")*/}
                         {/*    }*/}
                         {/*/>;*/}
-
-
                     </Datagrid>
                     <Box display="flex" justifyContent="center" marginTop={2}>
                         <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} color="primary" variant="outlined" />

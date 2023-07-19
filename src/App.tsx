@@ -20,8 +20,8 @@ const App = () => {
     });
     return (
         <Admin layout={Appbar} dataProvider={Dataprovider} queryClient={queryClient}>
-            <Resource name="locations" edit={LocationEdit} />
-            <Resource options={{ label: 'Locations' }} name="view-company-locations" list={LocationList} />
+            {/* <Resource name="locations" edit={LocationEdit} /> */}
+            <Resource options={{ label: 'Locations' }} name="view-company-locations" edit={LocationEdit} list={LocationList} />
             <Resource options={{ label: 'Workers' }} name="users" edit={WorkerDetails} list={WorkersComponent} />
             <Resource name="view-user-gates" options={{ label: 'Doors' }} edit={DoorsDetails} list={Doors} />
         </Admin>
