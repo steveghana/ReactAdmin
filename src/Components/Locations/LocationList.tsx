@@ -8,7 +8,9 @@ import { LocationListProps } from '../../types';
 import CustomCreateDelete from '../CustomCreateDelete';
 import CustomLoader from '../Loader';
 const LocationList: React.FC<LocationListProps> = ({ nointro }) => {
-    const { data, isLoading } = useGetList('locations');
+    // const { data, isLoading } = useGetList('locations');
+    const { data, isLoading } = useGetList('view-company-locations');
+
     const [currentPage, setCurrentPage] = React.useState(1);
     const itemsPerPage = 10;
     const handlePageChange = (_: any, newPage: number) => {
@@ -31,14 +33,22 @@ const LocationList: React.FC<LocationListProps> = ({ nointro }) => {
                 <CustomCreateDelete handleSearch={handleSearch} label="Location" searchTerm={searchTerm} withCreate />
                 <List exporter={false} pagination={false}>
                     <Datagrid data={item?.length < currentItems?.length ? item : currentItems} rowClick="edit">
-                        <TextField source="name" sortable label="Location Name" />
-                        <TextField source="addressCountry" sortable label="Country" />
+                        <TextField source="compName" sortable label="Company name" />
+                        <TextField source="loctName" sortable label="Location Name" />
+                        <TextField source="locatAddressCountry" sortable label="Country" />
                         <FunctionField
                             label="Full Address"
-                            render={(record:RaRecord) => `${record.addressStreet} ${record.addressNumber}, ${record.addressCity}`}
+                            render={(record:RaRecord) => `${record.loctAddressStreet} ${record.loctAddressNumber}, ${record.loctAddressCity}`}
                         />;
-                        <TextField source="addressZipCode" sortable label="Zip code" />
-                        <TextField source="floors" sortable label="Floors" />
+                        {/*<TextField source="loctAddressZipCode" sortable label="Zip code" />*/}
+                        <TextField source="loctFloors" sortable label="Floors" />
+                        {/*<FunctionField*/}
+                        {/*    label="Floors"*/}
+                        {/*    render={(record:RaRecord) => JSON.stringify(record.loctFloors).replace("[", "").replace("]", "").replace(/\\\//g, "")*/}
+                        {/*    }*/}
+                        {/*/>;*/}
+
+
                     </Datagrid>
                     <Box display="flex" justifyContent="center" marginTop={2}>
                         <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} color="primary" variant="outlined" />

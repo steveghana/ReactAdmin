@@ -9,6 +9,7 @@ import Layout from '../../Layout';
 const ItemEdit = () => {
     const { id } = useParams();
     const { data } = useGetOne('locations', { id });
+    // const { data } = useGetOne('view-company-locations', { id });
     const [nestedList, setNestedList] = useState<any>([]);
     const [doorlength, setDoorLength] = useState(0);
     let detailsData = {
