@@ -1,17 +1,21 @@
 import * as React from 'react';
-import { Paper, Typography } from '@mui/material';
+import { Box, Paper, Typography } from '@mui/material';
 import { useGetList } from 'react-admin';
-
-const Text: React.FC<{ length: number; type: string; id: string }> = ({ length, type, id }) => {
+import { useNavigate } from 'react-router-dom';
+const Text: React.FC<{ length: number; type: string; id: string; resource: string }> = ({ length, type, id, resource }) => {
     const origin = window.location.href;
     const pageName = origin.includes(id);
     const typographyColor = pageName ? '#01A2FD' : '#708099';
     const bgColor = pageName ? 'white' : '#f7f7f7';
+    const navigate = useNavigate();
+
     return (
         <Paper
             elevation={1}
+            onClick={() => navigate(`/${resource}`)}
             sx={{
                 width: '100%',
+                cursor: 'pointer',
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
@@ -31,15 +35,14 @@ const Text: React.FC<{ length: number; type: string; id: string }> = ({ length, 
 };
 
 const IntroCard: React.FC = () => {
-    const { data: locations } = useGetList('locations');
+    const { data: locations } = useGetList('view-company-locations');
     const { data: user } = useGetList('users');
-    const { data: doors } = useGetList('gates');
-
+    const { data: doors } = useGetList('view-user-gates');
     return (
         <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-            <Text length={locations?.length as number} type="Locations" id="locations" />
-            <Text length={user?.length as number} type="Workers" id="users" />
-            <Text length={doors?.length as number} type="Doors" id="gates" />
+            <Text resource="view-company-locations" length={locations?.length as number} type="Locations" id="locations" />
+            <Text resource="users" length={user?.length as number} type="Workers" id="users" />
+            <Text resource="view-user-gates" length={doors?.length as number} type="Doors" id="gates" />
         </div>
     );
 };
