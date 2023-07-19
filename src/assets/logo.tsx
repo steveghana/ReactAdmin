@@ -1,9 +1,9 @@
 export const LogoSvg = () => {
     return (
         <svg xmlns="http://www.w3.org/2000/svg" width="170" height="38" viewBox="0 0 170 38" fill="none">
-            <path d="M141.85 27.2687V36.7327" stroke="#00F1E6" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" />
-            <path d="M141.849 34.8204H143.904" stroke="#00F1E6" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" />
-            <path d="M141.849 32.0419H143.904" stroke="#00F1E6" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" />
+            <path d="M141.85 27.2687V36.7327" stroke="#00F1E6" strokeWidth="2" strokeMiterlimit="10" strokeLinecap="round" />
+            <path d="M141.849 34.8204H143.904" stroke="#00F1E6" strokeWidth="2" strokeMiterlimit="10" strokeLinecap="round" />
+            <path d="M141.849 32.0419H143.904" stroke="#00F1E6" strokeWidth="2" strokeMiterlimit="10" strokeLinecap="round" />
             <path
                 d="M0 19.1027C0 14.472 3.70455 10.6806 8.36417 10.6806C13.0238 10.6806 16.7283 14.443 16.7283 19.0158V26.2513C16.7283 26.888 16.2363 27.38 15.6286 27.38C15.0208 27.38 14.5288 26.888 14.5288 26.2513V19.0158C14.5288 15.6586 11.7793 12.9091 8.39312 12.9091C6.71449 12.9091 5.12269 13.5748 3.96502 14.7903C2.77841 16.0059 2.17063 17.5977 2.25746 19.2763C2.40217 22.6046 5.12269 25.1515 8.39312 25.1515C9.72444 25.1515 10.9689 24.7463 12.0687 23.9359C12.2713 23.7912 12.5028 23.7333 12.7344 23.7333C13.0238 23.7333 13.3422 23.8781 13.5737 24.1096C13.7763 24.3411 13.8631 24.6305 13.8342 24.9489C13.8052 25.2673 13.6316 25.5567 13.4 25.7303C11.924 26.8301 10.2164 27.4089 8.39312 27.4089C3.79137 27.4089 0.0289418 23.6755 0.0289418 19.1027H0Z"
                 fill="url(#paint0_linear_497_5339)"
@@ -50,40 +50,40 @@ export const LogoSvg = () => {
             />
             <defs>
                 <linearGradient id="paint0_linear_497_5339" x1="0" y1="19.0158" x2="169.078" y2="19.0158" gradientUnits="userSpaceOnUse">
-                    <stop stop-color="#0098FF" />
-                    <stop offset="0.88" stop-color="#00F1E6" />
+                    <stop stopColor="#0098FF" />
+                    <stop offset="0.88" stopColor="#00F1E6" />
                 </linearGradient>
                 <linearGradient id="paint1_linear_497_5339" x1="0.00163517" y1="19.0147" x2="169.079" y2="19.0147" gradientUnits="userSpaceOnUse">
-                    <stop stop-color="#0098FF" />
-                    <stop offset="0.88" stop-color="#00F1E6" />
+                    <stop stopColor="#0098FF" />
+                    <stop offset="0.88" stopColor="#00F1E6" />
                 </linearGradient>
                 <linearGradient id="paint2_linear_497_5339" x1="-0.00218688" y1="19.0147" x2="169.075" y2="19.0147" gradientUnits="userSpaceOnUse">
-                    <stop stop-color="#0098FF" />
-                    <stop offset="0.88" stop-color="#00F1E6" />
+                    <stop stopColor="#0098FF" />
+                    <stop offset="0.88" stopColor="#00F1E6" />
                 </linearGradient>
                 <linearGradient id="paint3_linear_497_5339" x1="0.00167234" y1="19.0147" x2="169.08" y2="19.0147" gradientUnits="userSpaceOnUse">
-                    <stop stop-color="#0098FF" />
-                    <stop offset="0.88" stop-color="#00F1E6" />
+                    <stop stopColor="#0098FF" />
+                    <stop offset="0.88" stopColor="#00F1E6" />
                 </linearGradient>
                 <linearGradient id="paint4_linear_497_5339" x1="0.000400732" y1="19.016" x2="169.078" y2="19.016" gradientUnits="userSpaceOnUse">
-                    <stop stop-color="#0098FF" />
-                    <stop offset="0.88" stop-color="#00F1E6" />
+                    <stop stopColor="#0098FF" />
+                    <stop offset="0.88" stopColor="#00F1E6" />
                 </linearGradient>
                 <linearGradient id="paint5_linear_497_5339" x1="0.000665659" y1="19.016" x2="169.078" y2="19.016" gradientUnits="userSpaceOnUse">
-                    <stop stop-color="#0098FF" />
-                    <stop offset="0.88" stop-color="#00F1E6" />
+                    <stop stopColor="#0098FF" />
+                    <stop offset="0.88" stopColor="#00F1E6" />
                 </linearGradient>
                 <linearGradient id="paint6_linear_497_5339" x1="0.000212829" y1="19.0147" x2="169.078" y2="19.0147" gradientUnits="userSpaceOnUse">
-                    <stop stop-color="#0098FF" />
-                    <stop offset="0.88" stop-color="#00F1E6" />
+                    <stop stopColor="#0098FF" />
+                    <stop offset="0.88" stopColor="#00F1E6" />
                 </linearGradient>
                 <linearGradient id="paint7_linear_497_5339" x1="0.00467694" y1="19.0147" x2="169.083" y2="19.0147" gradientUnits="userSpaceOnUse">
-                    <stop stop-color="#0098FF" />
-                    <stop offset="0.88" stop-color="#00F1E6" />
+                    <stop stopColor="#0098FF" />
+                    <stop offset="0.88" stopColor="#00F1E6" />
                 </linearGradient>
                 <linearGradient id="paint8_linear_497_5339" x1="-0.00038632" y1="19.0141" x2="169.077" y2="19.0141" gradientUnits="userSpaceOnUse">
-                    <stop stop-color="#0098FF" />
-                    <stop offset="0.88" stop-color="#00F1E6" />
+                    <stop stopColor="#0098FF" />
+                    <stop offset="0.88" stopColor="#00F1E6" />
                 </linearGradient>
             </defs>
         </svg>
@@ -117,7 +117,7 @@ export const Loader = () => {
             x="0px"
             y="0px"
             viewBox="0 0 100 100"
-            enable-background="new 0 0 100 100"
+            enableBackground="new 0 0 100 100"
             // xml="preserve"
         >
             <path
