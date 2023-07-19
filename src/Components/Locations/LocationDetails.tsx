@@ -12,22 +12,20 @@ const ItemEdit = () => {
     const { data } = useGetOne('view-company-locations', { id });
     const [nestedList, setNestedList] = useState<any>([]);
     const [doorlength, setDoorLength] = useState(0);
+    console.log('id data:', data);
     let detailsData = {
-        City: data?.addressCity,
-        Street: data?.addressStreet,
+        City: data?.loctAddressCity,
+        Street: data?.loctAddressStreet,
     };
     React.useEffect(() => {
-        console.log(data.loctFloors);
         const ids = [...JSON.parse(data.loctFloors)]; // Array of IDs
         const limit = 20; // Set the desired limit
-        console.log(ids);
         const fetchFloors = async () => {
             // const response = await axios.get(`${Apiurl}/view-user-gates?filter[limit]=20`);
             // console.log(response.data, 'data from demo flors');
             const response = await axios.get(
                 `${Apiurl}/view-user-gates?filter={"where":{"gateFloor":{"inq": ${JSON.stringify(ids)}}},"limit":${limit}}`
             );
-            console.log('Gates with location:', response?.data);
             setDoorLength(response?.data?.length);
             // Transform the API response into the desired data structure
             const transformedData = ids.map(item => {
@@ -45,7 +43,6 @@ const ItemEdit = () => {
                 Floors: transformedData,
             };
 
-            console.log(postData);
             setNestedList(postData);
         };
 
@@ -54,7 +51,7 @@ const ItemEdit = () => {
 
     return (
         <Layout>
-            <Details intro={detailsData} name={data?.name} />
+            <Details intro={detailsData} name={data?.loctName} />
             <NestedList data={nestedList} doorLength={doorlength} />
         </Layout>
     );
