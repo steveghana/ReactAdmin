@@ -40,13 +40,13 @@ const LocationList: React.FC<LocationListProps> = ({ nointro }) => {
                             label="Full Address"
                             render={(record: RaRecord) => `${record.loctAddressStreet} ${record.loctAddressNumber}, ${record.loctAddressCity}`}
                         />
-                        ;{/*<TextField source="loctAddressZipCode" sortable label="Zip code" />*/}
-                        <TextField source="loctFloors" sortable label="Floors" />
-                        {/*<FunctionField*/}
-                        {/*    label="Floors"*/}
-                        {/*    render={(record:RaRecord) => JSON.stringify(record.loctFloors).replace("[", "").replace("]", "").replace(/\\\//g, "")*/}
-                        {/*    }*/}
-                        {/*/>;*/}
+                        <FunctionField
+                            label="Floors"
+                            render={(record: any) => {
+                                const parsedArray = JSON.parse(record.loctFloors);
+                                return parsedArray.join(', ');
+                            }}
+                        />
                     </Datagrid>
                     <Box display="flex" justifyContent="center" marginTop={2}>
                         <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} color="primary" variant="outlined" />
