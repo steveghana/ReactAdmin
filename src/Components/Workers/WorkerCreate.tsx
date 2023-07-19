@@ -37,7 +37,6 @@ const CreateWorker = () => {
     const redirect = useRedirect();
     const handleFormChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
-        console.log(name, value);
         setFormData(prevFormData => ({
             ...prevFormData,
             [name]: value,

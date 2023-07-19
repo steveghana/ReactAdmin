@@ -12,7 +12,6 @@ const ItemEdit = () => {
     const { data } = useGetOne('view-company-locations', { id });
     const [nestedList, setNestedList] = useState<any>([]);
     const [doorlength, setDoorLength] = useState(0);
-    console.log('id data:', data);
     let detailsData = {
         City: data?.loctAddressCity,
         Street: data?.loctAddressStreet,
