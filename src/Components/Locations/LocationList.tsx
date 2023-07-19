@@ -9,7 +9,7 @@ import CustomCreateDelete from '../CustomCreateDelete';
 import CustomLoader from '../Loader';
 const LocationList: React.FC<LocationListProps> = ({ nointro }) => {
     // const { data, isLoading } = useGetList('locations');
-    const { data, isLoading } = useGetList('view-company-locations');
+    const { data, isLoading } = useGetList('view-company-locations', { pagination: { page: 1, perPage: 125 } });
     console.log('this is location:', data);
     const [currentPage, setCurrentPage] = React.useState(1);
     const itemsPerPage = 10;

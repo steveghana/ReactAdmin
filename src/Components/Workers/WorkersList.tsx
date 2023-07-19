@@ -9,7 +9,7 @@ import CustomCreateDelete from '../CustomCreateDelete';
 import CustomLoader from '../Loader';
 
 const WorkersComponent: React.FC<IWorkers> = props => {
-    const { data, isLoading } = useGetList('users');
+    const { data, isLoading } = useGetList('users', { pagination: { page: 1, perPage: 125 } });
 
     const OptionalLayout = () => {
         const [currentPage, setCurrentPage] = React.useState(1);

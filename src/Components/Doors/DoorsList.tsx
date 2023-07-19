@@ -9,7 +9,7 @@ import CustomCreateDelete from '../CustomCreateDelete';
 import CustomLoader from '../Loader';
 
 const Doors: React.FC<IDoors> = props => {
-    const { data, isLoading } = useGetList('view-user-gates');
+    const { data, isLoading } = useGetList('view-user-gates', { pagination: { page: 1, perPage: 125 } });
 
     const OptionalLayout = () => {
         const [currentPage, setCurrentPage] = React.useState(1);

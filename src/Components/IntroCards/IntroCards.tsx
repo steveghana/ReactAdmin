@@ -35,9 +35,9 @@ const Text: React.FC<{ length: number; type: string; id: string; resource: strin
 };
 
 const IntroCard: React.FC = () => {
-    const { data: locations } = useGetList('view-company-locations');
-    const { data: user } = useGetList('users');
-    const { data: doors } = useGetList('view-user-gates');
+    const { data: locations } = useGetList('view-company-locations', { pagination: { page: 1, perPage: 100000 } });
+    const { data: user } = useGetList('users', { pagination: { page: 1, perPage: 100000 } });
+    const { data: doors } = useGetList('view-user-gates', { pagination: { page: 1, perPage: 100000 } });
     return (
         <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
             <Text resource="view-company-locations" length={locations?.length as number} type="Locations" id="locations" />
