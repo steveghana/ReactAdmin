@@ -6,6 +6,7 @@ import Layout from '../../Layout';
 import { IWorkers } from '../../types';
 import IntroCard from '../IntroCards/IntroCards';
 import CustomCreateDelete from '../CustomCreateDelete';
+import CustomLoader from '../Loader';
 
 const WorkersComponent: React.FC<IWorkers> = props => {
     const { data, isLoading } = useGetList('view-user-companies');
@@ -20,7 +21,7 @@ const WorkersComponent: React.FC<IWorkers> = props => {
         const totalPages = Math.ceil((data?.length || 0) / itemsPerPage);
         const [item, searchTerm, handleSearch] = useSearchFilter(data as any);
         if (isLoading) {
-            return <div>Loading...</div>;
+            return <CustomLoader />;
         }
         const indexOfLastItem = currentPage * itemsPerPage;
         const indexOfFirstItem = indexOfLastItem - itemsPerPage;

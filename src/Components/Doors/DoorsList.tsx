@@ -6,6 +6,7 @@ import Layout from '../../Layout';
 import { IDoors } from '../../types';
 import IntroCard from '../IntroCards/IntroCards';
 import CustomCreateDelete from '../CustomCreateDelete';
+import CustomLoader from '../Loader';
 
 const Doors: React.FC<IDoors> = props => {
     const { data, isLoading } = useGetList('view-user-gates');
@@ -19,7 +20,7 @@ const Doors: React.FC<IDoors> = props => {
         const totalPages = Math.ceil(((props.idata || data)?.length || 0) / itemsPerPage);
         const [item, searchTerm, handleSearch] = useSearchFilter(data as any);
         if (isLoading) {
-            return <div>Loading...</div>;
+            return <CustomLoader />;
         }
         const indexOfLastItem = currentPage * itemsPerPage;
         const indexOfFirstItem = indexOfLastItem - itemsPerPage;

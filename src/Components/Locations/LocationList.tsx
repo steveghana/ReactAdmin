@@ -6,7 +6,7 @@ import IntroCard from '../IntroCards/IntroCards';
 import Layout from '../../Layout';
 import { LocationListProps } from '../../types';
 import CustomCreateDelete from '../CustomCreateDelete';
-
+import CustomLoader from '../Loader';
 const LocationList: React.FC<LocationListProps> = ({ nointro }) => {
     const { data, isLoading } = useGetList('locations');
     const [currentPage, setCurrentPage] = React.useState(1);
@@ -18,7 +18,7 @@ const LocationList: React.FC<LocationListProps> = ({ nointro }) => {
     const [item, searchTerm, handleSearch] = useSearchFilter(data as any);
 
     if (isLoading) {
-        return <div>Loading...</div>;
+        return <CustomLoader />;
     }
 
     const indexOfLastItem = currentPage * itemsPerPage;
