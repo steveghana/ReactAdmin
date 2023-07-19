@@ -1,0 +1,14 @@
+runtime: nodejs18
+env: standard
+instance_class: F1
+
+handlers:
+  - url: /(.*\..+)$
+    static_files: dist/\1
+    upload: dist/(.*\..+)$
+  - url: /.*
+    static_files: dist/index.html
+    upload: dist/index.html
+
+env_variables:
+  VITE_URL: 'https://access-key-dev.herokuapp.com'
