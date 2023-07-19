@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Paper, Typography } from '@mui/material';
+import { Paper, Typography } from '@mui/material';
 import { useGetList } from 'react-admin';
 import { useNavigate } from 'react-router-dom';
 const Text: React.FC<{ length: number; type: string; id: string; resource: string }> = ({ length, type, id, resource }) => {
