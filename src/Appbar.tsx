@@ -9,7 +9,7 @@ const MyAppBar = () => {
             sx={{
                 color: 'black',
                 background: 'white',
-                '& .RaAppBar-toolbar': { padding: 0.4 },
+                '& .RaAppBar-toolbar': { padding: 1 },
                 display: 'flex',
                 gap: '1rem',
                 boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',

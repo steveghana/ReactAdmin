@@ -56,10 +56,10 @@ const Events = () => {
                         <Typography color={'#708099'} variant="button" sx={{ marginRight: 'auto' }}>
                             Events
                         </Typography>
-                        <Button variant="contained" style={{ borderRadius: '40px' }} color="primary">
+                        <Button variant="contained" sx={{ borderRadius: '20px', background: '#01A2FD' }}>
                             All
                         </Button>
-                        <Button variant="outlined" style={{ borderRadius: '40px' }} disabled color="primary">
+                        <Button variant="outlined" style={{ borderRadius: '20px' }} disabled color="primary">
                             Alerts
                         </Button>
                     </div>

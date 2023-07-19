@@ -38,8 +38,8 @@ const IntroCard: React.FC = () => {
     return (
         <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
             <Text length={locations?.length as number} type="Locations" id="locations" />
-            <Text length={doors?.length as number} type="Doors" id="gates" />
             <Text length={user?.length as number} type="Workers" id="view-user-companies" />
+            <Text length={doors?.length as number} type="Doors" id="gates" />
         </div>
     );
 };
