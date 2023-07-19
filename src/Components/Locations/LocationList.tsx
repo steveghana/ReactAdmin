@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Paper, Pagination, Typography } from '@mui/material';
-import { Datagrid, List, TextField, useGetList } from 'react-admin';
+import {Datagrid, FunctionField, List, RaRecord, TextField, useGetList} from 'react-admin';
 import useSearchFilter from '../../CustomHook';
 import IntroCard from '../IntroCards/IntroCards';
 import Layout from '../../Layout';
@@ -32,9 +32,13 @@ const LocationList: React.FC<LocationListProps> = ({ nointro }) => {
                 <List exporter={false} pagination={false}>
                     <Datagrid data={item?.length < currentItems?.length ? item : currentItems} rowClick="edit">
                         <TextField source="name" sortable label="Location Name" />
-                        <TextField source="addressCity" sortable label="City" />
-                        <TextField source="addressStreet" sortable label="Street" />
-                        <TextField source="address" sortable label="Full Address" />
+                        <TextField source="addressCountry" sortable label="Country" />
+                        <FunctionField
+                            label="Full Address"
+                            render={(record:RaRecord) => `${record.addressStreet} ${record.addressNumber}, ${record.addressCity}`}
+                        />;
+                        <TextField source="addressZipCode" sortable label="Zip code" />
+                        <TextField source="floors" sortable label="Floors" />
                     </Datagrid>
                     <Box display="flex" justifyContent="center" marginTop={2}>
                         <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} color="primary" variant="outlined" />
