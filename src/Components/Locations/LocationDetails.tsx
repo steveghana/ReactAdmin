@@ -21,8 +21,6 @@ const ItemEdit = () => {
         const ids = [...JSON.parse(data.loctFloors)]; // Array of IDs
         const limit = 20; // Set the desired limit
         const fetchFloors = async () => {
-            // const response = await axios.get(`${Apiurl}/view-user-gates?filter[limit]=20`);
-            // console.log(response.data, 'data from demo flors');
             const response = await axios.get(
                 `${Apiurl}/view-user-gates?filter={"where":{"gateFloor":{"inq": ${JSON.stringify(ids)}}},"limit":${limit}}`
             );
