@@ -1,5 +1,5 @@
 import { Admin, Resource } from 'react-admin';
-import { RestProvider } from './DataProvider';
+import { RestProvider as Dataprovider } from './DataProvider';
 import LocationEdit from './Components/Locations/LocationDetails';
 import WorkersComponent from './Components/Workers/WorkersList';
 import { QueryClient } from 'react-query';
@@ -8,7 +8,7 @@ import WorkerDetails from './Components/Workers/WorkerDetails';
 
 import DoorsDetails from './Components/Doors/DoorsDetails';
 import LocationList from './Components/Locations/LocationList';
-import MyLayout from './Appbar';
+import Appbar from './Appbar';
 const App = () => {
     //This will cache responses in memory for smooth experience
     const queryClient = new QueryClient({
@@ -19,7 +19,7 @@ const App = () => {
         },
     });
     return (
-        <Admin layout={MyLayout} dataProvider={RestProvider} queryClient={queryClient}>
+        <Admin layout={Appbar} dataProvider={Dataprovider} queryClient={queryClient}>
             <Resource name="locations" edit={LocationEdit} list={LocationList} />
             <Resource options={{ label: 'Workers' }} name="view-user-companies" edit={WorkerDetails} list={WorkersComponent} />
             <Resource name="view-user-gates" options={{ label: 'Doors' }} edit={DoorsDetails} list={Doors} />
